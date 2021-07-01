@@ -18,10 +18,10 @@ namespace SPADE
             T ext = null;
             if (pawn.HasModExtension<T>())
                 {
-                ext = pawn.def.GetModExtension<T>();
+                ext = pawn.kindDef.GetModExtension<T>();
                 if (ext == null)
                     {
-                    ext = pawn.kindDef.GetModExtension<T>();
+                    ext = pawn.def.GetModExtension<T>();
                     }
                 }
             return ext;
