@@ -12,6 +12,7 @@
 			<li Class="HediffGiver_Heat">
 				<hediff>Heatstroke</hediff>
 			</li>
+      		<li Class="SPADE.HediffGiver_IngoresResSickness" />
 		</hediffGivers>
 	</HediffGiverSetDef>
 

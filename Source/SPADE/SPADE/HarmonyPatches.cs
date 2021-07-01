@@ -30,7 +30,7 @@ namespace SPADE
         {
         static bool Postfix(bool ret, ref Vector3 drawPos, JobDriver __instance)
             {
-            var defExt = __instance.GetActor().def.GetModExtension<DefExtension_CarriesThingsOffset>();
+            var defExt = __instance.GetActor().GetModExtension<DefExtension_CarriesThingsOffset>();
             if (defExt != null)
                 {
                 drawPos += defExt.offsets.GetFor(__instance.GetActor().Rotation);
@@ -46,7 +46,7 @@ namespace SPADE
         {
         static bool Postfix(bool ret, Pawn ___pawn)
             {
-            if (___pawn.def.HasModExtension<DefExtension_CarriesWeaponOpenly>())
+            if (___pawn.HasModExtension<DefExtension_CarriesWeaponOpenly>())
                 return true;
             return ret;
             }
@@ -57,7 +57,7 @@ namespace SPADE
         {
         static void Prefix(Thing eq, ref Vector3 drawLoc, ref float aimAngle, Pawn ___pawn, PawnRenderer __instance)
             {
-            var defExt = ___pawn.def.GetModExtension<DefExtension_CarriesWeaponStraight>();
+            var defExt = ___pawn.GetModExtension<DefExtension_CarriesWeaponStraight>();
             Stance_Busy stance_Busy = ___pawn.stances.curStance as Stance_Busy;
             if (defExt != null)
                 {
@@ -102,9 +102,9 @@ namespace SPADE
         {
         static Thing Postfix(Thing ret, Pawn healer, Pawn patient) 
             {
-            if (patient.def.HasModExtension<DefExtension_NonStandardMedicine>())
+            if (patient.HasModExtension<DefExtension_NonStandardMedicine>())
                 {
-                Predicate<Thing> validator = (Thing m) => (m.def.thingCategories.Contains(patient.def.GetModExtension<DefExtension_NonStandardMedicine>().medicine) && !m.IsForbidden(healer) && patient.playerSettings.medCare.AllowsMedicine(m.def) && healer.CanReserve(m, 10, 1)) ? true : false;
+                Predicate<Thing> validator = (Thing m) => (m.def.thingCategories.Contains(patient.GetModExtension<DefExtension_NonStandardMedicine>().medicine) && !m.IsForbidden(healer) && patient.playerSettings.medCare.AllowsMedicine(m.def) && healer.CanReserve(m, 10, 1)) ? true : false;
                 Func<Thing, float> priorityGetter = (Thing t) => t.def.GetStatValueAbstract(StatDefOf.MedicalPotency);
                 return GenClosest.ClosestThing_Global_Reachable(patient.Position, patient.Map, patient.Map.listerThings.ThingsInGroup(ThingRequestGroup.Medicine), PathEndMode.ClosestTouch, TraverseParms.For(healer), 9999f, validator, priorityGetter);
                 }
@@ -142,7 +142,7 @@ namespace SPADE
         {
         static bool Postfix(bool ret, NeedDef nd, Pawn ___pawn)
             {
-            if (___pawn.def.GetModExtension<DefExtension_DoesNotNeed>()?.needs.Contains(nd) ?? false)
+            if (___pawn.GetModExtension<DefExtension_DoesNotNeed>()?.needs.Contains(nd) ?? false)
                 return false;
             return ret;
             }

@@ -29,7 +29,7 @@
 		<workSkill>Crafting</workSkill>
 		<workSkillLearnFactor>16</workSkillLearnFactor>
 		<anesthetize>false</anesthetize>
-			<workerClass>Recipe_InstallArtificialBodyPart</workerClass>
+		<workerClass>Recipe_InstallArtificialBodyPart</workerClass>
 		<workAmount>1300</workAmount>
 		<surgerySuccessChanceFactor>1.30</surgerySuccessChanceFactor>
 	</RecipeDef>
@@ -58,7 +58,7 @@
 			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 			<workSkill>Crafting</workSkill>
 			<effectWorking>Smith</effectWorking>
-			<soundWorking>Recipe_Smith</soundWorking>
+			<soundWorking>Recipe_Machining</soundWorking>
 			<unfinishedThingDef>UnfinishedHealthItemBionic</unfinishedThingDef>
 			<skillRequirements>
 				<Crafting>8</Crafting>

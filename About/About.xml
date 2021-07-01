@@ -16,6 +16,11 @@
 			<displayName>Humanoid Alien Races 2.0</displayName>
 			<steamWorkshopUrl>steam://https://steamcommunity.com/sharedfiles/filedetails/?id=839005762</steamWorkshopUrl>
 		</li>
+		<li>
+			<packageId>isorex.communityframework</packageId>
+			<displayName>Community Framework</displayName>
+			<steamWorkshopUrl>steam://https://steamcommunity.com/sharedfiles/filedetails/?id=2526310487</steamWorkshopUrl>
+		</li>
 	</modDependencies>
 	<loadBefore></loadBefore>
 	<loadAfter>

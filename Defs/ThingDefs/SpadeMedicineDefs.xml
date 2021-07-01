@@ -147,4 +147,57 @@
 		</tradeTags>
 		<thingSetMakerTags><li>RewardStandardHighFreq</li></thingSetMakerTags>
 	</ThingDef>
+
+
+
+	<ThingDef ParentName="spade_Medicine">
+		<defName>spade_RestorationKit</defName>
+		<label>restoration kit</label>
+		<description>A kit of industrial-era repair equipment. Contains enough spare parts to fully repair a SPADE in case of total failure.</description>
+		<thingClass>ThingWithComps</thingClass>
+		<graphicData>
+			<texPath>Items/RepairKit</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<drawSize>0.85</drawSize>
+			<color>(189,118,118)</color>
+		</graphicData>
+		<techLevel>Industrial</techLevel>
+		<statBases>
+			<MarketValue>72</MarketValue>
+			<WorkToMake>700</WorkToMake>
+		</statBases>
+		<costList>
+			<spade_AdvancedRepairKit>1</spade_AdvancedRepairKit>
+			<Steel>75</Steel>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Chemfuel>3</Chemfuel>
+		</costList>
+		<comps>
+			<li Class="CompProperties_UseEffectPlaySound">
+				<soundOnUsed>MechSerumUsed</soundOnUsed>
+			</li>
+			<li Class="CompProperties_Usable">
+				<useJob>UseItem</useJob>
+				<useLabel>Restore SPADE</useLabel>
+				<useDuration>0</useDuration>
+			</li>
+			<li Class="CompProperties_Targetable">
+				<compClass>SPADE.CompTargetable_SingleCorpse_SPADE_Resurrectable</compClass>
+			</li>
+			<li>
+				<compClass>CompTargetEffect_Resurrect</compClass>
+			</li>
+		</comps>
+		<recipeMaker>
+			<workSkill>Crafting</workSkill>
+			<recipeUsers>
+				<li>TableMachining</li>
+			</recipeUsers>
+			<researchPrerequisite>Spade_Basic</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>4</Crafting>
+				<Intellectual>4</Intellectual>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
 </Defs>

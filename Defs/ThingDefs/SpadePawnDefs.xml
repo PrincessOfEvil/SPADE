@@ -266,7 +266,7 @@
 					<bodyAddons>
 						<li>
 							<path>Pawns/Naked_spade_actuator</path>
-			   				<bodyPart>Actuator</bodyPart>
+				 				<bodyPart>Actuator</bodyPart>
 							<inFrontOfBody>true</inFrontOfBody>
 							<layerInvert>false</layerInvert>
 							<drawnDesiccated>false</drawnDesiccated>
@@ -300,7 +300,7 @@
 						</li>
 						<li>
 							<path>Pawns/Naked_spade_arm</path>
-			   				<bodyPart>SPADE_Arm</bodyPart>
+				 				<bodyPart>SPADE_Arm</bodyPart>
 							<inFrontOfBody>true</inFrontOfBody>
 							<layerInvert>false</layerInvert>
 							<drawnDesiccated>false</drawnDesiccated>
@@ -476,7 +476,7 @@
 			<ComponentIndustrial>2</ComponentIndustrial>
 		</butcherProducts>
 		<recipes>
-      		<li>RemoveSpadePart</li>
+			<li>RemoveSpadePart</li>
 
 			<li>InstallSpadeTreads</li>
 			<li>InstallSpadeWheels</li>
@@ -516,6 +516,7 @@
 					<east>(0.6, 0, 0)</east>
 				</offsets>
 			</li>
+			<li Class="SPADE.DefExtension_SPADE_Resurrectable" />
 		</modExtensions>
 	</AlienRace.ThingDef_AlienRace>
 
@@ -566,7 +567,7 @@
 		</stages>
 	</ThoughtDef>
 	<HediffDef>
-    	<hediffClass>HediffWithComps</hediffClass>
+			<hediffClass>HediffWithComps</hediffClass>
 		<defName>JoyOffsetEmotionlessRobot</defName>
 		<label>SpadeJoyOffsetEmotionlessRobot</label>
 		<description>gains joy from thin air</description>
@@ -584,22 +585,59 @@
 		</stages>
 	</HediffDef>
 
-	
+	<ThingDef>
+		<defName>spade_BaseEgg</defName>
+		<label>SPADE</label>
+		<description>Scout/Patrol Automated Drone, Enhanced.</description>
+		<thingClass>ThingWithComps</thingClass>
+		<graphicData>
+			<texPath>Pawns/Naked_spade_body_south</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
+				<hatcherPawn>spade_SpadeSimplePlayer</hatcherPawn>
+			</li>
+		</comps>
+		<tickerType>Normal</tickerType>
+		<statBases>
+			<WorkToMake>13000</WorkToMake>
+		</statBases>
+		<costList>
+			<Steel>150</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+		<recipeMaker>
+			<workSkill>Crafting</workSkill>
+			<recipeUsers>
+				<li>TableMachining</li>
+			</recipeUsers>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Machining</soundWorking>
+			<unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+			<researchPrerequisite>Spade_Basic</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>8</Crafting>
+				<Intellectual>8</Intellectual>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
 
-  <FleshTypeDef>
-    <defName>MechanoidButSpade</defName>
-    <corpseCategory>CorpsesMechanoid</corpseCategory>
-    <damageEffecter>Damage_HitMechanoid</damageEffecter>
-    <wounds>
-      <li>
-        <texture>Things/Pawn/Wounds/WoundMechA</texture>
-      </li>
-      <li>
-        <texture>Things/Pawn/Wounds/WoundMechB</texture>
-      </li>
-      <li>
-        <texture>Things/Pawn/Wounds/WoundMechC</texture>
-      </li>
-    </wounds>
-  </FleshTypeDef>
+	<FleshTypeDef>
+		<defName>MechanoidButSpade</defName>
+		<corpseCategory>CorpsesMechanoid</corpseCategory>
+		<damageEffecter>Damage_HitMechanoid</damageEffecter>
+		<wounds>
+			<li>
+				<texture>Things/Pawn/Wounds/WoundMechA</texture>
+			</li>
+			<li>
+				<texture>Things/Pawn/Wounds/WoundMechB</texture>
+			</li>
+			<li>
+				<texture>Things/Pawn/Wounds/WoundMechC</texture>
+			</li>
+		</wounds>
+	</FleshTypeDef>
 </Defs>
