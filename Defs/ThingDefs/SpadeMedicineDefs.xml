@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+	
+<Defs>
+	<RecipeDef ParentName="SurgerySpade">
+		<defName>RemoveSpadePart</defName>
+		<label>remove machine part</label>
+		<description>Remove a spade part.</description>
+		<workerClass>Recipe_RemoveBodyPart</workerClass>
+		<jobString>Removing spade part.</jobString>
+		<workAmount>2000</workAmount>
+		<surgerySuccessChanceFactor>1.4</surgerySuccessChanceFactor>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>Spade_Medicine</li>
+					</categories>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>Spade_Medicine</li>
+			</categories>
+		</fixedIngredientFilter>
+	</RecipeDef>
+
+	<ThingCategoryDef>
+		<defName>Spade_Medicine</defName>
+		<label>spade repair kit</label>
+		<parent>Manufactured</parent>
+		<resourceReadoutRoot>true</resourceReadoutRoot>
+		<iconPath>Items/RepairKit/RepairKit_a</iconPath>
+	</ThingCategoryDef>
+
+	<ThingDef Name="spade_Medicine" Abstract="True" ParentName="ResourceBase">
+		<thingClass>Medicine</thingClass>
+		<stackLimit>25</stackLimit>
+		<drawGUIOverlay>True</drawGUIOverlay>
+		<uiIconForStackCount>1</uiIconForStackCount>
+		<soundInteract>Standard_Drop</soundInteract>
+		<soundDrop>Standard_Drop</soundDrop>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<Mass>1</Mass>
+			<Flammability>0.5</Flammability>
+			<DeteriorationRate>2</DeteriorationRate>
+		</statBases>
+		<comps>
+			<li>
+				<compClass>SPADE.Comp_NonStandardMedicine</compClass>
+			</li>
+		</comps>
+		<thingCategories>
+			<li>Spade_Medicine</li>
+			<li>Medicine</li>
+		</thingCategories>
+	</ThingDef>
+
+	<ThingDef ParentName="spade_Medicine">
+		<defName>spade_BasicRepairKit</defName>
+		<label>basic repair kit</label>
+		<description>A basic repair kit, easy to assemble wherever needed.</description>
+		<graphicData>
+			<texPath>Items/RepairKit</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<drawSize>0.85</drawSize>
+		</graphicData>
+		<techLevel>Neolithic</techLevel>
+		<statBases>
+			<MarketValue>10</MarketValue>
+			<MedicalPotency>0.60</MedicalPotency>
+			<MedicalQualityMax>0.70</MedicalQualityMax>
+			<WorkToMake>250</WorkToMake>
+		</statBases>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>10</costStuffCount>
+		<costList>
+			<Steel>10</Steel>
+		</costList>
+		<recipeMaker>
+			<recipeUsers>
+				<li>CraftingSpot</li>
+			</recipeUsers>
+			<skillRequirements>
+				<Crafting>3</Crafting>
+				<Intellectual>3</Intellectual>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="spade_Medicine">
+		<defName>spade_AdvancedRepairKit</defName>
+		<label>advanced repair kit</label>
+		<description>A kit of industrial-era repair equipment. It contains a full tool set, complete with a miniature welding torch.</description>
+		<graphicData>
+			<texPath>Items/RepairKit</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<drawSize>0.85</drawSize>
+			<color>(118,169,189)</color>
+		</graphicData>
+		<techLevel>Industrial</techLevel>
+		<statBases>
+			<MarketValue>18</MarketValue>
+			<MedicalPotency>1.00</MedicalPotency>
+			<MedicalQualityMax>1.00</MedicalQualityMax>
+			<WorkToMake>700</WorkToMake>
+		</statBases>
+		<costList>
+			<spade_BasicRepairKit>1</spade_BasicRepairKit>
+			<ComponentIndustrial>1</ComponentIndustrial>
+			<Chemfuel>3</Chemfuel>
+		</costList>
+		<recipeMaker>
+			<workSkill>Crafting</workSkill>
+			<recipeUsers>
+				<li>TableMachining</li>
+			</recipeUsers>
+			<researchPrerequisite>Spade_Basic</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>4</Crafting>
+				<Intellectual>4</Intellectual>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="spade_Medicine">
+		<defName>spade_UltratechRepairKit</defName>
+		<label>glitterworld repair kit</label>
+		<description>A kit of advanced ultra-tech repair supplies, probably manufactured on a distant glitterworld. It contains advanced polymorphic nanobots, a diagnostic assistant AI, a mini-imager, and various multi-use tools.</description>
+		<graphicData>
+			<texPath>Items/RepairKit</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<drawSize>0.85</drawSize>
+		</graphicData>
+		<techLevel>Ultra</techLevel>
+		<statBases>
+			<MarketValue>50</MarketValue>
+			<MedicalPotency>1.60</MedicalPotency>
+			<MedicalQualityMax>1.30</MedicalQualityMax>
+		</statBases>
+		<tradeTags>
+			<li>ExoticMisc</li>
+		</tradeTags>
+		<thingSetMakerTags><li>RewardStandardHighFreq</li></thingSetMakerTags>
+	</ThingDef>
+</Defs>

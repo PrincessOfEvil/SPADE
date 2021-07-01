@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ModMetaData>
+	<name>SPADE</name>
+	<author>Princess of Evil</author>
+	<supportedVersions>
+		<li>1.2</li>
+	</supportedVersions>
+	<packageId>princess.spade</packageId>
+	<description>
+    null
+	</description>
+	<modDependencies>
+		<li>
+			<packageId>erdelf.humanoidalienraces</packageId>
+			<displayName>Humanoid Alien Races 2.0</displayName>
+			<steamWorkshopUrl>steam://https://steamcommunity.com/sharedfiles/filedetails/?id=839005762</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+	<loadBefore></loadBefore>
+	<loadAfter>
+		<li>erdelf.humanoidalienraces</li>
+	</loadAfter>
+</ModMetaData>
