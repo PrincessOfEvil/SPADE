@@ -8,6 +8,13 @@ using Verse;
 namespace SPADE
     {
     public class HediffComp_IgnoresTerrain : HediffComp
-        {
-        }
+		{
+		public override string CompTipStringExtra
+			{
+			get
+				{
+				return "IgnoresTerrain".Translate();
+				}
+			}
+		}
     }

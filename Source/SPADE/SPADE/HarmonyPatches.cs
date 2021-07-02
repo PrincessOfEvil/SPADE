@@ -124,6 +124,14 @@ namespace SPADE
             return Mathf.CeilToInt(ret + pawn.health.hediffSet.GetAllComps().Where(hediff => { return hediff is HediffComp_ChangePartHealth && hediff.parent.Part.def == __instance; }).Cast<HediffComp_ChangePartHealth>().Sum(hediff => { return hediff.Props.health; }) * pawn.HealthScale);
             }
         }
+    [HarmonyPatch(typeof(Pawn_StoryTracker), "get_DisabledWorkTagsBackstoryAndTraits")]
+    static class SPADE_Pawn_StoryTracker_get_DisabledWorkTagsBackstoryAndTraits_Patch
+        {
+        static WorkTags Postfix(WorkTags ret, Pawn ___pawn)
+            {
+            return ret & (WorkTags)___pawn.health.hediffSet.GetAllComps().Where(hediff => { return hediff is HediffComp_EnableWorkTypes; }).Cast<HediffComp_EnableWorkTypes>().Sum(hediff => { return (int)hediff.Props.workTags; });
+            }
+        }
     [HarmonyPatch(typeof(Pawn), "GetDisabledWorkTypes")]
     static class SPADE_Pawn_GetDisabledWorkTypes_Patch
         {

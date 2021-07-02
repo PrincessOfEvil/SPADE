@@ -66,8 +66,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SPADE\CompTargetEffect_FixWorstHealthCondition.cs" />
     <Compile Include="SPADE\CompTargetable_SinglePawn_HasExt.cs" />
     <Compile Include="SPADE\DefExtension_CarryOffsets.cs" />
+    <Compile Include="SPADE\HediffComp_Skill.cs" />
     <Compile Include="SPADE\HediffGiver_IngoresResSickness.cs" />
     <Compile Include="SPADE\DefExtension_NonStandardMedicine.cs" />
     <Compile Include="SPADE\DefExtension_DoesNotNeed.cs" />

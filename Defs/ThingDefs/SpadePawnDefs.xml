@@ -310,6 +310,8 @@
 							<hediffGraphics>
 								<SpadeGunArm>Pawns/Naked_spade_arm</SpadeGunArm>
 								<SpadeCrane>Pawns/Naked_spade_arm_crane</SpadeCrane>
+								<SpadeWelder>Pawns/Naked_spade_arm_welder</SpadeWelder>
+								<SpadeHarvester>Pawns/Naked_spade_arm_harvester</SpadeHarvester>
 							</hediffGraphics>
 							<layerOffset>-0.27</layerOffset>
 							<offsets>
@@ -517,6 +519,7 @@
 				</offsets>
 			</li>
 			<li Class="SPADE.DefExtension_SPADE_Resurrectable" />
+			<li Class="SPADE.DefExtension_Repairable" />
 		</modExtensions>
 	</AlienRace.ThingDef_AlienRace>
 

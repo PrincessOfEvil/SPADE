@@ -34,6 +34,7 @@
 		<iconPath>Items/RepairKit/RepairKit_a</iconPath>
 	</ThingCategoryDef>
 
+
 	<ThingDef Name="spade_Medicine" Abstract="True" ParentName="ResourceBase">
 		<thingClass>Medicine</thingClass>
 		<stackLimit>25</stackLimit>
@@ -61,7 +62,7 @@
 	<ThingDef ParentName="spade_Medicine">
 		<defName>spade_BasicRepairKit</defName>
 		<label>basic repair kit</label>
-		<description>A basic repair kit, easy to assemble wherever needed.</description>
+		<description>A basic repair kit, easy to assemble wherever needed. Has the basic tools to plug the holes and tape over shorts to let internal repair mechanites finish the job, but lacks spare parts for instant repair.</description>
 		<graphicData>
 			<texPath>Items/RepairKit</texPath>
 			<graphicClass>Graphic_StackCount</graphicClass>
@@ -95,7 +96,7 @@
 	<ThingDef ParentName="spade_Medicine">
 		<defName>spade_AdvancedRepairKit</defName>
 		<label>advanced repair kit</label>
-		<description>A kit of industrial-era repair equipment. It contains a full tool set, complete with a miniature welding torch.</description>
+		<description>A kit of industrial-era repair equipment. It contains a full tool set, complete with a miniature welding torch. Capable of almost instantly repairing a compatible mech.</description>
 		<graphicData>
 			<texPath>Items/RepairKit</texPath>
 			<graphicClass>Graphic_StackCount</graphicClass>
@@ -109,6 +110,19 @@
 			<MedicalQualityMax>1.00</MedicalQualityMax>
 			<WorkToMake>700</WorkToMake>
 		</statBases>
+		<comps>
+			<li Class="CompProperties_Usable">
+				<useJob>UseItem</useJob>
+				<useLabel>Repair minor damage</useLabel>
+				<useDuration>0</useDuration>
+			</li>
+			<li Class="CompProperties_Targetable">
+				<compClass>SPADE.CompTargetable_SinglePawn_Repairable</compClass>
+			</li>
+			<li>
+				<compClass>SPADE.CompTargetEffect_FixWorstHealthCondition</compClass>
+			</li>
+		</comps>
 		<costList>
 			<spade_BasicRepairKit>1</spade_BasicRepairKit>
 			<ComponentIndustrial>1</ComponentIndustrial>
@@ -142,6 +156,19 @@
 			<MedicalPotency>1.60</MedicalPotency>
 			<MedicalQualityMax>1.30</MedicalQualityMax>
 		</statBases>
+		<comps>
+			<li Class="CompProperties_Usable">
+				<useJob>UseItem</useJob>
+				<useLabel>Repair minor damage</useLabel>
+				<useDuration>0</useDuration>
+			</li>
+			<li Class="CompProperties_Targetable">
+				<compClass>SPADE.CompTargetable_SinglePawn_Repairable</compClass>
+			</li>
+			<li>
+				<compClass>SPADE.CompTargetEffect_FixWorstHealthCondition</compClass>
+			</li>
+		</comps>
 		<tradeTags>
 			<li>ExoticMisc</li>
 		</tradeTags>
@@ -200,4 +227,11 @@
 			</skillRequirements>
 		</recipeMaker>
 	</ThingDef>
+
+	<JobDef>
+		<defName>spade_Repair</defName>
+		<driverClass>SPADE.JobDriver_Repair</driverClass>
+		<reportString>repairing TargetA.</reportString>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
 </Defs>

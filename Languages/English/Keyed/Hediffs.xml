@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<CannotUseMelee>Cannot use melee weapons</CannotUseMelee>
+	<CannotUseRanged>Cannot use ranged weapons</CannotUseRanged>
+
+	<EnabledWorkTags>Enabled work tags: {0}</EnabledWorkTags>
+	<EnabledWorkTypes>Enabled work types:</EnabledWorkTypes>
+	<AffectedSkills>Affected skills:</AffectedSkills>
+	<SkillLevel>Skill level: {0}</SkillLevel>
+
+	<IgnoresTerrain>Can float over slowing terrain</IgnoresTerrain>
+</LanguageData>

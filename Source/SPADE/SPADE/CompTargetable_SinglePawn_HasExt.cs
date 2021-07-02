@@ -35,4 +35,41 @@ namespace SPADE
 		{
 		public DefExtension_SPADE_Resurrectable() { }
 		}
+
+	public class CompTargetable_SinglePawn_Repairable : CompTargetable_SinglePawn
+		{
+		protected override TargetingParameters GetTargetingParameters()
+			{
+			return new TargetingParameters
+				{
+				canTargetPawns = true,
+				canTargetBuildings = false,
+				validator = ((TargetInfo x) => BaseTargetValidator(x.Thing) && localValidator(x.Thing))
+				};
+			}
+		protected bool localValidator(Thing thing)
+			{
+			Pawn pawn = thing as Pawn;
+			if (pawn != null)
+				{
+				return pawn.HasModExtension<DefExtension_Repairable>();
+				}
+			return false;
+			}
+		public override bool CanBeUsedBy(Pawn p, out string failReason)
+			{
+			failReason = null;
+			if (p.skills.GetSkill(DefDatabase<SkillDef>.GetNamed("Crafting")).Level < 4)
+				{
+				failReason = "LackingSufficientCraftingSkill".Translate();
+
+				return false;
+				}
+			return true;
+			}
+		}
+	public class DefExtension_Repairable : DefModExtension
+		{
+		public DefExtension_Repairable() { }
+		}
 	}

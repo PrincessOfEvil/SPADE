@@ -18,7 +18,6 @@
 		<defaultLabelColor>(1,1,1)</defaultLabelColor>
 		<isBad>false</isBad>
 	</HediffDef>
-
 	<RecipeDef Name="SurgerySpade" Abstract="True">
 		<effectWorking>Repair</effectWorking>
 		<soundWorking>Recipe_Machining</soundWorking>
@@ -337,16 +336,18 @@
 		<labelNoun>a spade gun mount</labelNoun>
 		<description>An installed gun mount for a SPADE. Good at shooting things.</description>
 		<stages>
-			<li>
-				<statOffsets>
-					<ShootingAccuracyPawn>10</ShootingAccuracyPawn>
-				</statOffsets>
-			</li>
 		</stages>
 		<comps>
 			<li Class="SPADE.HediffCompProperties_EnableWorkTypes">
 				<compClass>SPADE.HediffComp_EnableWorkTypes</compClass>
 				<workTags>Violent</workTags>
+			</li>
+			<li Class="SPADE.HediffCompProperties_Skill">
+				<compClass>SPADE.HediffComp_SetSkill</compClass>
+				<skills>
+					<li>Shooting</li>
+				</skills>
+				<level>10</level>
 			</li>
 			<li>
 				<compClass>SPADE.HediffComp_CannotUseMelee</compClass>
@@ -402,13 +403,12 @@
 	<HediffDef ParentName="AddedBodyPartBaseSpade">
 		<defName>SpadeCrane</defName>
 		<label>spade crane</label>
-		<labelNoun>a set of spade wheels</labelNoun>
+		<labelNoun>a spade crane</labelNoun>
 		<description>An installed crane arm for a SPADE. Capable of moving heavy items, and isn't too terrible in melee, but incapable of doing much else.</description>
 		<stages>
 			<li>
 				<statOffsets>
 					<CarryingCapacity>50</CarryingCapacity>
-					<MeleeHitChance>5</MeleeHitChance>
 				</statOffsets>
 			</li>
 		</stages>
@@ -416,6 +416,13 @@
 			<li Class="SPADE.HediffCompProperties_EnableWorkTypes">
 				<compClass>SPADE.HediffComp_EnableWorkTypes</compClass>
 				<workTags>Hauling</workTags>
+			</li>
+			<li Class="SPADE.HediffCompProperties_Skill">
+				<compClass>SPADE.HediffComp_SetSkill</compClass>
+				<skills>
+					<li>Melee</li>
+				</skills>
+				<level>5</level>
 			</li>
 			<li Class="SPADE.HediffCompProperties_ChangePartHealth">
 				<compClass>SPADE.HediffComp_ChangePartHealth</compClass>
@@ -475,5 +482,167 @@
 			<li>SPADE_Arm</li>
 		</appliedOnFixedBodyParts>
 		<addsHediff>SpadeCrane</addsHediff>
+	</RecipeDef>
+
+	<HediffDef ParentName="AddedBodyPartBaseSpade">
+		<defName>SpadeWelder</defName>
+		<label>spade welder</label>
+		<labelNoun>a spade welder</labelNoun>
+		<description>An installed welding arm for a SPADE. Capable of repairing or constructing buildings, as well as finer items.</description>
+		<stages>
+		</stages>
+		<comps>
+			<li Class="SPADE.HediffCompProperties_EnableWorkTypes">
+				<compClass>SPADE.HediffComp_EnableWorkTypes</compClass>
+				<workTags>Crafting</workTags>
+				<workTypes>
+					<li>Construction</li>
+				</workTypes>
+			</li>
+			<li Class="SPADE.HediffCompProperties_Skill">
+				<compClass>SPADE.HediffComp_SetSkill</compClass>
+				<skills>
+					<li>Construction</li>
+					<li>Crafting</li>
+				</skills>
+				<level>5</level>
+			</li>
+			<li Class="SPADE.HediffCompProperties_ChangePartHealth">
+				<compClass>SPADE.HediffComp_ChangePartHealth</compClass>
+				<health>-15</health>
+			</li>
+			<li>
+				<compClass>SPADE.HediffComp_CannotUseMelee</compClass>
+			</li>
+			<li>
+				<compClass>SPADE.HediffComp_CannotUseRanged</compClass>
+			</li>
+		</comps>
+		<spawnThingOnRemoved>SpadeWelder</spawnThingOnRemoved>
+		<addedPartProps>
+			<betterThanNatural>true</betterThanNatural>
+		</addedPartProps>
+	</HediffDef>
+	<ThingDef ParentName="BodyPartSpadeBase">
+		<defName>SpadeWelder</defName>
+		<label>spade welder</label>
+		<description>A welding arm for a SPADE. Capable of repairing or constructing buildings, as well as finer items.</description>
+		<descriptionHyperlinks><RecipeDef>InstallSpadeWelder</RecipeDef></descriptionHyperlinks>
+		<costList>
+			<Steel>40</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+		<statBases>
+			<Mass>0.3</Mass>
+		</statBases>
+	</ThingDef>
+	<RecipeDef ParentName="SurgerySpade">
+		<defName>InstallSpadeWelder</defName>
+		<label>install spade welder</label>
+		<description>Installs spade welder.</description>
+		<jobString>Installing spade welder.</jobString>
+		<descriptionHyperlinks>
+			<ThingDef>SpadeWelder</ThingDef>
+			<HediffDef>SpadeWelder</HediffDef>
+		</descriptionHyperlinks>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>SpadeWelder</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>SpadeWelder</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>SPADE_Arm</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>SpadeWelder</addsHediff>
+	</RecipeDef>
+
+	<HediffDef ParentName="AddedBodyPartBaseSpade">
+		<defName>SpadeHarvester</defName>
+		<label>spade harvester</label>
+		<labelNoun>a spade harvester</labelNoun>
+		<description>An installed crop harvester for a SPADE. Too rough to work on delicate crops.</description>
+		<stages>
+		</stages>
+		<comps>
+			<li Class="SPADE.HediffCompProperties_EnableWorkTypes">
+				<compClass>SPADE.HediffComp_EnableWorkTypes</compClass>
+				<workTags>PlantWork</workTags>
+			</li>
+			<li Class="SPADE.HediffCompProperties_Skill">
+				<compClass>SPADE.HediffComp_SetSkill</compClass>
+				<skills>
+					<li>Plants</li>
+				</skills>
+				<level>5</level>
+			</li>
+			<li Class="SPADE.HediffCompProperties_ChangePartHealth">
+				<compClass>SPADE.HediffComp_ChangePartHealth</compClass>
+				<health>-15</health>
+			</li>
+			<li>
+				<compClass>SPADE.HediffComp_CannotUseMelee</compClass>
+			</li>
+			<li>
+				<compClass>SPADE.HediffComp_CannotUseRanged</compClass>
+			</li>
+		</comps>
+		<spawnThingOnRemoved>SpadeHarvester</spawnThingOnRemoved>
+		<addedPartProps>
+			<betterThanNatural>true</betterThanNatural>
+		</addedPartProps>
+	</HediffDef>
+	<ThingDef ParentName="BodyPartSpadeBase">
+		<defName>SpadeHarvester</defName>
+		<label>spade harvester</label>
+		<description>A crop harvester for a SPADE. Too rough to work on delicate crops.</description>
+		<descriptionHyperlinks><RecipeDef>InstallSpadeHarvester</RecipeDef></descriptionHyperlinks>
+		<costList>
+			<Steel>40</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+		<statBases>
+			<Mass>0.3</Mass>
+		</statBases>
+	</ThingDef>
+	<RecipeDef ParentName="SurgerySpade">
+		<defName>InstallSpadeHarvester</defName>
+		<label>install spade harvester</label>
+		<description>Installs spade harvester.</description>
+		<jobString>Installing spade harvester.</jobString>
+		<descriptionHyperlinks>
+			<ThingDef>SpadeHarvester</ThingDef>
+			<HediffDef>SpadeHarvester</HediffDef>
+		</descriptionHyperlinks>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>SpadeHarvester</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>SpadeHarvester</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>SPADE_Arm</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>SpadeHarvester</addsHediff>
 	</RecipeDef>
 </Defs>
