@@ -15,7 +15,7 @@ namespace SPADE
             {
             Props.affectedSkills.ForEach(skill => { Pawn.skills.GetSkill(skill).Notify_SkillDisablesChanged(); });
             }
-        public override void CompPostPostRemoved(DamageInfo? dinfo)
+        public override void CompPostPostRemoved()
             {
             Props.affectedSkills.ForEach(skill => { Pawn.skills.GetSkill(skill).Notify_SkillDisablesChanged(); });
             }

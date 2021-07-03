@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Defs>
-	<FactionDef ParentName="PlayerFactionBase">
+	<FactionDef Name="SPADEBaseFaction" ParentName="PlayerFactionBase">
 		<defName>PlayerColonySPADE</defName>
 		<label>New SPADE Arrivals</label>
 		<description>Your robot colony.</description>
@@ -29,6 +29,20 @@
 				<li>Cloth</li>
 			</thingDefs>
 		</apparelStuffFilter>
+	</FactionDef>
+	<FactionDef ParentName="SPADEBaseFaction">
+		<defName>PlayerColonySPADE_EDB</defName>
+		<fixedName>SPADE</fixedName>
+		<hidden>true</hidden>
+		<isPlayer>false</isPlayer>
+		<canSiege>false</canSiege>
+		<canStageAttacks>false</canStageAttacks>
+		<canMakeRandomly>false</canMakeRandomly>
+		<raidCommonalityFromPointsCurve>
+			<points>
+				<li>(0, 0)</li>
+			</points>
+		</raidCommonalityFromPointsCurve>
 	</FactionDef>
 
 	<PawnKindDef Name="BaseSPADE" ParentName="BasePlayerPawnKind">
@@ -312,6 +326,7 @@
 								<SpadeCrane>Pawns/Naked_spade_arm_crane</SpadeCrane>
 								<SpadeWelder>Pawns/Naked_spade_arm_welder</SpadeWelder>
 								<SpadeHarvester>Pawns/Naked_spade_arm_harvester</SpadeHarvester>
+								<SpadeDrill>Pawns/Naked_spade_arm_drill</SpadeDrill>
 							</hediffGraphics>
 							<layerOffset>-0.27</layerOffset>
 							<offsets>
@@ -498,6 +513,7 @@
 					<li>RoomSize</li>
 				</needs>
 			</li>
+			<li Class="SPADE.DefExtension_CannotTalk" />
 			<li Class="SPADE.DefExtension_NonStandardMedicine">
 				<medicine>Spade_Medicine</medicine>
 			</li>
@@ -570,11 +586,17 @@
 		</stages>
 	</ThoughtDef>
 	<HediffDef>
-			<hediffClass>HediffWithComps</hediffClass>
+		<hediffClass>HediffWithComps</hediffClass>
 		<defName>JoyOffsetEmotionlessRobot</defName>
 		<label>SpadeJoyOffsetEmotionlessRobot</label>
-		<description>gains joy from thin air</description>
+		<description>gains joy from thin air (also enables hitting switches)</description>
 		<comps>
+			<li Class="SPADE.HediffCompProperties_EnableWorkTypes">
+				<compClass>SPADE.HediffComp_EnableWorkTypes</compClass>
+				<workTypes>
+					<li>BasicWorker</li>
+				</workTypes>
+			</li>
 			<li Class="SPADE.HediffCompProperties_Joy">
 				<compClass>SPADE.HediffComp_Joy</compClass>
 				<joyPerTick>0.000035</joyPerTick>

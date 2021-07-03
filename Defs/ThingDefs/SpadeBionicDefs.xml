@@ -645,4 +645,83 @@
 		</appliedOnFixedBodyParts>
 		<addsHediff>SpadeHarvester</addsHediff>
 	</RecipeDef>
+
+	<HediffDef ParentName="AddedBodyPartBaseSpade">
+		<defName>SpadeDrill</defName>
+		<label>spade drill</label>
+		<labelNoun>a spade drill</labelNoun>
+		<description>An installed drill arm for a SPADE. Relatively fast and efficient.</description>
+		<stages>
+		</stages>
+		<comps>
+			<li Class="SPADE.HediffCompProperties_EnableWorkTypes">
+				<compClass>SPADE.HediffComp_EnableWorkTypes</compClass>
+				<workTags>Mining</workTags>
+			</li>
+			<li Class="SPADE.HediffCompProperties_Skill">
+				<compClass>SPADE.HediffComp_SetSkill</compClass>
+				<skills>
+					<li>Mining</li>
+				</skills>
+				<level>10</level>
+			</li>
+			<li Class="SPADE.HediffCompProperties_ChangePartHealth">
+				<compClass>SPADE.HediffComp_ChangePartHealth</compClass>
+				<health>-5</health>
+			</li>
+			<li>
+				<compClass>SPADE.HediffComp_CannotUseMelee</compClass>
+			</li>
+			<li>
+				<compClass>SPADE.HediffComp_CannotUseRanged</compClass>
+			</li>
+		</comps>
+		<spawnThingOnRemoved>SpadeDrill</spawnThingOnRemoved>
+		<addedPartProps>
+			<betterThanNatural>true</betterThanNatural>
+		</addedPartProps>
+	</HediffDef>
+	<ThingDef ParentName="BodyPartSpadeBase">
+		<defName>SpadeDrill</defName>
+		<label>spade drill</label>
+		<description>A drill arm for a SPADE. Relatively fast and efficient.</description>
+		<descriptionHyperlinks><RecipeDef>InstallSpadeDrill</RecipeDef></descriptionHyperlinks>
+		<costList>
+			<Steel>40</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+		<statBases>
+			<Mass>0.3</Mass>
+		</statBases>
+	</ThingDef>
+	<RecipeDef ParentName="SurgerySpade">
+		<defName>InstallSpadeDrill</defName>
+		<label>install spade drill</label>
+		<description>Installs spade drill.</description>
+		<jobString>Installing spade drill.</jobString>
+		<descriptionHyperlinks>
+			<ThingDef>SpadeDrill</ThingDef>
+			<HediffDef>SpadeDrill</HediffDef>
+		</descriptionHyperlinks>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>SpadeDrill</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>SpadeDrill</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>SPADE_Arm</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>SpadeDrill</addsHediff>
+	</RecipeDef>
 </Defs>

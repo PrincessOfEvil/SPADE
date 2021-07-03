@@ -13,4 +13,9 @@ namespace SPADE
         public List<NeedDef> needs;
         public DefExtension_DoesNotNeed() { }
         }
+
+    public class DefExtension_CannotTalk : DefModExtension
+        {
+        public DefExtension_CannotTalk() { }
+        }
     }

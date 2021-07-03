@@ -24,6 +24,18 @@ namespace SPADE
             harmony.PatchAll(Assembly.GetExecutingAssembly());
             }
         }
+    [HarmonyPatch(typeof(PawnUtility), "IsInteractionBlocked")]
+    static class SPADE_PawnUtility_IsInteractionBlocked_Patch
+        {
+        static bool Postfix(bool ret, Pawn pawn) 
+            {
+            if (pawn.HasModExtension<DefExtension_CannotTalk>()) 
+                {
+                return true;
+                }
+            return ret;
+            }
+        }
 
     [HarmonyPatch(typeof(JobDriver), "ModifyCarriedThingDrawPos")]
     static class SPADE_JobDriver_ModifyCarriedThingDrawPos_Patch
@@ -98,7 +110,7 @@ namespace SPADE
             }
         }
     [HarmonyPatch(typeof(HealthAIUtility), "FindBestMedicine")]
-    static class SPADE_HealthAIUtility_GetMaxHealth_Patch
+    static class SPADE_HealthAIUtility_FindBestMedicine_Patch
         {
         static Thing Postfix(Thing ret, Pawn healer, Pawn patient) 
             {
@@ -106,11 +118,23 @@ namespace SPADE
                 {
                 Predicate<Thing> validator = (Thing m) => (m.def.thingCategories.Contains(patient.GetModExtension<DefExtension_NonStandardMedicine>().medicine) && !m.IsForbidden(healer) && patient.playerSettings.medCare.AllowsMedicine(m.def) && healer.CanReserve(m, 10, 1)) ? true : false;
                 Func<Thing, float> priorityGetter = (Thing t) => t.def.GetStatValueAbstract(StatDefOf.MedicalPotency);
-                return GenClosest.ClosestThing_Global_Reachable(patient.Position, patient.Map, patient.Map.listerThings.ThingsInGroup(ThingRequestGroup.Medicine), PathEndMode.ClosestTouch, TraverseParms.For(healer), 9999f, validator, priorityGetter);
+                Thing thing = GenClosest.ClosestThing_Global_Reachable(patient.Position, patient.Map, patient.Map.listerThings.ThingsInGroup(ThingRequestGroup.Medicine), PathEndMode.ClosestTouch, TraverseParms.For(healer), 9999f, validator, priorityGetter);
+                if (DebugViewSettings.logTutor)
+                    {
+                    Log.Message("Found non-standard med" + thing.def.defName);
+                    }
+                return thing;
                 }
-            if (!(ret.TryGetComp<Comp_NonStandardMedicine>() is null)) 
+            if (ret.TryGetComp<Comp_NonStandardMedicine>() != null)
                 {
-                return null;
+                if (DebugViewSettings.logTutor)
+                    {
+                    Log.Message("Found non-standard meds, searching for standard ones...");
+                    }
+
+                Predicate<Thing> validator = (Thing m) => (m.TryGetComp<Comp_NonStandardMedicine>() == null && !m.IsForbidden(healer) && patient.playerSettings.medCare.AllowsMedicine(m.def) && healer.CanReserve(m, 10, 1)) ? true : false;
+                Func<Thing, float> priorityGetter = (Thing t) => t.def.GetStatValueAbstract(StatDefOf.MedicalPotency);
+                return GenClosest.ClosestThing_Global_Reachable(patient.Position, patient.Map, patient.Map.listerThings.ThingsInGroup(ThingRequestGroup.Medicine), PathEndMode.ClosestTouch, TraverseParms.For(healer), 9999f, validator, priorityGetter);
                 }
             return ret;
             }
