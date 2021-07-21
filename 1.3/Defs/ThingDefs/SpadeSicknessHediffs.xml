@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<HediffGiverSetDef>
+		<defName>SpadeStandardAtlas</defName>
+		<hediffGivers>
+			<li Class="HediffGiver_Bleeding">
+				<hediff>SpadeLeakingEngine</hediff>
+			</li>
+			<li Class="HediffGiver_Hypothermia">
+				<hediff>Hypothermia</hediff>
+			</li>
+			<li Class="HediffGiver_Heat">
+				<hediff>Heatstroke</hediff>
+			</li>
+      		<li Class="SPADE.HediffGiver_IngoresHediffs">
+				<ignoredHediffs>
+					<li>ResurrectionSickness</li>
+					<li>ResurrectionPsychosis</li>
+					<li>Dementia</li>
+					<li>Blindness</li>
+
+					<li>Anesthetic</li>
+				</ignoredHediffs>
+			</li>
+		</hediffGivers>
+	</HediffGiverSetDef>
+
+	
+	<HediffDef>
+		<defName>SpadeLeakingEngine</defName>
+		<label>internal leaks</label>
+		<description>Leaking biodiesel and oil, causing issues with movement, as well as cooling.</description>
+		<maxSeverity>1.0</maxSeverity>
+		<defaultLabelColor>(0.45, 0.45, 0.2)</defaultLabelColor>
+		<stages>
+			<li>
+				<label>initial</label>
+				<becomeVisible>false</becomeVisible>
+			</li>
+		
+			<li>
+				<minSeverity>0.1</minSeverity>
+				<label>initial</label>
+				<statOffsets>
+					<ComfyTemperatureMax>-5</ComfyTemperatureMax>
+				</statOffsets>
+				<capMods>
+					<li>
+						<capacity>Moving</capacity>
+						<offset>-0.05</offset>
+					</li>
+		 			<li>
+						<capacity>Manipulation</capacity>
+						<offset>-0.05</offset>
+					</li>
+				</capMods>
+			</li>
+	
+			<li>
+				<minSeverity>0.3</minSeverity>
+				<label>minor</label>
+				<statOffsets>
+					<ComfyTemperatureMax>-15</ComfyTemperatureMax>
+				</statOffsets>
+				<capMods>
+					<li>
+						<capacity>Moving</capacity>
+						<offset>-0.15</offset>
+					</li>
+		 			<li>
+						<capacity>Manipulation</capacity>
+						<offset>-0.15</offset>
+					</li>
+				</capMods>
+			</li>
+	
+			<li>
+				<minSeverity>0.6</minSeverity>
+				<label>serious</label>
+				<statOffsets>
+					<ComfyTemperatureMax>-30</ComfyTemperatureMax>
+				</statOffsets>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>-0.3</offset>
+					</li>
+					<li>
+						<capacity>Moving</capacity>
+						<offset>-0.3</offset>
+					</li>
+		 			<li>
+						<capacity>Manipulation</capacity>
+						<offset>-0.3</offset>
+					</li>
+				</capMods>
+			</li>
+	
+	
+			<li>
+				<minSeverity>0.9</minSeverity>
+				<label>extreme</label>
+				<statOffsets>
+					 <ComfyTemperatureMax>-60</ComfyTemperatureMax>
+				</statOffsets>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>-0.6</offset>
+					</li>
+					<li>
+						<capacity>Moving</capacity>
+						<offset>-0.6</offset>
+					</li>
+		 			<li>
+						<capacity>Manipulation</capacity>
+						<offset>-0.6</offset>
+					</li>
+				</capMods>
+			</li>
+		</stages>
+	</HediffDef>
+</Defs>

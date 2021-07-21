@@ -13,7 +13,8 @@ using Verse.AI;
 
 namespace SPADE
     {
-    #pragma warning disable IDE0051 // Remove unused private members
+#pragma warning disable IDE0051 // Remove unused private members
+
     [StaticConstructorOnStartup]
     static class HarmonyPatches
         {
@@ -22,20 +23,36 @@ namespace SPADE
             var harmony = new Harmony("princess.spade");
             Log.Message("SPADE patching...");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
+
+            //Targeting lambdas by name, yeah, yeah.
+            var healthAI_bestMed_anon_original = AccessTools.FirstMethod(
+                AccessTools.FirstInner(typeof(HealthAIUtility), inner => inner.GetField("patient") != null),
+                method => method.Name.Contains("b__1")); ;
+
+            var healthAI_bestMed_anon_postfix = typeof(SPADE_HealthAIUtility_FindBestMedicine_Anon_Patch).GetMethod("Postfix", AccessTools.all);
+
+            harmony.Patch(healthAI_bestMed_anon_original, postfix: new HarmonyMethod(healthAI_bestMed_anon_postfix));
             }
         }
-    [HarmonyPatch(typeof(PawnUtility), "IsInteractionBlocked")]
-    static class SPADE_PawnUtility_IsInteractionBlocked_Patch
+
+    /// <summary>
+    /// This patches the Hatch method so when no parent can be found (which is the case when a pawn is spawned from a crafted item), it is set so the player faction. 
+    /// https://github.com/ISOR3X/communityframework/blob/main/Source/communityframework/communityframework/Harmony%20patches/CompHatcher/Hatch.cs
+    /// </summary>
+
+    [HarmonyPatch(typeof(CompHatcher))]
+    [HarmonyPatch("Hatch")]
+    class Hatch
         {
-        static bool Postfix(bool ret, Pawn pawn) 
+        public static void Prefix(CompHatcher __instance)
             {
-            if (pawn.HasModExtension<DefExtension_CannotTalk>()) 
+            if (__instance.hatcheeParent == null) //If no parent is found for the hatchee, set the hatchee's faction to that of the player.
                 {
-                return true;
+                __instance.hatcheeFaction = Faction.OfPlayer;
                 }
-            return ret;
             }
         }
+
 
     [HarmonyPatch(typeof(JobDriver), "ModifyCarriedThingDrawPos")]
     static class SPADE_JobDriver_ModifyCarriedThingDrawPos_Patch
@@ -86,8 +103,8 @@ namespace SPADE
             }
         }
 
-    [HarmonyPatch(typeof(EquipmentUtility), "CanEquip_NewTmp")]
-    static class SPADE_EquipmentUtility_CanEquip_NewTmp_Patch
+    [HarmonyPatch(typeof(EquipmentUtility), "CanEquip", new Type[] { typeof(Thing), typeof(Pawn), typeof(string), typeof(bool) }, new ArgumentType[] { ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Out, ArgumentType.Normal})]
+    static class SPADE_EquipmentUtility_CanEquip_Patch
         {
         static bool Postfix(bool ret, Thing thing, Pawn pawn, ref string cantReason, bool checkBonded)
             {
@@ -109,15 +126,14 @@ namespace SPADE
             return ret;
             }
         }
-    [HarmonyPatch(typeof(HealthAIUtility), "FindBestMedicine")]
-    static class SPADE_HealthAIUtility_FindBestMedicine_Patch
+    static class SPADE_HealthAIUtility_FindBestMedicine_Anon_Patch
         {
-        static Thing Postfix(Thing ret, Pawn healer, Pawn patient) 
+        static bool Postfix(bool ret, Thing m, Pawn ___patient)
             {
+            /*
             if (patient.HasModExtension<DefExtension_NonStandardMedicine>())
                 {
                 Predicate<Thing> validator = (Thing m) => (m.def.thingCategories.Contains(patient.GetModExtension<DefExtension_NonStandardMedicine>().medicine) && !m.IsForbidden(healer) && patient.playerSettings.medCare.AllowsMedicine(m.def) && healer.CanReserve(m, 10, 1)) ? true : false;
-                Func<Thing, float> priorityGetter = (Thing t) => t.def.GetStatValueAbstract(StatDefOf.MedicalPotency);
                 Thing thing = GenClosest.ClosestThing_Global_Reachable(patient.Position, patient.Map, patient.Map.listerThings.ThingsInGroup(ThingRequestGroup.Medicine), PathEndMode.ClosestTouch, TraverseParms.For(healer), 9999f, validator, priorityGetter);
                 if (DebugViewSettings.logTutor)
                     {
@@ -133,9 +149,18 @@ namespace SPADE
                     }
 
                 Predicate<Thing> validator = (Thing m) => (m.TryGetComp<Comp_NonStandardMedicine>() == null && !m.IsForbidden(healer) && patient.playerSettings.medCare.AllowsMedicine(m.def) && healer.CanReserve(m, 10, 1)) ? true : false;
-                Func<Thing, float> priorityGetter = (Thing t) => t.def.GetStatValueAbstract(StatDefOf.MedicalPotency);
                 return GenClosest.ClosestThing_Global_Reachable(patient.Position, patient.Map, patient.Map.listerThings.ThingsInGroup(ThingRequestGroup.Medicine), PathEndMode.ClosestTouch, TraverseParms.For(healer), 9999f, validator, priorityGetter);
                 }
+            */
+
+            if (ret)
+                {
+                var defext = ___patient.GetModExtension<DefExtension_NonStandardMedicine>();
+                if (defext != null && m.def.thingCategories.Contains(defext.medicine))
+                    return true;
+                else if (m.TryGetComp<Comp_NonStandardMedicine>() != null) return false;
+                }
+
             return ret;
             }
         }
@@ -167,16 +192,6 @@ namespace SPADE
                     list.SelectMany(hediff => { return hediff.Props.workTypes; }))
                 .Where(work => { return (allowedTags & (int)work.workTags) == 0; })
                 .ToList();
-            }
-        }
-    [HarmonyPatch(typeof(Pawn_NeedsTracker), "ShouldHaveNeed")]
-    static class SPADE_Pawn_NeedsTracker_ShouldHaveNeed_Patch
-        {
-        static bool Postfix(bool ret, NeedDef nd, Pawn ___pawn)
-            {
-            if (___pawn.GetModExtension<DefExtension_DoesNotNeed>()?.needs.Contains(nd) ?? false)
-                return false;
-            return ret;
             }
         }
     [HarmonyPatch(typeof(Pawn_PathFollower), "CostToMoveIntoCell", typeof(Pawn), typeof(IntVec3))]

@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+	<FactionDef Name="SPADEBaseFaction" ParentName="PlayerFactionBase">
+		<defName>PlayerColonySPADE</defName>
+		<label>New SPADE Arrivals</label>
+		<description>Your robot colony.</description>
+		
+		<isPlayer>true</isPlayer>
+		<backstoryCategories>
+			<li>Civil</li>
+		</backstoryCategories>
+		<basicMemberKind>spade_SpadeSimplePlayer</basicMemberKind>
+		<pawnsPlural>colonists</pawnsPlural>
+		<playerInitialSettlementNameMaker>NamerInitialSettlementColony</playerInitialSettlementNameMaker>
+		<factionNameMaker>NamerFactionOutlander</factionNameMaker>
+		<settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
+		<techLevel>Industrial</techLevel>
+		<factionIconPath>World/WorldObjects/Expanding/Town</factionIconPath>
+		<startingResearchTags>
+			<li>ClassicStart</li>
+		</startingResearchTags>
+		<hairTags>
+			<li>Urban</li>
+		</hairTags>
+		<apparelStuffFilter>
+			<thingDefs>
+				<li>Synthread</li>
+				<li>Cloth</li>
+			</thingDefs>
+		</apparelStuffFilter>
+	</FactionDef>
+	<FactionDef ParentName="SPADEBaseFaction">
+		<defName>PlayerColonySPADE_EDB</defName>
+		<fixedName>SPADE</fixedName>
+		<hidden>true</hidden>
+		<isPlayer>false</isPlayer>
+		<canSiege>false</canSiege>
+		<canStageAttacks>false</canStageAttacks>
+		<canMakeRandomly>false</canMakeRandomly>
+		<raidCommonalityFromPointsCurve>
+			<points>
+				<li>(0, 0)</li>
+			</points>
+		</raidCommonalityFromPointsCurve>
+	</FactionDef>
+
+	<PawnKindDef Name="BaseSPADE" ParentName="BasePlayerPawnKind">
+		<defName>spade_SpadeSimplePlayer</defName>
+		<label>SPADE</label>
+		<race>spade_spade</race>
+		<backstoryFiltersOverride>
+			<li>
+				<categories>
+					<li>spade_Player</li>
+				</categories>
+			</li>
+		</backstoryFiltersOverride>
+		<maxGenerationAge>5</maxGenerationAge>
+		<defaultFactionType>PlayerColonySPADE</defaultFactionType>
+		<chemicalAddictionChance>0.00</chemicalAddictionChance>
+		<backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+		<techHediffsRequired>
+			<li>SpadeTreads</li>
+			<li>SpadeGunMount</li>
+		</techHediffsRequired>
+		<techHediffsMaxAmount>3</techHediffsMaxAmount>
+	</PawnKindDef>
+	
+
+	<AlienRace.ThingDef_AlienRace ParentName="BasePawn">
+		<defName>spade_spade</defName>
+		<label>SPADE</label>
+		<description>A simple autonomous robot originally designed as a heavy assault platform.</description>
+	
+		<statBases>
+			<MarketValue>2000</MarketValue>
+			<MoveSpeed>3.00</MoveSpeed>
+			<CarryingCapacity>40</CarryingCapacity>
+			<Flammability>0.1</Flammability>
+			<PsychicSensitivity>0.1</PsychicSensitivity>
+			<ComfyTemperatureMin>-40</ComfyTemperatureMin>
+			<ComfyTemperatureMax>40</ComfyTemperatureMax>
+			<PainShockThreshold>5</PainShockThreshold>
+			<ToxicSensitivity>0.1</ToxicSensitivity>
+			<MentalBreakThreshold>0.08</MentalBreakThreshold>
+			<GlobalLearningFactor>0</GlobalLearningFactor>
+			<WorkSpeedGlobal>0.5</WorkSpeedGlobal>
+			<ImmunityGainSpeed>10</ImmunityGainSpeed>
+			<LeatherAmount>0</LeatherAmount>
+			<MeatAmount>0</MeatAmount>
+			<ArmorRating_Blunt>0.10</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.15</ArmorRating_Sharp>
+			<FoodPoisonChance>0.0</FoodPoisonChance>
+			<MedicalTendQuality>0.4</MedicalTendQuality>
+			<MedicalSurgerySuccessChance>0.6</MedicalSurgerySuccessChance>
+			<Mass>50</Mass>
+		</statBases>
+
+		<race>
+			<thinkTreeMain>SpadeThinkTree</thinkTreeMain>
+			<thinkTreeConstant>SpadeConstant</thinkTreeConstant>
+			<nameGenerator>SPADEAtlasStandard</nameGenerator>
+	 		<intelligence>Humanlike</intelligence>
+ 			<lifeExpectancy>350</lifeExpectancy>
+			<needsRest>false</needsRest>
+			<foodType>OmnivoreHuman</foodType>
+			<baseHungerRate>0.1</baseHungerRate>
+
+			<body>spade_spade</body>
+			<baseBodySize>1</baseBodySize>
+			<baseHealthScale>1</baseHealthScale>
+			<bloodDef>Filth_MachineBits</bloodDef>
+			<hediffGiverSets>
+				<li>SpadeStandardAtlas</li>
+			</hediffGiverSets>
+			<fleshType>MechanoidButSpade</fleshType>
+
+			<gestationPeriodDays>1</gestationPeriodDays>
+			<canBePredatorPrey>false</canBePredatorPrey>
+			<lifeStageAges>
+				<li>
+					<def>HumanlikeAdult</def>
+					<minAge>0</minAge>
+				</li>
+			</lifeStageAges>
+			<litterSizeCurve>
+				<points>
+					<li>(0.5, 0)</li>
+					<li>(1, 1)</li>
+					<li>(1.01, 0.02)</li>
+					<li>(3.5, 0)</li>
+				</points>
+			</litterSizeCurve>
+			<ageGenerationCurve>
+				<points>
+					<li>(0,0)</li>
+					<li>(1,100)</li>
+					<li>(2,100)</li>
+					<li>(20,15)</li>
+					<li>(50,30)</li>
+					<li>(100,50)</li>
+					<li>(150,40)</li>
+					<li>(250,15)</li>
+					<li>(350,0)</li>
+				</points>
+			</ageGenerationCurve>
+
+			<soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+		</race>
+		<alienRace>
+			<generalSettings>
+				<maleGenderProbability>0.5</maleGenderProbability>
+				<immuneToAge>true</immuneToAge>
+				<canLayDown>false</canLayDown>
+				<validBeds>
+				</validBeds>
+				<maxDamageForSocialfight>6</maxDamageForSocialfight>
+
+				<allowHumanBios>false</allowHumanBios>
+				<forcedRaceTraitEntries>
+					<li>
+						<defName>spade_EmotionlessRobot</defName>
+						<chance>100</chance>
+					</li>
+				</forcedRaceTraitEntries>
+				<disallowedTraits>
+					<li>
+						<defName>DrugDesire</defName>
+					</li>
+					<li>
+						<defName>AnnoyingVoice</defName>
+					</li>
+					<li>
+						<defName>CreepyBreathing</defName>
+					</li>
+					<li>
+						<defName>Pyromaniac</defName>
+					</li>
+					<li>
+						<defName>Wimp</defName>
+					</li>
+					<li>
+						<defName>Masochist</defName>
+					</li>
+					<li>
+						<defName>NightOwl</defName>
+					</li>
+					<li>
+						<defName>Jealous</defName>
+					</li>
+					<li>
+						<defName>Nudist</defName>
+					</li>
+					<li>
+						<defName>Transhumanist</defName>
+					</li>
+					<li>
+						<defName>BodyPurist</defName>
+					</li>
+					<li>
+						<defName>Beauty</defName>
+					</li>
+					<li>
+						<defName>Immunity</defName>
+					</li>
+					<li>
+						<defName>Tough</defName>
+					</li>
+				</disallowedTraits>
+				<traitCount>1</traitCount>
+				<additionalTraits>0</additionalTraits>
+				<notXenophobistTowards>
+					<li>Human</li>
+				</notXenophobistTowards>
+
+				<alienPartGenerator>
+					<alienbodytypes>
+						<li>spade_body</li>
+					</alienbodytypes>
+					<bodyAddons>
+						<li>
+							<path>Pawns/Naked_spade_actuator</path>
+				 			<bodyPart>SPADE_Actuator</bodyPart>
+							<inFrontOfBody>true</inFrontOfBody>
+							<layerInvert>false</layerInvert>
+							<drawnDesiccated>false</drawnDesiccated>
+							<colorChannel>skin</colorChannel>
+
+							<scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+							<hediffGraphics>
+								<SpadeTreads>Pawns/Naked_spade_actuator</SpadeTreads>
+								<SpadeWheels>Pawns/Naked_spade_actuator_wheel</SpadeWheels>
+								<SpadeHover>Pawns/Naked_spade_actuator_hover</SpadeHover>
+								<SpadeCleaner>Pawns/Naked_spade_actuator_cleaner</SpadeCleaner>
+							</hediffGraphics>
+							<layerOffset>-0.271</layerOffset>
+							<offsets>
+								<south>
+									<bodyTypes>
+										<spade_body>(-0.42, 0.22)</spade_body>
+									</bodyTypes>
+								</south>
+								<north>
+									<bodyTypes>
+										<spade_body>(0, 0.55)</spade_body>
+									</bodyTypes>
+								</north>
+								<east>
+									<bodyTypes>
+										<spade_body>(-0.42, 0.22)</spade_body>
+									</bodyTypes>
+								</east>
+							</offsets>
+						</li>
+						<li>
+							<path>Pawns/Naked_spade_arm</path>
+				 			<bodyPart>SPADE_Manipulator</bodyPart>
+							<inFrontOfBody>true</inFrontOfBody>
+							<layerInvert>false</layerInvert>
+							<drawnDesiccated>false</drawnDesiccated>
+							<colorChannel>skin</colorChannel>
+
+							<scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+							<hediffGraphics>
+								<SpadeGunMount>Pawns/Naked_spade_arm</SpadeGunMount>
+								<SpadeCrane>Pawns/Naked_spade_arm_crane</SpadeCrane>
+								<SpadeWelder>Pawns/Naked_spade_arm_welder</SpadeWelder>
+								<SpadeHarvester>Pawns/Naked_spade_arm_harvester</SpadeHarvester>
+								<SpadeDrill>Pawns/Naked_spade_arm_drill</SpadeDrill>
+								<SpadeManipulator>Pawns/Naked_spade_arm_manipulator</SpadeManipulator>
+							</hediffGraphics>
+							<layerOffset>-0.27</layerOffset>
+							<offsets>
+								<south>
+									<bodyTypes>
+										<spade_body>(-0.42, 0.22)</spade_body>
+									</bodyTypes>
+								</south>
+								<north>
+									<bodyTypes>
+										<spade_body>(0, 0.55)</spade_body>
+									</bodyTypes>
+								</north>
+								<east>
+									<bodyTypes>
+										<spade_body>(-0.42, 0.22)</spade_body>
+									</bodyTypes>
+									<layerOffset>-0.28</layerOffset>
+								</east>
+							</offsets>
+						</li>
+					</bodyAddons>
+					<colorChannels>
+						<li>
+							<name>skin</name>
+							<first Class="ColorGenerator_Options">
+								<options>
+									<li>
+										<weight>20</weight>
+										<only>RGBA(0.8,0.2,0.2,1)</only>
+									</li>
+									<li>
+										<weight>20</weight>
+										<only>RGBA(0.2,0.8,0.2,1)</only>
+									</li>
+									<li>
+										<weight>20</weight>
+										<only>RGBA(0.2,0.2,0.8,1)</only>
+									</li>
+
+									<li>
+										<weight>10</weight>
+										<only>RGBA(0.8,0.8,0.2,1)</only>
+									</li>
+									<li>
+										<weight>10</weight>
+										<only>RGBA(0.2,0.8,0.8,1)</only>
+									</li>
+									<li>
+										<weight>10</weight>
+										<only>RGBA(0.8,0.2,0.8,1)</only>
+									</li>
+
+									<li>
+										<weight>5</weight>
+										<only>RGBA(0.2,0.2,0.2,1)</only>
+									</li>
+									<li>
+										<weight>5</weight>
+										<only>RGBA(0.8,0.8,0.8,1)</only>
+									</li>
+								</options>
+							</first>
+						</li>
+					</colorChannels>
+					<useGenderedHeads>false</useGenderedHeads>
+					<useGenderedBodies>false</useGenderedBodies>
+					<customDrawSize>(1.25, 1.25)</customDrawSize>
+				</alienPartGenerator>
+			</generalSettings>
+
+			<graphicPaths>
+				<li>
+					<body>Pawns/</body>
+				</li>
+			</graphicPaths>
+
+			<hairSettings>
+				<hasHair>false</hasHair>
+			</hairSettings>
+
+			<thoughtSettings>
+				<cannotReceiveThoughtsAtAll>false</cannotReceiveThoughtsAtAll>
+				<cannotReceiveThoughts>
+					<li>NeedFood</li>
+					<li>Naked</li>
+					<li>Pain</li>
+					<li>SleepDisturbed</li>
+					<li>SleptOnGround</li>
+					<li>ArtifactMoodBoost</li>
+					<li>EnvironmentCold</li>
+					<li>EnvironmentHot</li>
+					<li>ButcheredHumanlikeCorpse</li>
+					<li>KnowButcheredHumanlikeCorpse</li>
+					<li>ObservedLayingCorpse</li>
+					<li>ObservedLayingRottingCorpse</li>
+				</cannotReceiveThoughts>
+			</thoughtSettings>
+
+			<relationSettings>
+				<relationChanceModifierParent>0</relationChanceModifierParent>
+				<relationChanceModifierSibling>0</relationChanceModifierSibling>
+				<relationChanceModifierChild>0</relationChanceModifierChild>
+
+				<relationChanceModifierLover>0</relationChanceModifierLover>
+				<relationChanceModifierExLover>0</relationChanceModifierExLover>
+
+				<relationChanceModifierFiance>0</relationChanceModifierFiance>
+				<relationChanceModifierSpouse>0</relationChanceModifierSpouse>
+				<relationChanceModifierExSpouse>0</relationChanceModifierExSpouse>
+			</relationSettings>
+
+			<raceRestriction>
+	            <apparelList>
+	                <li>spade_Apparel_Tarp</li>
+	                <li>spade_Apparel_ArmorPlating</li>
+	            </apparelList>
+				<traitList>
+					<li>spade_EmotionlessRobot</li>
+				</traitList>
+				<onlyUseRaceRestrictedApparel>true</onlyUseRaceRestrictedApparel>
+				<onlyGetRaceRestrictedTraits>true</onlyGetRaceRestrictedTraits>
+			</raceRestriction>
+
+			<compatibility>
+				<isFlesh>false</isFlesh>
+				<isSentient>false</isSentient>
+				<hasBlood>false</hasBlood>
+			</compatibility>
+		</alienRace>
+		<tools>
+			<li>
+				<label>ram</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>14</power>
+				<cooldownTime>3</cooldownTime>
+				<linkedBodyPartsGroup>SPADE_Casings</linkedBodyPartsGroup>
+				<surpriseAttack>
+					<extraMeleeDamages>
+						<li>
+							<def>Stun</def>
+							<amount>22</amount>
+						</li>
+					</extraMeleeDamages>
+				</surpriseAttack>
+			</li>
+			<li>
+				<label>arm</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>8</power>
+				<cooldownTime>1.8</cooldownTime>
+				<linkedBodyPartsGroup>SPADE_Manipulators</linkedBodyPartsGroup>
+				<surpriseAttack>
+					<extraMeleeDamages>
+						<li>
+	 						<def>Stun</def>
+	 						<amount>14</amount>
+						</li>
+					</extraMeleeDamages>
+				</surpriseAttack>
+			</li>
+		</tools>
+		<butcherProducts>
+			<Steel>50</Steel>
+			<ComponentIndustrial>2</ComponentIndustrial>
+		</butcherProducts>
+		<recipes>
+			<li>RemoveSpadePart</li>
+
+			<li>InstallSpadeTreads</li>
+			<li>InstallSpadeWheels</li>
+			<li>InstallSpadeHover</li>
+			<li>InstallSpadeCleaner</li>
+
+			<li>InstallSpadeGunMount</li>
+			<li>InstallSpadeCrane</li>
+			<li>InstallSpadeHarvester</li>
+			<li>InstallSpadeDrill</li>
+			<li>InstallSpadeManipulator</li>
+
+			<li>InstallSpadeExtinguisher</li>
+		</recipes>
+
+		<modExtensions>
+			<li Class="SPADE.DefExtension_DoesNotNeed">
+				<needs>
+					<li>Beauty</li>
+					<li>Comfort</li>
+					<li>Outdoors</li>
+					<li>RoomSize</li>
+				</needs>
+			</li>
+			<li Class="SPADE.DefExtension_CannotTalk" />
+			<li Class="SPADE.DefExtension_NonStandardMedicine">
+				<medicine>Spade_Medicine</medicine>
+			</li>
+			<li Class="SPADE.DefExtension_CarriesWeaponOpenly" />
+			<li Class="SPADE.DefExtension_CarriesWeaponStraight">
+				<offsets>
+					<north>(0, 0.036735, 0.11)</north>
+					<south>(0, 0, 0.11)</south>
+					<west>(0.2, -0.01, 0.33)</west>
+					<east>(-0.2, -0.01, 0.33)</east>
+				</offsets>
+			</li>
+			<li Class="SPADE.DefExtension_CarriesThingsOffset">
+				<offsets>
+					<north>(0, 0, 0.42)</north>
+					<south>(0, 0, -0.42)</south>
+					<west>(-0.42, 0, 0)</west>
+					<east>(0.42, 0, 0)</east>
+				</offsets>
+			</li>
+			<li Class="SPADE.DefExtension_SPADE_Resurrectable" />
+			<li Class="SPADE.DefExtension_Repairable" />
+		</modExtensions>
+	</AlienRace.ThingDef_AlienRace>
+
+
+	<AlienRace.BackstoryDef>
+		<defName>spade_PlayerBackstory_Spawn</defName>
+		<title>Robotic colonist</title>
+		<titleShort>SPADE</titleShort>
+		<baseDescription>{PAWN_nameDef} is a simple robot assembled from scrap. What happens next is up to them.</baseDescription>
+		<bodyTypeGlobal>spade_body</bodyTypeGlobal>
+		<slot>Childhood</slot>
+		<spawnCategories>
+			<li>spade_Player</li>
+		</spawnCategories>
+		<forcedHediffs>
+			<li>JoyOffsetEmotionlessRobot</li>
+		</forcedHediffs>
+		<skillGains>
+			<li>
+				<defName>Shooting</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Melee</defName>
+				<amount>-20</amount>
+			</li>
+	
+			<li>
+				<defName>Construction</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Crafting</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Mining</defName>
+				<amount>-20</amount>
+			</li>
+	
+			<li>
+				<defName>Plants</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Animals</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Cooking</defName>
+				<amount>-20</amount>
+			</li>
+	
+			<li>
+				<defName>Artistic</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Medicine</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Social</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Intellectual</defName>
+				<amount>-20</amount>
+			</li>
+		</skillGains>
+	</AlienRace.BackstoryDef>
+
+
+	<TraitDef>
+		<defName>spade_EmotionlessRobot</defName>
+		<commonality>1</commonality>
+		<disabledWorkTags>AllWork</disabledWorkTags>
+		<conflictingPassions>
+			<li>Shooting</li>
+			<li>Melee</li>
+
+			<li>Construction</li>
+			<li>Crafting</li>
+			<li>Mining</li>
+
+			<li>Plants</li>
+			<li>Animals</li>
+			<li>Cooking</li>
+
+			<li>Artistic</li>
+			<li>Medicine</li>
+			<li>Social</li>
+			<li>Intellectual</li>
+		</conflictingPassions>
+		<degreeDatas>
+			<li>
+				<label>Emotionless robot</label>
+				<description>This robot was made with warfare in mind, making any emotions detrimental.</description>
+				<statOffsets>
+					<SocialImpact>-0.90</SocialImpact>
+				</statOffsets>
+			</li>
+		</degreeDatas>
+	</TraitDef>
+	<ThoughtDef>
+		<defName>MoodOffsetEmotionlessRobot</defName>
+		<workerClass>ThoughtWorker_AlwaysActive</workerClass>
+		<validWhileDespawned>true</validWhileDespawned>
+		<requiredTraits>
+			<li>spade_EmotionlessRobot</li>
+		</requiredTraits>
+		<stages>
+			<li>
+				<label>Emotionless robot</label>
+				<description>Beep beep boop!</description>
+				<baseMoodEffect>40</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+	<HediffDef>
+		<hediffClass>HediffWithComps</hediffClass>
+		<defName>JoyOffsetEmotionlessRobot</defName>
+		<label>SpadeJoyOffsetEmotionlessRobot</label>
+		<description>gains joy from thin air (also enables hitting switches)</description>
+		<comps>
+			<li Class="SPADE.HediffCompProperties_EnableWorkTypes">
+				<compClass>SPADE.HediffComp_EnableWorkTypes</compClass>
+				<workTypes>
+					<li>BasicWorker</li>
+				</workTypes>
+			</li>
+			<li Class="SPADE.HediffCompProperties_Joy">
+				<compClass>SPADE.HediffComp_Joy</compClass>
+				<joyPerTick>0.000035</joyPerTick>
+				<joyKind>Meditative</joyKind>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<becomeVisible>false</becomeVisible>
+			</li>
+		</stages>
+	</HediffDef>
+
+	<ThingDef>
+		<defName>spade_BaseEgg</defName>
+		<label>SPADE</label>
+		<description>Scout/Patrol Automated Drone, Enhanced.</description>
+		<thingClass>ThingWithComps</thingClass>
+		<graphicData>
+			<texPath>Pawns/Naked_spade_body_south</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
+				<hatcherPawn>spade_SpadeSimplePlayer</hatcherPawn>
+			</li>
+		</comps>
+		<tickerType>Normal</tickerType>
+		<statBases>
+			<WorkToMake>13000</WorkToMake>
+		</statBases>
+		<costList>
+			<Steel>150</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+		<recipeMaker>
+			<workSkill>Crafting</workSkill>
+			<recipeUsers>
+				<li>TableMachining</li>
+			</recipeUsers>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Machining</soundWorking>
+			<unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+			<researchPrerequisite>Spade_Basic</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>8</Crafting>
+				<Intellectual>8</Intellectual>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+	<FleshTypeDef>
+		<defName>MechanoidButSpade</defName>
+		<corpseCategory>CorpsesMechanoid</corpseCategory>
+		<damageEffecter>Damage_HitMechanoid</damageEffecter>
+		<wounds>
+			<li>
+				<texture>Things/Pawn/Wounds/WoundMechA</texture>
+			</li>
+			<li>
+				<texture>Things/Pawn/Wounds/WoundMechB</texture>
+			</li>
+			<li>
+				<texture>Things/Pawn/Wounds/WoundMechC</texture>
+			</li>
+		</wounds>
+	</FleshTypeDef>
+</Defs>

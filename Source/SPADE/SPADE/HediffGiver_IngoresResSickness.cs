@@ -8,12 +8,12 @@ using Verse;
 
 namespace SPADE
     {
-    public class HediffGiver_IngoresResSickness : HediffGiver
+    public class HediffGiver_IngoresHediffs : HediffGiver
         {
-        IEnumerable<HediffDef> listToCheck = new List<string>() { "ResurrectionSickness", "Dementia", "Blindness", "ResurrectionPsychosis" }.Select(hediff => { return DefDatabase<HediffDef>.GetNamed(hediff); });
+        List<HediffDef> ignoredHediffs = new List<HediffDef>();
         public override bool OnHediffAdded(Pawn pawn, Hediff hediff)
             {
-            if (listToCheck.Contains(hediff.def))
+            if (ignoredHediffs.Contains(hediff.def))
                 {
                 pawn.health.RemoveHediff(hediff);
                 }

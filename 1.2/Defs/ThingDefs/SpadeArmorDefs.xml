@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+	<ThingDef ParentName="ApparelMakeableBase">
+		<defName>spade_Apparel_Tarp</defName>
+		<label>tarpaulin</label>
+		<description>A large piece of hastily stitched together fabric to protect the SPADE against the elements.</description>
+		<graphicData>
+			<texPath>Armor/Tarp_spade_body_south</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.75</drawSize>
+		</graphicData>
+		<costStuffCount>80</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<thingCategories>
+			<li>Apparel</li>
+		</thingCategories>
+		<statBases>
+			<MaxHitPoints>200</MaxHitPoints>
+			<WorkToMake>5000</WorkToMake>
+			<Mass>2</Mass>
+			<StuffEffectMultiplierArmor>0.5</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.60</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.85</StuffEffectMultiplierInsulation_Heat>
+			<EquipDelay>3</EquipDelay>
+		</statBases>
+		<apparel>
+			<bodyPartGroups>
+				<li>SPADE_Casings</li>
+				<li>SPADE_Actuators</li>
+				<!-- Vanilla compat -->
+				<li>Torso</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Armor/Tarp</wornGraphicPath>
+			<layers>
+				<li>Shell</li>
+			</layers>
+			<tags>
+				<li>IndustrialBasic</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Worker</li>
+			</defaultOutfitTags>
+		</apparel>
+		<colorGenerator Class="ColorGenerator_Options">
+			<options>
+				<li>
+					<weight>10</weight>
+					<only>(0.33,0.33,0.33)</only>
+				</li>
+				<li>
+					<weight>10</weight>
+					<only>(0.65,0.65,0.65)</only>
+				</li>
+				<li>
+					<weight>10</weight>
+					<only>(0.4,0.3,0.15)</only>
+				</li>
+				<li>
+					<weight>15</weight>
+					<min>(0.3,0.3,0.3)</min>
+					<max>(0.5,0.5,0.5)</max>
+				</li>
+				<li>
+					<weight>6</weight>
+					<min>(0.5,0.5,0.5)</min>
+					<max>(1,1,1)</max>
+				</li>
+			</options>
+		</colorGenerator>
+	</ThingDef>
+	
+	<ThingDef ParentName="ArmorSmithableBase">
+		<defName>spade_Apparel_ArmorPlating</defName>
+		<label>armor plating</label>
+		<description>Specialized SPADE armor plating. Slows the drone down, though not by much.</description>
+		<recipeMaker>
+			<unfinishedThingDef>UnfinishedMetallicTechArmor</unfinishedThingDef>
+			<researchPrerequisite>PlateArmor</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>7</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<graphicData>
+			<texPath>Armor/Armor_spade_body_south</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.75</drawSize>
+		</graphicData>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>170</costStuffCount>
+		<statBases>
+			<WorkToMake>38000</WorkToMake>
+			<MaxHitPoints>290</MaxHitPoints>
+			<Mass>15</Mass>
+			<StuffEffectMultiplierArmor>0.85</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>1.0</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0</StuffEffectMultiplierInsulation_Heat>
+			<EquipDelay>15</EquipDelay>
+		</statBases>
+		<thingSetMakerTags>
+			<li>RewardStandardLowFreq</li>
+			<li>RewardStandardQualitySuper</li>
+		</thingSetMakerTags>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.12</MoveSpeed>
+		</equippedStatOffsets>
+		<thingCategories>
+			<li>ApparelArmor</li>
+		</thingCategories>
+		<apparel>
+			<bodyPartGroups>
+				<li>SPADE_Casings</li>
+				<li>SPADE_Manipulators</li>
+				<li>SPADE_Actuators</li>
+				<!-- Vanilla compat -->
+				<li>Torso</li>
+				<li>Arms</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Armor/Armor</wornGraphicPath>
+			<layers>
+				<li>Middle</li>
+				<li>Shell</li>
+			</layers>
+			<tags>
+				<li>MedievalMilitary</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+		</apparel>
+		<colorGenerator Class="ColorGenerator_Options">
+			<options>
+				<li>
+					<weight>10</weight>
+					<only>(0.33,0.33,0.33)</only>
+				</li>
+				<li>
+					<weight>10</weight>
+					<only>(0.65,0.65,0.65)</only>
+				</li>
+				<li>
+					<weight>6</weight>
+					<min>(0.3,0.3,0.3)</min>
+					<max>(0.5,0.5,0.5)</max>
+				</li>
+			</options>
+		</colorGenerator>
+	</ThingDef>
+</Defs>

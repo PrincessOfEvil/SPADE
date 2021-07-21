@@ -30,7 +30,18 @@ namespace SPADE
 				}
 			return false;
 			}
-        }
+		public override bool CanBeUsedBy(Pawn p, out string failReason)
+			{
+			failReason = null;
+			if (p.skills.GetSkill(DefDatabase<SkillDef>.GetNamed("Crafting")).Level < 8)
+				{
+				failReason = "LackingSufficientCraftingSkill".Translate();
+
+				return false;
+				}
+			return true;
+			}
+		}
 	public class DefExtension_SPADE_Resurrectable : DefModExtension
 		{
 		public DefExtension_SPADE_Resurrectable() { }

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+	<BodyDef>
+		<defName>spade_spade</defName>
+		<label>spade</label>
+		<corePart>
+			<def>SPADE_Casing</def>
+			<height>Middle</height>
+			<depth>Outside</depth>
+			<groups>
+				<li>SPADE_Casings</li>
+			</groups>
+			<parts>
+				<li>
+			  		<def>SPADE_Manipulator</def>
+			  		<coverage>0.1848</coverage>
+			  		<groups>
+			  			<li>SPADE_Manipulators</li>
+ 					</groups>
+				</li>
+				<li>
+					<def>SPADE_Engine</def>
+					<coverage>0.15</coverage>
+					<depth>Inside</depth>
+					<groups>
+						<li>SPADE_Casings</li>
+					</groups>
+				</li>
+				<li>
+					<def>SPADE_Transmission</def>
+					<coverage>0.1</coverage>
+					<depth>Inside</depth>
+					<groups>
+						<li>SPADE_Casings</li>
+					</groups>
+				</li>
+				<li>
+					<def>SPADE_Biogenerator</def>
+					<coverage>0.025</coverage>
+					<depth>Inside</depth>
+					<groups>
+						<li>SPADE_Casings</li>
+					</groups>
+				</li>
+				<li>
+					<def>SPADE_Battery</def>
+					<coverage>0.02</coverage>
+					<depth>Inside</depth>
+					<groups>
+						<li>SPADE_Casings</li>
+					</groups>
+				</li>
+				<li>
+					<def>SPADE_Controller</def>
+					<coverage>0.00864</coverage>
+					<depth>Inside</depth>
+					<groups>
+						<li>SPADE_Casings</li>
+					</groups>
+				</li>
+				<li>
+					<def>SPADE_Augmentation</def>
+					<customLabel>left front augment slot</customLabel>
+					<coverage>0</coverage>
+					<depth>Inside</depth>
+					<groups>
+						<li>SPADE_Augmentations</li>
+					</groups>
+				</li>
+				<li>
+					<def>SPADE_Augmentation</def>
+					<customLabel>left back augment slot</customLabel>
+					<coverage>0</coverage>
+					<depth>Inside</depth>
+					<groups>
+						<li>SPADE_Augmentations</li>
+					</groups>
+				</li>
+				<li>
+					<def>SPADE_Augmentation</def>
+					<customLabel>right front augment slot</customLabel>
+					<coverage>0</coverage>
+					<depth>Inside</depth>
+					<groups>
+						<li>SPADE_Augmentations</li>
+					</groups>
+				</li>
+				<li>
+					<def>SPADE_Augmentation</def>
+					<customLabel>right back augment slot</customLabel>
+					<coverage>0</coverage>
+					<depth>Inside</depth>
+					<groups>
+						<li>SPADE_Augmentations</li>
+					</groups>
+				</li>
+				<li>
+					<def>SPADE_LightSensor</def>
+					<coverage>0.000756</coverage>
+					<groups>
+						<li>SPADE_Casings</li>
+					</groups>
+				</li>
+				<li>
+					<def>SPADE_Antenna</def>
+					<coverage>0.000756</coverage>
+					<groups>
+						<li>SPADE_Casings</li>
+					</groups>
+				</li>
+				<li>
+					<def>SPADE_Suspension</def>
+					<coverage>0</coverage>
+					<height>Bottom</height>
+					<groups>
+						<li>SPADE_Suspensions</li>
+					</groups>
+				</li>
+				<li>
+					<def>SPADE_Actuator</def>
+					<coverage>0.28</coverage>
+					<height>Bottom</height>
+					<groups>
+						<li>SPADE_Actuators</li>
+					</groups>
+				</li>
+			</parts>
+		</corePart>
+	</BodyDef>
+
+
+	<BodyPartDef>
+		<defName>SPADE_Casing</defName>
+		<label>casing</label>
+		<hitPoints>60</hitPoints>
+		<skinCovered>true</skinCovered>
+
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<bleedRate>0</bleedRate>
+
+		<canSuggestAmputation>false</canSuggestAmputation>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>SPADE_Engine</defName>
+		<label>engine</label>
+		<hitPoints>40</hitPoints>
+		<skinCovered>false</skinCovered>
+
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<bleedRate>5</bleedRate>
+
+		<tags>
+			<li>BloodPumpingSource</li>
+		</tags>
+		<canSuggestAmputation>false</canSuggestAmputation>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>SPADE_Transmission</defName>
+		<label>transmission</label>
+		<hitPoints>30</hitPoints>
+		<skinCovered>false</skinCovered>
+
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<bleedRate>0</bleedRate>
+
+		<tags>
+			<li>BloodFiltrationLiver</li>
+		</tags>
+		<canSuggestAmputation>false</canSuggestAmputation>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>SPADE_Battery</defName>
+		<label>battery</label>
+		<hitPoints>15</hitPoints>
+		<skinCovered>false</skinCovered>
+
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<bleedRate>5</bleedRate>
+
+		<tags>
+			<li>BreathingSource</li>
+		</tags>
+		<canSuggestAmputation>false</canSuggestAmputation>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>SPADE_Biogenerator</defName>
+		<label>biogenerator</label>
+		<hitPoints>20</hitPoints>
+		<skinCovered>false</skinCovered>
+
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+
+		<tags>
+			<li>MetabolismSource</li>
+		</tags>
+		<canSuggestAmputation>false</canSuggestAmputation>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>SPADE_Controller</defName>
+		<label>controller</label>
+		<hitPoints>10</hitPoints>
+		<skinCovered>false</skinCovered>
+
+		<permanentInjuryChanceFactor>9999999</permanentInjuryChanceFactor>
+		<delicate>true</delicate>
+		<bleedRate>0</bleedRate>
+
+		<tags>
+	   		<li>ConsciousnessSource</li>
+		</tags>
+		<canSuggestAmputation>false</canSuggestAmputation>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>SPADE_LightSensor</defName>
+		<label>light sensor</label>
+		<hitPoints>10</hitPoints>
+		<skinCovered>false</skinCovered>
+		<socketed>true</socketed>
+
+		<frostbiteVulnerability>5</frostbiteVulnerability>
+		<permanentInjuryChanceFactor>15</permanentInjuryChanceFactor>
+		<delicate>true</delicate>
+		<bleedRate>0</bleedRate>
+
+		<tags>
+			<li>SightSource</li>
+		</tags>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>SPADE_Antenna</defName>
+		<label>antenna</label>
+		<hitPoints>12</hitPoints>
+		<skinCovered>false</skinCovered>
+		<socketed>true</socketed>
+
+		<frostbiteVulnerability>5</frostbiteVulnerability>
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<delicate>true</delicate>
+		<bleedRate>0</bleedRate>
+
+		<tags>
+	  		<li>HearingSource</li>
+			<li>TalkingSource</li>
+		</tags>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>SPADE_Suspension</defName>
+		<label>utility slot</label>
+		<conceptual>true</conceptual>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>SPADE_Actuator</defName>
+		<label>actuator</label>
+		<hitPoints>60</hitPoints>
+		<skinCovered>true</skinCovered>
+		<solid>true</solid>
+
+		<frostbiteVulnerability>10</frostbiteVulnerability>
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<bleedRate>0</bleedRate>
+		<destroyableByDamage>false</destroyableByDamage>
+
+		<tags>
+			<li>MovingLimbCore</li>
+		</tags>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>SPADE_Manipulator</defName>
+		<label>manipulator</label>
+		<hitPoints>30</hitPoints>
+		<skinCovered>true</skinCovered>
+		<solid>true</solid>
+
+		<frostbiteVulnerability>10</frostbiteVulnerability>
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<bleedRate>0</bleedRate>
+		<destroyableByDamage>false</destroyableByDamage>
+
+		<tags>
+			<li>ManipulationLimbCore</li>
+		</tags>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>SPADE_Augmentation</defName>
+		<label>augment slot</label>
+		<conceptual>true</conceptual>
+	</BodyPartDef>
+
+
+	<BodyPartGroupDef>
+		<defName>SPADE_Casings</defName>
+		<label>casing</label>
+		<listOrder>100</listOrder>
+	</BodyPartGroupDef>
+
+	<BodyPartGroupDef>
+		<defName>SPADE_Suspensions</defName>
+		<label>utility slot</label>
+		<listOrder>50</listOrder>
+	</BodyPartGroupDef>
+  
+	<BodyPartGroupDef>
+		<defName>SPADE_Actuators</defName>
+		<label>actuators</label>
+		<listOrder>10</listOrder>
+	</BodyPartGroupDef>
+  
+	<BodyPartGroupDef>
+		<defName>SPADE_Manipulators</defName>
+		<label>manipulators</label>
+		<listOrder>80</listOrder>
+	</BodyPartGroupDef>
+
+	<BodyPartGroupDef>
+		<defName>SPADE_Augmentations</defName>
+		<label>augment slots</label>
+		<listOrder>55</listOrder>
+	</BodyPartGroupDef>
+
+
+	<BodyTypeDef>
+		<defName>spade_body</defName>
+		<headOffset>(0, 0)</headOffset>
+		<bodyNakedGraphicPath>Pawns/Naked_spade_body</bodyNakedGraphicPath>
+		<bodyDessicatedGraphicPath>Pawns/Naked_spade_body</bodyDessicatedGraphicPath>
+	</BodyTypeDef>
+</Defs>

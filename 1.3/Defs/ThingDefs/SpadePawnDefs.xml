@@ -2,7 +2,7 @@
 
 <Defs>
 	<FactionDef Name="SPADEBaseFaction" ParentName="PlayerFactionBase">
-		<defName>PlayerColonySPADE</defName>
+		<defName>spade_PlayerColonySPADE</defName>
 		<label>New SPADE Arrivals</label>
 		<description>Your robot colony.</description>
 		
@@ -20,29 +20,12 @@
 		<startingResearchTags>
 			<li>ClassicStart</li>
 		</startingResearchTags>
-		<hairTags>
-			<li>Urban</li>
-		</hairTags>
 		<apparelStuffFilter>
 			<thingDefs>
 				<li>Synthread</li>
 				<li>Cloth</li>
 			</thingDefs>
 		</apparelStuffFilter>
-	</FactionDef>
-	<FactionDef ParentName="SPADEBaseFaction">
-		<defName>PlayerColonySPADE_EDB</defName>
-		<fixedName>SPADE</fixedName>
-		<hidden>true</hidden>
-		<isPlayer>false</isPlayer>
-		<canSiege>false</canSiege>
-		<canStageAttacks>false</canStageAttacks>
-		<canMakeRandomly>false</canMakeRandomly>
-		<raidCommonalityFromPointsCurve>
-			<points>
-				<li>(0, 0)</li>
-			</points>
-		</raidCommonalityFromPointsCurve>
 	</FactionDef>
 
 	<PawnKindDef Name="BaseSPADE" ParentName="BasePlayerPawnKind">
@@ -57,69 +40,15 @@
 			</li>
 		</backstoryFiltersOverride>
 		<maxGenerationAge>5</maxGenerationAge>
-		<defaultFactionType>PlayerColonySPADE</defaultFactionType>
+		<defaultFactionType>spade_PlayerColonySPADE</defaultFactionType>
 		<chemicalAddictionChance>0.00</chemicalAddictionChance>
 		<backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
 		<techHediffsRequired>
 			<li>SpadeTreads</li>
-			<li>SpadeGunArm</li>
+			<li>SpadeGunMount</li>
 		</techHediffsRequired>
 		<techHediffsMaxAmount>3</techHediffsMaxAmount>
-		<skills>
-			<li>
-				<skill>Shooting</skill>
-				<range>0</range>
-			</li>
-			<li>
-				<skill>Melee</skill>
-				<range>0</range>
-			</li>
-
-			<!--
-			<li>
-				<skill>Construction</skill>
-				<range>0</range>
-			</li>
-			<li>
-				<skill>Crafting</skill>
-				<range>0</range>
-			</li>
-			<li>
-				<skill>Mining</skill>
-				<range>0</range>
-			</li>
-
-			<li>
-				<skill>Plants</skill>
-				<range>0</range>
-			</li>
-			<li>
-				<skill>Animals</skill>
-				<range>0</range>
-			</li>
-			<li>
-				<skill>Cooking</skill>
-				<range>0</range>
-			</li>
-
-			<li>
-				<skill>Artistic</skill>
-				<range>0</range>
-			</li>
-			<li>
-				<skill>Medicine</skill>
-				<range>0</range>
-			</li>
-			<li>
-				<skill>Social</skill>
-				<range>0</range>
-			</li>
-			<li>
-				<skill>Intellectual</skill>
-				<range>0</range>
-			</li>
-			-->
-		</skills>
+		<initialResistanceRange>42~56</initialResistanceRange>
 	</PawnKindDef>
 	
 
@@ -211,8 +140,6 @@
 				<immuneToAge>true</immuneToAge>
 				<canLayDown>false</canLayDown>
 				<validBeds>
-					<li>SleepingSpot</li>
-					<li>AnimalSleepingSpot</li>
 				</validBeds>
 				<maxDamageForSocialfight>6</maxDamageForSocialfight>
 
@@ -280,7 +207,7 @@
 					<bodyAddons>
 						<li>
 							<path>Pawns/Naked_spade_actuator</path>
-				 				<bodyPart>Actuator</bodyPart>
+				 			<bodyPart>SPADE_Actuator</bodyPart>
 							<inFrontOfBody>true</inFrontOfBody>
 							<layerInvert>false</layerInvert>
 							<drawnDesiccated>false</drawnDesiccated>
@@ -293,28 +220,21 @@
 								<SpadeHover>Pawns/Naked_spade_actuator_hover</SpadeHover>
 								<SpadeCleaner>Pawns/Naked_spade_actuator_cleaner</SpadeCleaner>
 							</hediffGraphics>
-							<layerOffset>-0.27</layerOffset>
 							<offsets>
 								<south>
-									<bodyTypes>
-										<spade_body>(-0.42, 0.22)</spade_body>
-									</bodyTypes>
+									<layerOffset>-0.271</layerOffset>
 								</south>
 								<north>
-									<bodyTypes>
-										<spade_body>(0, 0.55)</spade_body>
-									</bodyTypes>
+									<layerOffset>-0.271</layerOffset>
 								</north>
 								<east>
-									<bodyTypes>
-										<spade_body>(-0.42, 0.22)</spade_body>
-									</bodyTypes>
+									<layerOffset>-0.271</layerOffset>
 								</east>
 							</offsets>
 						</li>
 						<li>
 							<path>Pawns/Naked_spade_arm</path>
-				 				<bodyPart>SPADE_Arm</bodyPart>
+				 			<bodyPart>SPADE_Manipulator</bodyPart>
 							<inFrontOfBody>true</inFrontOfBody>
 							<layerInvert>false</layerInvert>
 							<drawnDesiccated>false</drawnDesiccated>
@@ -322,28 +242,22 @@
 
 							<scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
 							<hediffGraphics>
-								<SpadeGunArm>Pawns/Naked_spade_arm</SpadeGunArm>
+								<SpadeGunMount>Pawns/Naked_spade_arm</SpadeGunMount>
 								<SpadeCrane>Pawns/Naked_spade_arm_crane</SpadeCrane>
 								<SpadeWelder>Pawns/Naked_spade_arm_welder</SpadeWelder>
 								<SpadeHarvester>Pawns/Naked_spade_arm_harvester</SpadeHarvester>
 								<SpadeDrill>Pawns/Naked_spade_arm_drill</SpadeDrill>
+								<SpadeManipulator>Pawns/Naked_spade_arm_manipulator</SpadeManipulator>
 							</hediffGraphics>
-							<layerOffset>-0.27</layerOffset>
 							<offsets>
 								<south>
-									<bodyTypes>
-										<spade_body>(-0.42, 0.22)</spade_body>
-									</bodyTypes>
+									<layerOffset>-0.27</layerOffset>
 								</south>
 								<north>
-									<bodyTypes>
-										<spade_body>(0, 0.55)</spade_body>
-									</bodyTypes>
+									<layerOffset>-0.27</layerOffset>
 								</north>
 								<east>
-									<bodyTypes>
-										<spade_body>(-0.42, 0.22)</spade_body>
-									</bodyTypes>
+									<layerOffset>-0.28</layerOffset>
 								</east>
 							</offsets>
 						</li>
@@ -393,7 +307,7 @@
 					</colorChannels>
 					<useGenderedHeads>false</useGenderedHeads>
 					<useGenderedBodies>false</useGenderedBodies>
-					<customDrawSize>(1.75, 1.75)</customDrawSize>
+					<customDrawSize>(1.25, 1.25)</customDrawSize>
 				</alienPartGenerator>
 			</generalSettings>
 
@@ -403,9 +317,29 @@
 				</li>
 			</graphicPaths>
 
-			<hairSettings>
-				<hasHair>false</hasHair>
-			</hairSettings>
+			<styleSettings>
+								<li>
+										<key>HairDef</key>
+										<value>
+												<hasStyle>false</hasStyle>
+												<styleTags />
+										</value>
+								</li>
+								<li>
+										<key>TattooDef</key>
+										<value>
+												<hasStyle>false</hasStyle>
+												<styleTags />
+										</value>
+								</li>
+								<li>
+										<key>BeardDef</key>
+										<value>
+												<hasStyle>false</hasStyle>
+												<styleTags />
+										</value>
+								</li>
+			</styleSettings>
 
 			<thoughtSettings>
 				<cannotReceiveThoughtsAtAll>false</cannotReceiveThoughtsAtAll>
@@ -439,6 +373,10 @@
 			</relationSettings>
 
 			<raceRestriction>
+							<apparelList>
+									<li>spade_Apparel_Tarp</li>
+									<li>spade_Apparel_ArmorPlating</li>
+							</apparelList>
 				<traitList>
 					<li>spade_EmotionlessRobot</li>
 				</traitList>
@@ -460,7 +398,7 @@
 				</capacities>
 				<power>14</power>
 				<cooldownTime>3</cooldownTime>
-				<linkedBodyPartsGroup>Casings</linkedBodyPartsGroup>
+				<linkedBodyPartsGroup>SPADE_Casings</linkedBodyPartsGroup>
 				<surpriseAttack>
 					<extraMeleeDamages>
 						<li>
@@ -477,7 +415,7 @@
 				</capacities>
 				<power>8</power>
 				<cooldownTime>1.8</cooldownTime>
-				<linkedBodyPartsGroup>SPADE_Arms</linkedBodyPartsGroup>
+				<linkedBodyPartsGroup>SPADE_Manipulators</linkedBodyPartsGroup>
 				<surpriseAttack>
 					<extraMeleeDamages>
 						<li>
@@ -500,20 +438,16 @@
 			<li>InstallSpadeHover</li>
 			<li>InstallSpadeCleaner</li>
 
-			<li>InstallSpadeGunArm</li>
+			<li>InstallSpadeGunMount</li>
 			<li>InstallSpadeCrane</li>
+			<li>InstallSpadeHarvester</li>
+			<li>InstallSpadeDrill</li>
+			<li>InstallSpadeManipulator</li>
+
+			<li>InstallSpadeExtinguisher</li>
 		</recipes>
 
 		<modExtensions>
-			<li Class="SPADE.DefExtension_DoesNotNeed">
-				<needs>
-					<li>Beauty</li>
-					<li>Comfort</li>
-					<li>Outdoors</li>
-					<li>RoomSize</li>
-				</needs>
-			</li>
-			<li Class="SPADE.DefExtension_CannotTalk" />
 			<li Class="SPADE.DefExtension_NonStandardMedicine">
 				<medicine>Spade_Medicine</medicine>
 			</li>
@@ -522,16 +456,16 @@
 				<offsets>
 					<north>(0, 0.036735, 0.11)</north>
 					<south>(0, 0, 0.11)</south>
-					<west>(0.2, 0, 0.33)</west>
-					<east>(-0.2, 0, 0.33)</east>
+					<west>(0.2, -0.01, 0.33)</west>
+					<east>(-0.2, -0.01, 0.33)</east>
 				</offsets>
 			</li>
 			<li Class="SPADE.DefExtension_CarriesThingsOffset">
 				<offsets>
-					<north>(0, 0, 0.6)</north>
-					<south>(0, 0, -0.6)</south>
-					<west>(-0.6, 0, 0)</west>
-					<east>(0.6, 0, 0)</east>
+					<north>(0, 0, 0.42)</north>
+					<south>(0, 0, -0.42)</south>
+					<west>(-0.42, 0, 0)</west>
+					<east>(0.42, 0, 0)</east>
 				</offsets>
 			</li>
 			<li Class="SPADE.DefExtension_SPADE_Resurrectable" />
@@ -551,8 +485,61 @@
 			<li>spade_Player</li>
 		</spawnCategories>
 		<forcedHediffs>
-			<li>JoyOffsetEmotionlessRobot</li>
+			<li>spade_EmotionlessRobot</li>
 		</forcedHediffs>
+		<skillGains>
+			<li>
+				<defName>Shooting</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Melee</defName>
+				<amount>-20</amount>
+			</li>
+	
+			<li>
+				<defName>Construction</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Crafting</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Mining</defName>
+				<amount>-20</amount>
+			</li>
+	
+			<li>
+				<defName>Plants</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Animals</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Cooking</defName>
+				<amount>-20</amount>
+			</li>
+	
+			<li>
+				<defName>Artistic</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Medicine</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Social</defName>
+				<amount>-20</amount>
+			</li>
+			<li>
+				<defName>Intellectual</defName>
+				<amount>-20</amount>
+			</li>
+		</skillGains>
 	</AlienRace.BackstoryDef>
 
 
@@ -560,6 +547,23 @@
 		<defName>spade_EmotionlessRobot</defName>
 		<commonality>1</commonality>
 		<disabledWorkTags>AllWork</disabledWorkTags>
+		<conflictingPassions>
+			<li>Shooting</li>
+			<li>Melee</li>
+
+			<li>Construction</li>
+			<li>Crafting</li>
+			<li>Mining</li>
+
+			<li>Plants</li>
+			<li>Animals</li>
+			<li>Cooking</li>
+
+			<li>Artistic</li>
+			<li>Medicine</li>
+			<li>Social</li>
+			<li>Intellectual</li>
+		</conflictingPassions>
 		<degreeDatas>
 			<li>
 				<label>Emotionless robot</label>
@@ -587,9 +591,17 @@
 	</ThoughtDef>
 	<HediffDef>
 		<hediffClass>HediffWithComps</hediffClass>
-		<defName>JoyOffsetEmotionlessRobot</defName>
-		<label>SpadeJoyOffsetEmotionlessRobot</label>
-		<description>gains joy from thin air (also enables hitting switches)</description>
+		<defName>spade_EmotionlessRobot</defName>
+		<label>SpadeEmotionlessRobot</label>
+		<description>gains joy from thin air, enables hitting switches, stops from talking...</description>
+		<blocksSocialInteraction>true</blocksSocialInteraction>
+		<disablesNeeds>
+			<li>Beauty</li>
+			<li>Comfort</li>
+			<li>Outdoors</li>
+			<li>Indoors</li>
+			<li>RoomSize</li>
+		</disablesNeeds>
 		<comps>
 			<li Class="SPADE.HediffCompProperties_EnableWorkTypes">
 				<compClass>SPADE.HediffComp_EnableWorkTypes</compClass>
@@ -605,6 +617,7 @@
 		</comps>
 		<stages>
 			<li>
+				<painFactor>0</painFactor>
 				<becomeVisible>false</becomeVisible>
 			</li>
 		</stages>
@@ -653,7 +666,18 @@
 		<defName>MechanoidButSpade</defName>
 		<corpseCategory>CorpsesMechanoid</corpseCategory>
 		<damageEffecter>Damage_HitMechanoid</damageEffecter>
-		<wounds>
+		<bandagedWounds>
+			<li>
+				<texture>Things/Pawn/Wounds/BandagedA</texture>
+			</li>
+			<li>
+				<texture>Things/Pawn/Wounds/BandagedB</texture>
+			</li>
+			<li>
+				<texture>Things/Pawn/Wounds/BandagedC</texture>
+			</li>
+		</bandagedWounds>
+		<genericWounds>
 			<li>
 				<texture>Things/Pawn/Wounds/WoundMechA</texture>
 			</li>
@@ -663,6 +687,6 @@
 			<li>
 				<texture>Things/Pawn/Wounds/WoundMechC</texture>
 			</li>
-		</wounds>
+		</genericWounds>
 	</FleshTypeDef>
 </Defs>

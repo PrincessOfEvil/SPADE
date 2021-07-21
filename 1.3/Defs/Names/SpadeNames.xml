@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <RulePackDef>
+    <defName>SPADEAtlasStandard</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>name->[SPADEStandardNames]-[SPADENumber]</li>
+      </rulesStrings>
+      <rulesRaw>
+        <li Class="Rule_File">
+          <keyword>SPADEStandardNames</keyword>
+          <path>Atlas_Names/SPADEStandardNames</path>
+        </li>
+        <li Class="Rule_File">
+          <keyword>SPADENumber</keyword>
+          <path>Atlas_Names/SPADENumber</path>
+        </li>
+      </rulesRaw>
+    </rulePack>
+  </RulePackDef>
+</Defs>
