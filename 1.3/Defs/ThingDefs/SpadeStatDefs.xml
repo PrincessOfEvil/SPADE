@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <StatDef>
+    <defName>spade_CaravanCarryingCapacityFactor</defName>
+    <label>caravan carrying capacity factor</label>
+    <description>The multiplier applied to the amount of stuff this creature can carry in its backpack, pouches or internal compartments.\n\nThis is exactly the ability to carry cargo on long cross-world trips.</description>
+    <category>BasicsPawn</category>
+    <showIfUndefined>false</showIfUndefined>
+    <defaultBaseValue>1.0</defaultBaseValue>
+    <toStringStyle>PercentZero</toStringStyle>
+    <minValue>1</minValue>
+    <displayPriorityInCategory>2204</displayPriorityInCategory>
+  </StatDef>
+
+</Defs>

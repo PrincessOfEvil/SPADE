@@ -140,8 +140,12 @@
 		<description>An installed set of wheels. Faster than default threads, but doesn't have much health and cannot carry heavy items.</description>
 		<stages>
 			<li>
+				<statOffsets>
+					<CaravanRidingSpeedFactor>0.2</CaravanRidingSpeedFactor>
+				</statOffsets>
 				<statFactors>
 					<CarryingCapacity>0.75</CarryingCapacity>
+					<spade_CaravanCarryingCapacityFactor>0.75</spade_CaravanCarryingCapacityFactor>
 				</statFactors>
 			</li>
 		</stages>
@@ -208,8 +212,12 @@
 		<description>An installed set of hover pads. Slightly faster than default threads, and doesn't slow down on any terrain, but cannot carry anything heavier than dry tissue paper, and are extremely delicate.</description>
 		<stages>
 			<li>
+				<statOffsets>
+					<CaravanRidingSpeedFactor>0.1</CaravanRidingSpeedFactor>
+				</statOffsets>
 				<statFactors>
 					<CarryingCapacity>0.5</CarryingCapacity>
+					<spade_CaravanCarryingCapacityFactor>0.5</spade_CaravanCarryingCapacityFactor>
 				</statFactors>
 			</li>
 		</stages>
@@ -849,6 +857,7 @@
 			<ThingDef>SpadeExtinguisher</ThingDef>
 			<HediffDef>SpadeExtinguisher</HediffDef>
 		</descriptionHyperlinks>
+		<!-- You can install it four times if you *really* feel like it. Heat prot maxes out at one, though. -->
 		<ingredients>
 			<li>
 				<filter>
@@ -868,5 +877,81 @@
 			<li>SPADE_Augmentation</li>
 		</appliedOnFixedBodyParts>
 		<addsHediff>SpadeExtinguisher</addsHediff>
+	</RecipeDef>
+
+	<HediffDef ParentName="AddedBodyPartBaseSpade">
+		<defName>SpadeWikiuplink</defName>
+		<label>omnipedia uplink</label>
+		<labelNoun>an Omnipedia uplink</labelNoun>
+		<description>An installed Omnipedia uplink. Gathers easy-to-use scripts related to many tasks.</description>
+		<tags>
+			<li>SpadeWikiuplink</li>
+		</tags>
+		<stages>
+		</stages>
+		<comps>
+			<li Class="SPADE.HediffCompProperties_Skill">
+				<compClass>SPADE.HediffComp_AddSkill</compClass>
+				<skills>
+					<li>Construction</li>
+					<li>Crafting</li>
+					<li>Mining</li>
+					<li>Plants</li>
+					<li>Cooking</li>
+				</skills>
+				<level>4</level>
+			</li>
+		</comps>
+		<spawnThingOnRemoved>SpadeWikiuplink</spawnThingOnRemoved>
+		<addedPartProps>
+			<betterThanNatural>false</betterThanNatural>
+		</addedPartProps>
+	</HediffDef>
+	<ThingDef ParentName="BodyPartSpadeBase">
+		<defName>SpadeWikiuplink</defName>
+		<label>Omnipedia uplink</label>
+		<description>An Omnipedia uplink. Gathers easy-to-use scripts related to many tasks.</description>
+		<descriptionHyperlinks><RecipeDef>InstallSpadeWikiuplink</RecipeDef></descriptionHyperlinks>
+		<costList>
+			<Steel>20</Steel>
+			<ComponentIndustrial>2</ComponentIndustrial>
+		</costList>
+		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+		<statBases>
+			<Mass>5</Mass>
+		</statBases>
+	</ThingDef>
+	<RecipeDef ParentName="SurgerySpade">
+		<defName>InstallSpadeWikiuplink</defName>
+		<label>install Omnipedia uplink</label>
+		<description>Installs Omnipedia uplink.</description>
+		<jobString>Installing Omnipedia uplink.</jobString>
+		<descriptionHyperlinks>
+			<ThingDef>SpadeWikiuplink</ThingDef>
+			<HediffDef>SpadeWikiuplink</HediffDef>
+		</descriptionHyperlinks>
+		<!-- cannot download the same data twice. -->
+		<incompatibleWithHediffTags>
+			<li>SpadeWikiuplink</li>
+		</incompatibleWithHediffTags>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>SpadeWikiuplink</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>SpadeWikiuplink</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>SPADE_Augmentation</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>SpadeWikiuplink</addsHediff>
 	</RecipeDef>
 </Defs>

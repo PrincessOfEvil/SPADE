@@ -78,7 +78,17 @@
 			<FoodPoisonChance>0.0</FoodPoisonChance>
 			<MedicalTendQuality>0.4</MedicalTendQuality>
 			<MedicalSurgerySuccessChance>0.6</MedicalSurgerySuccessChance>
-			<Mass>50</Mass>
+			<Mass>100</Mass>
+
+			<!-- This is where it gets weird. -->
+
+			<!-- What? It's a vehicle. You can ride it if you feel like it, the SPADE doesn't give a shit. -->
+			<!-- It's pretty slow though. -->
+			<CaravanRidingSpeedFactor>1.1</CaravanRidingSpeedFactor>
+			<!-- It's a vehicle. It can carry much more than disgusting human hands. -->
+			<!-- Also see: being OP with PickUpAndCarry. -->
+			<!-- Weaker legs genuinely hurt this stat at least. -->
+			<spade_CaravanCarryingCapacityFactor>2.5</spade_CaravanCarryingCapacityFactor>
 		</statBases>
 
 		<race>
@@ -104,7 +114,7 @@
 			<canBePredatorPrey>false</canBePredatorPrey>
 			<lifeStageAges>
 				<li>
-					<def>HumanlikeAdult</def>
+					<def>AnimalAdult</def>
 					<minAge>0</minAge>
 				</li>
 			</lifeStageAges>
@@ -318,27 +328,27 @@
 			</graphicPaths>
 
 			<styleSettings>
-								<li>
-										<key>HairDef</key>
-										<value>
-												<hasStyle>false</hasStyle>
-												<styleTags />
-										</value>
-								</li>
-								<li>
-										<key>TattooDef</key>
-										<value>
-												<hasStyle>false</hasStyle>
-												<styleTags />
-										</value>
-								</li>
-								<li>
-										<key>BeardDef</key>
-										<value>
-												<hasStyle>false</hasStyle>
-												<styleTags />
-										</value>
-								</li>
+				<li>
+					<key>HairDef</key>
+					<value>
+						<hasStyle>false</hasStyle>
+						<styleTags />
+					</value>
+				</li>
+				<li>
+					<key>TattooDef</key>
+					<value>
+						<hasStyle>false</hasStyle>
+						<styleTags />
+					</value>
+				</li>
+				<li>
+					<key>BeardDef</key>
+					<value>
+						<hasStyle>false</hasStyle>
+						<styleTags />
+					</value>
+				</li>
 			</styleSettings>
 
 			<thoughtSettings>
@@ -445,6 +455,7 @@
 			<li>InstallSpadeManipulator</li>
 
 			<li>InstallSpadeExtinguisher</li>
+			<li>InstallSpadeWikiuplink</li>
 		</recipes>
 
 		<modExtensions>

@@ -53,6 +53,25 @@ namespace SPADE
             }
         }
 
+    [HarmonyPatch(typeof(MassUtility), "Capacity")]
+    static class SPADE_MassUtility_Capacity_Patch
+        {
+        static StatDef def;
+        static float Postfix(float ret, Pawn p)
+            {
+            ensureInit();
+
+            if (def != null)
+                ret *= p.GetStatValue(def);
+
+            return ret;
+            }
+        private static void ensureInit()
+            {
+            if (def == null)
+                def = DefDatabase<StatDef>.GetNamed("spade_CaravanCarryingCapacityFactor");
+            }
+        }
 
     [HarmonyPatch(typeof(JobDriver), "ModifyCarriedThingDrawPos")]
     static class SPADE_JobDriver_ModifyCarriedThingDrawPos_Patch
@@ -87,9 +106,9 @@ namespace SPADE
         static void Prefix(Thing eq, ref Vector3 drawLoc, ref float aimAngle, Pawn ___pawn, PawnRenderer __instance)
             {
             var defExt = ___pawn.GetModExtension<DefExtension_CarriesWeaponStraight>();
-            Stance_Busy stance_Busy = ___pawn.stances.curStance as Stance_Busy;
             if (defExt != null)
                 {
+                Stance_Busy stance_Busy = ___pawn.stances.curStance as Stance_Busy;
                 if (!(stance_Busy != null && !stance_Busy.neverAimWeapon && stance_Busy.focusTarg.IsValid))
                     {
                     aimAngle = ___pawn.Rotation.AsAngle;
@@ -155,12 +174,16 @@ namespace SPADE
 
             if (ret)
                 {
+                if (DebugViewSettings.logTutor)
+                    {
+                    Log.Message("entered the anon patch");
+                    }
+
                 var defext = ___patient.GetModExtension<DefExtension_NonStandardMedicine>();
                 if (defext != null && m.def.thingCategories.Contains(defext.medicine))
                     return true;
                 else if (m.TryGetComp<Comp_NonStandardMedicine>() != null) return false;
                 }
-
             return ret;
             }
         }
