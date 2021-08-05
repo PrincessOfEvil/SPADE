@@ -218,7 +218,8 @@ namespace SPADE
                 var defext = ___patient.GetModExtension<DefExtension_NonStandardMedicine>();
                 if (defext != null && !m.def.thingCategories.Contains(defext.medicine))
                     return false;
-                else if (m.TryGetComp<Comp_NonStandardMedicine>() != null) return false;
+                if (defext == null && m.TryGetComp<Comp_NonStandardMedicine>() != null)
+                    return false;
                 }
             return ret;
             }
