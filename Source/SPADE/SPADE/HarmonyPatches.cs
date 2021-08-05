@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using RimWorld;
+using RimWorld.Planet;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,6 +51,41 @@ namespace SPADE
                 {
                 __instance.hatcheeFaction = Faction.OfPlayer;
                 }
+            }
+        }
+
+    [HarmonyPatch(typeof(FoodTypeFlagsExtension), "ToHumanString")]
+    static class SPADE_FoodTypeFlagsExtension_ToHumanString_Patch
+        {
+        // 2^23
+        private const int JetFuel = 8388608;
+        static string Postfix(string ret, FoodTypeFlags ft)
+            {
+            if (!Harmony.HasAnyPatches("twoscythe.shipgirls") && ((int)ft & JetFuel) != 0)
+                {
+                if (ret.Length > 0)
+                    {
+                    ret += ", ";
+                    }
+                ret += "FoodTypeFlags_JetFuel".Translate();
+                }
+
+            return ret;
+            }
+        }
+
+    [HarmonyPatch(typeof(Caravan), "get_NightResting")]
+    static class SPADE_Caravan_get_NightResting_Patch
+        {
+        static bool Postfix(bool ret, Caravan __instance)
+            {
+            if (ret) 
+                {
+                if (!__instance.PawnsListForReading.Where((Pawn p) => !p.HasModExtension<DefExtension_DoesNotNeedCaravanRest>()).Any())
+                    return false;
+                }
+
+            return ret;
             }
         }
 
@@ -180,8 +216,8 @@ namespace SPADE
                     }
 
                 var defext = ___patient.GetModExtension<DefExtension_NonStandardMedicine>();
-                if (defext != null && m.def.thingCategories.Contains(defext.medicine))
-                    return true;
+                if (defext != null && !m.def.thingCategories.Contains(defext.medicine))
+                    return false;
                 else if (m.TryGetComp<Comp_NonStandardMedicine>() != null) return false;
                 }
             return ret;

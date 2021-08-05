@@ -69,6 +69,7 @@
     <Compile Include="SPADE\CompTargetEffect_FixWorstHealthCondition.cs" />
     <Compile Include="SPADE\CompTargetable_SinglePawn_HasExt.cs" />
     <Compile Include="SPADE\DefExtension_CarryOffsets.cs" />
+    <Compile Include="SPADE\DefExtension_MiscFlags.cs" />
     <Compile Include="SPADE\HediffComp_Skill.cs" />
     <Compile Include="SPADE\HediffGiver_IngoresResSickness.cs" />
     <Compile Include="SPADE\DefExtension_NonStandardMedicine.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="SPADE\HediffComp_Joy.cs" />
     <Compile Include="SPADE\HediffComp_EnableWorkTypes.cs" />
     <Compile Include="SPADE\HediffComp_ChangePartHealth.cs" />
+    <Compile Include="SPADE\IngredientValueGetter_Nutrition.cs" />
     <Compile Include="SPADE\Util.cs" />
     <None Include=".editorconfig" />
   </ItemGroup>

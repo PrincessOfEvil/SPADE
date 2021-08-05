@@ -98,8 +98,8 @@
 	 		<intelligence>Humanlike</intelligence>
  			<lifeExpectancy>350</lifeExpectancy>
 			<needsRest>false</needsRest>
-			<foodType>OmnivoreHuman</foodType>
-			<baseHungerRate>0.1</baseHungerRate>
+			<foodType>8396607</foodType>
+			<baseHungerRate>0.25</baseHungerRate>
 
 			<body>spade_spade</body>
 			<baseBodySize>1</baseBodySize>
@@ -383,10 +383,10 @@
 			</relationSettings>
 
 			<raceRestriction>
-							<apparelList>
-									<li>spade_Apparel_Tarp</li>
-									<li>spade_Apparel_ArmorPlating</li>
-							</apparelList>
+				<apparelList>
+					<li>spade_Apparel_Tarp</li>
+					<li>spade_Apparel_ArmorPlating</li>
+				</apparelList>
 				<traitList>
 					<li>spade_EmotionlessRobot</li>
 				</traitList>
@@ -459,9 +459,6 @@
 		</recipes>
 
 		<modExtensions>
-			<li Class="SPADE.DefExtension_NonStandardMedicine">
-				<medicine>Spade_Medicine</medicine>
-			</li>
 			<li Class="SPADE.DefExtension_CarriesWeaponOpenly" />
 			<li Class="SPADE.DefExtension_CarriesWeaponStraight">
 				<offsets>
@@ -471,6 +468,7 @@
 					<east>(-0.2, -0.01, 0.33)</east>
 				</offsets>
 			</li>
+
 			<li Class="SPADE.DefExtension_CarriesThingsOffset">
 				<offsets>
 					<north>(0, 0, 0.42)</north>
@@ -479,8 +477,14 @@
 					<east>(0.42, 0, 0)</east>
 				</offsets>
 			</li>
+
+			<li Class="SPADE.DefExtension_NonStandardMedicine">
+				<medicine>Spade_Medicine</medicine>
+			</li>
 			<li Class="SPADE.DefExtension_SPADE_Resurrectable" />
 			<li Class="SPADE.DefExtension_Repairable" />
+
+			<li Class="SPADE.DefExtension_DoesNotNeedCaravanRest" />
 		</modExtensions>
 	</AlienRace.ThingDef_AlienRace>
 
@@ -628,6 +632,9 @@
 		</comps>
 		<stages>
 			<li>
+				<statFactors>
+					<GlobalLearningFactor>0.0</GlobalLearningFactor>
+				</statFactors>
 				<painFactor>0</painFactor>
 				<becomeVisible>false</becomeVisible>
 			</li>
