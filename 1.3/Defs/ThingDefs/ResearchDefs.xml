@@ -2,7 +2,7 @@
 
 <Defs>
   <ResearchProjectDef>
-    <defName>Spade_Basic</defName>
+    <defName>spade_SPADE_Research_Basic</defName>
     <label>SPADE</label>
     <description>Build SPADE drones: autonomous armored vehicles capable of limited tasks.</description>
     <baseCost>800</baseCost>

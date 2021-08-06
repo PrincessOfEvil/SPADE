@@ -71,7 +71,7 @@
 				<Crafting>8</Crafting>
 			</skillRequirements>
 			<researchPrerequisites>
-				<li>Spade_Basic</li>
+				<li>spade_SPADE_Research_Basic</li>
 			</researchPrerequisites>
 			<recipeUsers>
 				<li>TableMachining</li>

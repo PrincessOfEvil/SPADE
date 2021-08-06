@@ -132,7 +132,7 @@
 			<recipeUsers>
 				<li>TableMachining</li>
 			</recipeUsers>
-			<researchPrerequisite>Spade_Basic</researchPrerequisite>
+			<researchPrerequisite>spade_SPADE_Research_Basic</researchPrerequisite>
 			<skillRequirements>
 				<Crafting>4</Crafting>
 				<Intellectual>4</Intellectual>
@@ -219,7 +219,7 @@
 			<recipeUsers>
 				<li>TableMachining</li>
 			</recipeUsers>
-			<researchPrerequisite>Spade_Basic</researchPrerequisite>
+			<researchPrerequisite>spade_SPADE_Research_Basic</researchPrerequisite>
 			<skillRequirements>
 				<Crafting>4</Crafting>
 				<Intellectual>4</Intellectual>

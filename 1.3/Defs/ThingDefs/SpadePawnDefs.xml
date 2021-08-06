@@ -10,7 +10,31 @@
 		<backstoryCategories>
 			<li>Civil</li>
 		</backstoryCategories>
-		<basicMemberKind>spade_SpadeSimplePlayer</basicMemberKind>
+		<basicMemberKind>spade_SPADE_Ranged</basicMemberKind>
+		<pawnGroupMakers>
+			<li>
+				<kindDef>Peaceful</kindDef>
+				<options>
+					<spade_SPADE_Ranged>20</spade_SPADE_Ranged>
+
+					<spade_SPADE_Harvester>10</spade_SPADE_Harvester>
+					<spade_SPADE_Miner>10</spade_SPADE_Miner>
+
+					<spade_SPADE_Assembler>5</spade_SPADE_Assembler>
+					<spade_SPADE_Support>5</spade_SPADE_Support>
+					<spade_SPADE_Hauler>5</spade_SPADE_Hauler>
+				</options>
+			</li>
+		</pawnGroupMakers>
+		<maxPawnCostPerTotalPointsCurve>
+			<points>
+				<li>(0,35)</li>
+				<li>(70, 50)</li>
+				<li>(700, 100)</li>
+				<li>(1300, 150)</li>
+				<li>(100000, 10000)</li>
+			</points>
+		</maxPawnCostPerTotalPointsCurve>
 		<pawnsPlural>colonists</pawnsPlural>
 		<playerInitialSettlementNameMaker>NamerInitialSettlementColony</playerInitialSettlementNameMaker>
 		<factionNameMaker>NamerFactionOutlander</factionNameMaker>
@@ -26,12 +50,16 @@
 				<li>Cloth</li>
 			</thingDefs>
 		</apparelStuffFilter>
+		<disallowedPrecepts>
+			<!-- Because SPADE is one... -->
+			<li MayRequire="Ludeon.RimWorld.Ideology">AutonomousWeapons_Disapproved</li>
+		</disallowedPrecepts>
 	</FactionDef>
 
-	<PawnKindDef Name="BaseSPADE" ParentName="BasePlayerPawnKind">
-		<defName>spade_SpadeSimplePlayer</defName>
+	<PawnKindDef ParentName="BasePlayerPawnKind">
+		<defName>spade_SPADE_Ranged</defName>
 		<label>SPADE</label>
-		<race>spade_spade</race>
+		<race>spade_SPADE_Basic</race>
 		<backstoryFiltersOverride>
 			<li>
 				<categories>
@@ -43,19 +71,114 @@
 		<defaultFactionType>spade_PlayerColonySPADE</defaultFactionType>
 		<chemicalAddictionChance>0.00</chemicalAddictionChance>
 		<backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+
+		<combatPower>60</combatPower>
+		<isFighter>true</isFighter>
+
+		<gearHealthRange>0.6~2</gearHealthRange>
+		<apparelTags>
+			<li>IndustrialMilitaryBasic</li>
+		</apparelTags>
+		<apparelMoney>400~600</apparelMoney>
+
 		<techHediffsRequired>
 			<li>SpadeTreads</li>
 			<li>SpadeGunMount</li>
 		</techHediffsRequired>
 		<techHediffsMaxAmount>3</techHediffsMaxAmount>
+
+		<weaponTags>
+			<li>Gun</li>
+		</weaponTags>
+		<weaponMoney>250~400</weaponMoney>
+
+		<initialWillRange>3~5</initialWillRange>
 		<initialResistanceRange>42~56</initialResistanceRange>
+	</PawnKindDef>
+
+	<PawnKindDef Name="BaseSPADE" ParentName="BasePlayerPawnKind" Abstract="True">
+		<defName>spade_SPADE_Base</defName>
+		<label>SPADE Base</label>
+		<race>spade_SPADE_Basic</race>
+		<backstoryFiltersOverride>
+			<li>
+				<categories>
+					<li>spade_Player</li>
+				</categories>
+			</li>
+		</backstoryFiltersOverride>
+		<maxGenerationAge>5</maxGenerationAge>
+		<defaultFactionType>spade_PlayerColonySPADE</defaultFactionType>
+		<chemicalAddictionChance>0.00</chemicalAddictionChance>
+		<backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+
+		<combatPower>30</combatPower>
+		<isFighter>false</isFighter>
+
+		<gearHealthRange>0.6~2</gearHealthRange>
+		<apparelMoney>200~400</apparelMoney>
+
+		<techHediffsMaxAmount>3</techHediffsMaxAmount>
+
+		<initialWillRange>3~5</initialWillRange>
+		<initialResistanceRange>42~56</initialResistanceRange>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="BaseSPADE">
+		<defName>spade_SPADE_Assembler</defName>
+		<label>SPADE Assembler</label>
+
+		<techHediffsRequired>
+			<li>SpadeWheels</li>
+			<li>SpadeWelder</li>
+		</techHediffsRequired>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="BaseSPADE">
+		<defName>spade_SPADE_Harvester</defName>
+		<label>SPADE Harvester</label>
+
+		<techHediffsRequired>
+			<li>SpadeWheels</li>
+			<li>SpadeHarvester</li>
+		</techHediffsRequired>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="BaseSPADE">
+		<defName>spade_SPADE_Miner</defName>
+		<label>SPADE Miner</label>
+
+		<techHediffsRequired>
+			<li>SpadeTreads</li>
+			<li>SpadeDrill</li>
+		</techHediffsRequired>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="BaseSPADE">
+		<defName>spade_SPADE_Support</defName>
+		<label>SPADE Support</label>
+
+		<techHediffsRequired>
+			<li>SpadeWheels</li>
+			<li>SpadeManipulator</li>
+		</techHediffsRequired>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="BaseSPADE">
+		<defName>spade_SPADE_Hauler</defName>
+		<label>SPADE Hauler</label>
+
+		<techHediffsRequired>
+			<li>SpadeCleaner</li>
+			<li>SpadeCrane</li>
+		</techHediffsRequired>
 	</PawnKindDef>
 	
 
 	<AlienRace.ThingDef_AlienRace ParentName="BasePawn">
-		<defName>spade_spade</defName>
+		<defName>spade_SPADE_Basic</defName>
 		<label>SPADE</label>
-		<description>A simple autonomous robot originally designed as a heavy assault platform.</description>
+		<description>Scout/Patrol Automated Drone, Enhanced. A simple autonomous robot originally designed as a heavy assault platform.</description>
 	
 		<statBases>
 			<MarketValue>2000</MarketValue>
@@ -101,7 +224,7 @@
 			<foodType>8396607</foodType>
 			<baseHungerRate>0.25</baseHungerRate>
 
-			<body>spade_spade</body>
+			<body>spade_SPADE_Body</body>
 			<baseBodySize>1</baseBodySize>
 			<baseHealthScale>1</baseHealthScale>
 			<bloodDef>Filth_MachineBits</bloodDef>
@@ -641,10 +764,10 @@
 		</stages>
 	</HediffDef>
 
-	<ThingDef>
-		<defName>spade_BaseEgg</defName>
-		<label>SPADE</label>
-		<description>Scout/Patrol Automated Drone, Enhanced.</description>
+	<ThingDef Name="SPADE_Spawner">
+		<defName>spade_SPADE_Ranged_Spawner</defName>
+		<label>SPADE, ranged configuration</label>
+		<description>Scout/Patrol Automated Drone, Enhanced. Basic configuration. Ready for battle (weapons not included).</description>
 		<thingClass>ThingWithComps</thingClass>
 		<graphicData>
 			<texPath>Pawns/Naked_spade_body_south</texPath>
@@ -653,7 +776,7 @@
 		<comps>
 			<li Class="CompProperties_Hatcher">
 				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
-				<hatcherPawn>spade_SpadeSimplePlayer</hatcherPawn>
+				<hatcherPawn>spade_SPADE_Ranged</hatcherPawn>
 			</li>
 		</comps>
 		<tickerType>Normal</tickerType>
@@ -672,13 +795,69 @@
 			<effectWorking>Smith</effectWorking>
 			<soundWorking>Recipe_Machining</soundWorking>
 			<unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
-			<researchPrerequisite>Spade_Basic</researchPrerequisite>
+			<researchPrerequisite>spade_SPADE_Research_Basic</researchPrerequisite>
 			<skillRequirements>
 				<Crafting>8</Crafting>
 				<Intellectual>8</Intellectual>
 			</skillRequirements>
 		</recipeMaker>
 	</ThingDef>
+
+	<ThingDef ParentName="SPADE_Spawner">
+		<defName>spade_SPADE_Assembler_Spawner</defName>
+		<label>SPADE, assembly configuration</label>
+		<description>Scout/Patrol Automated Drone, Enhanced. Assembly line configuration. Designed to be used in small-scale factories.</description>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherPawn>spade_SPADE_Assembler</hatcherPawn>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="SPADE_Spawner">
+		<defName>spade_SPADE_Harvester_Spawner</defName>
+		<label>SPADE, harvester configuration</label>
+		<description>Scout/Patrol Automated Drone, Enhanced. Combine harvester configuration. Capable of fully tending after a variety of simple crops.</description>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherPawn>spade_SPADE_Harvester</hatcherPawn>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="SPADE_Spawner">
+		<defName>spade_SPADE_Miner_Spawner</defName>
+		<label>SPADE, mining configuration</label>
+		<description>Scout/Patrol Automated Drone, Enhanced. Automated mining configuration. Incapable of transporting extracted resources.</description>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherPawn>spade_SPADE_Miner</hatcherPawn>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="SPADE_Spawner">
+		<defName>spade_SPADE_Support_Spawner</defName>
+		<label>SPADE, support configuration</label>
+		<description>Scout/Patrol Automated Drone, Enhanced. Auxiliary support configuration. The installed manipulator is capable of any required basic labor, but isn't specialized enough to excel at any tasks.</description>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherPawn>spade_SPADE_Support</hatcherPawn>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="SPADE_Spawner">
+		<defName>spade_SPADE_Hauler_Spawner</defName>
+		<label>SPADE, hauling configuration</label>
+		<description>Scout/Patrol Automated Drone, Enhanced. Hauling/cleaning configuration.</description>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherPawn>spade_SPADE_Hauler</hatcherPawn>
+			</li>
+		</comps>
+	</ThingDef>
+
 
 	<FleshTypeDef>
 		<defName>MechanoidButSpade</defName>

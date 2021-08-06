@@ -2,7 +2,7 @@
 
 <Defs>
 	<BodyDef>
-		<defName>spade_spade</defName>
+		<defName>spade_SPADE_Body</defName>
 		<label>spade</label>
 		<corePart>
 			<def>SPADE_Casing</def>
