@@ -84,6 +84,7 @@
 		<recipeMaker>
 			<recipeUsers>
 				<li>CraftingSpot</li>
+				<li>TableMachining</li>
 			</recipeUsers>
 			<skillRequirements>
 				<Crafting>3</Crafting>
