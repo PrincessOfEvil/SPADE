@@ -194,9 +194,9 @@
 		</statBases>
 		<costList>
 			<spade_AdvancedRepairKit>1</spade_AdvancedRepairKit>
-			<Steel>75</Steel>
-			<ComponentIndustrial>2</ComponentIndustrial>
-			<Chemfuel>3</Chemfuel>
+			<Steel>120</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<Chemfuel>15</Chemfuel>
 		</costList>
 		<comps>
 			<li Class="CompProperties_UseEffectPlaySound">
