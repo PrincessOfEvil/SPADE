@@ -82,6 +82,7 @@
     <Compile Include="SPADE\HediffComps\HediffComp_EnableWorkTypes.cs" />
     <Compile Include="SPADE\HediffComps\HediffComp_ChangePartHealth.cs" />
     <Compile Include="SPADE\IngredientValueGetter_Nutrition.cs" />
+    <Compile Include="SPADE\Recipe_InstallClashingArtificalPart.cs" />
     <Compile Include="SPADE\Util.cs" />
     <Compile Include="SPADE\Verb_ShootStatic.cs" />
     <None Include=".editorconfig" />

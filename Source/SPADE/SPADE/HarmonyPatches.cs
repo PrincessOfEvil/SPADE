@@ -34,6 +34,23 @@ namespace SPADE
 
             harmony.Patch(healthAI_bestMed_anon_original, postfix: new HarmonyMethod(healthAI_bestMed_anon_postfix));
             }
+
+        /*
+        public static void DrawResearchPrereqsPostfix(ResearchProjectDef project, Rect rect, ref float __result)
+            {
+            //init
+            float xMin = rect.xMin;
+            float yMin = rect.yMin;
+            rect.xMin += 6f;
+
+
+
+            //restoring defaults
+            GUI.color = Color.white;
+            rect.xMin = xMin;
+            __result += rect.yMin - yMin;
+            }
+        */
         }
 
     /// <summary>
@@ -51,6 +68,32 @@ namespace SPADE
                 {
                 __instance.hatcheeFaction = Faction.OfPlayer;
                 }
+            }
+        }
+
+
+    [HarmonyPatch(typeof(JobDriver_BeatFire), "MakeNewToils")]
+    static class SPADE_JobDriver_BeatFire_MakeNewToils_Patch
+        {
+        static IEnumerable<Toil> Postfix(IEnumerable<Toil> ret, JobDriver_BeatFire __instance)
+            {
+            var input = __instance.pawn.health.hediffSet.GetAllComps().FirstOrFallback(hediff => hediff is HediffComp_VerbGiver diff && !diff.VerbProperties.NullOrEmpty() && diff.VerbProperties.Any(props => props.category == VerbCategory.BeatFire)) as HediffComp_VerbGiver;
+            if (input != null)
+                return iterator(input, __instance);
+
+            else return ret;
+            }
+
+        static IEnumerable<Toil> iterator(HediffComp_VerbGiver input, JobDriver_BeatFire __instance)
+            {
+            __instance.job.verbToUse = input.VerbTracker.PrimaryVerb;
+
+            Toil gotoCastPos = Toils_Combat.GotoCastPosition(TargetIndex.A, maxRangeFactor: 0.65f);
+            yield return gotoCastPos;
+            Toil jumpIfCannotHit = Toils_Jump.JumpIfTargetNotHittable(TargetIndex.A, gotoCastPos);
+            yield return jumpIfCannotHit;
+            yield return Toils_Combat.CastVerb(TargetIndex.A);
+            yield return Toils_Jump.Jump(jumpIfCannotHit);
             }
         }
 
@@ -93,12 +136,22 @@ namespace SPADE
     static class SPADE_MassUtility_Capacity_Patch
         {
         static StatDef def;
-        static float Postfix(float ret, Pawn p)
+        static float Postfix(float ret, Pawn p, StringBuilder explanation)
             {
             ensureInit();
 
             if (def != null)
+                {
                 ret *= p.GetStatValue(def);
+
+                if (explanation != null)
+                    {
+                    explanation.AppendLine();
+                    explanation.Append("  - " + p.LabelShortCap + ": x" + p.GetStatValue(def).ToStringPercent());
+                    explanation.AppendLine();
+                    explanation.Append("  - " + p.LabelShortCap + ": " + ret.ToStringMassOffset());
+                    }
+                }
 
             return ret;
             }
@@ -261,8 +314,14 @@ namespace SPADE
             {
             if (pawn.health.hediffSet.GetAllComps().Where(hediff => { return hediff is HediffComp_IgnoresTerrain; }).Any())
                 {
-                return (c.x != pawn.Position.x && c.z != pawn.Position.z) ? pawn.TicksPerMoveDiagonal : pawn.TicksPerMoveCardinal;
+                int i = (c.x != pawn.Position.x && c.z != pawn.Position.z) ? pawn.TicksPerMoveDiagonal : pawn.TicksPerMoveCardinal;
+
+                if (pawn.CurJob != null && pawn.jobs.curJob.locomotionUrgency == LocomotionUrgency.Sprint)
+                    i = Mathf.RoundToInt((float)i * 0.75f); ;
+
+                return i;
                 }
+
             return ret;
             }
         }

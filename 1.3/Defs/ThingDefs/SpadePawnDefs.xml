@@ -97,8 +97,6 @@
 	</PawnKindDef>
 
 	<PawnKindDef Name="BaseSPADE" ParentName="BasePlayerPawnKind" Abstract="True">
-		<defName>spade_SPADE_Base</defName>
-		<label>SPADE Base</label>
 		<race>spade_SPADE_Basic</race>
 		<backstoryFiltersOverride>
 			<li>
@@ -126,7 +124,7 @@
 
 	<PawnKindDef ParentName="BaseSPADE">
 		<defName>spade_SPADE_Assembler</defName>
-		<label>SPADE Assembler</label>
+		<label>SPADE assembler</label>
 
 		<techHediffsRequired>
 			<li>SpadeWheels</li>
@@ -136,7 +134,7 @@
 
 	<PawnKindDef ParentName="BaseSPADE">
 		<defName>spade_SPADE_Harvester</defName>
-		<label>SPADE Harvester</label>
+		<label>SPADE harvester</label>
 
 		<techHediffsRequired>
 			<li>SpadeWheels</li>
@@ -146,7 +144,7 @@
 
 	<PawnKindDef ParentName="BaseSPADE">
 		<defName>spade_SPADE_Miner</defName>
-		<label>SPADE Miner</label>
+		<label>SPADE miner</label>
 
 		<techHediffsRequired>
 			<li>SpadeTreads</li>
@@ -156,7 +154,7 @@
 
 	<PawnKindDef ParentName="BaseSPADE">
 		<defName>spade_SPADE_Support</defName>
-		<label>SPADE Support</label>
+		<label>SPADE support</label>
 
 		<techHediffsRequired>
 			<li>SpadeWheels</li>
@@ -166,7 +164,7 @@
 
 	<PawnKindDef ParentName="BaseSPADE">
 		<defName>spade_SPADE_Hauler</defName>
-		<label>SPADE Hauler</label>
+		<label>SPADE hauler</label>
 
 		<techHediffsRequired>
 			<li>SpadeCleaner</li>
@@ -221,6 +219,8 @@
 	 		<intelligence>Humanlike</intelligence>
  			<lifeExpectancy>350</lifeExpectancy>
 			<needsRest>false</needsRest>
+			
+			<!-- Human-like omnivore + 2^23 -->
 			<foodType>8396607</foodType>
 			<baseHungerRate>0.25</baseHungerRate>
 
@@ -237,7 +237,7 @@
 			<canBePredatorPrey>false</canBePredatorPrey>
 			<lifeStageAges>
 				<li>
-					<def>AnimalAdult</def>
+					<def>spade_SPADE</def>
 					<minAge>0</minAge>
 				</li>
 			</lifeStageAges>
@@ -564,21 +564,6 @@
 			<ComponentIndustrial>2</ComponentIndustrial>
 		</butcherProducts>
 		<recipes>
-			<li>RemoveSpadePart</li>
-
-			<li>InstallSpadeTreads</li>
-			<li>InstallSpadeWheels</li>
-			<li>InstallSpadeHover</li>
-			<li>InstallSpadeCleaner</li>
-
-			<li>InstallSpadeGunMount</li>
-			<li>InstallSpadeCrane</li>
-			<li>InstallSpadeHarvester</li>
-			<li>InstallSpadeDrill</li>
-			<li>InstallSpadeManipulator</li>
-
-			<li>InstallSpadeExtinguisher</li>
-			<li>InstallSpadeWikiuplink</li>
 		</recipes>
 
 		<modExtensions>
@@ -886,4 +871,15 @@
 			</li>
 		</genericWounds>
 	</FleshTypeDef>
+
+	<LifeStageDef>
+		<defName>spade_SPADE</defName>
+		<label>adult</label>
+		<visible>false</visible>
+		<reproductive>true</reproductive>
+		<milkable>true</milkable>
+		<shearable>true</shearable>
+		<caravanRideable>true</caravanRideable>
+		<foodMaxFactor>2</foodMaxFactor>
+	</LifeStageDef>
 </Defs>
