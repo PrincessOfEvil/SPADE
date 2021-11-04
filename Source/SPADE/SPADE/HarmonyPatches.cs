@@ -71,6 +71,69 @@ namespace SPADE
             }
         }
 
+    /* 
+     * This patch removes a bit of a vanilla backwards compatibility break in VEF's MVCF Ranged Hediffs.
+     * Namely, them making all hediffs capable of being ranged.
+     * This only runs 
+     */
+    [HarmonyPatch(typeof(MVCF.Utilities.VerbManagerUtility), "AddVerbs", new Type[] { typeof(MVCF.VerbManager), typeof(Hediff)})]
+    static class SPADEHacksIntoModsInTheNameOfChaos_MVCF_Utilities_VerbManagerUtility_AddVerbs_WithHediff_Patch
+        {
+        private static Dictionary<string, bool> modCompatDictionary = new Dictionary<string, bool>();
+        static bool Prefix(Hediff hediff)
+            {
+            var mod = hediff?.def?.modContentPack?.Name;
+            /*
+             * ...it would get ignored anyway and i'm sparing a couple cycles.
+             * Checking for self for any 'lets just block them out and ignore it lul' shenanigans.
+             */
+            if (MVCF.Base.IsIgnoredMod(mod) && mod != "SPADE") return false;
+
+            var comp = hediff.TryGetComp<HediffComp_VerbGiver>();
+            if (comp?.VerbTracker?.AllVerbs == null) return false;
+
+            if (comp.VerbTracker.AllVerbs.Any(v => !v.IsMeleeAttack))
+                {
+                if (!MVCF.Base.Features.HediffVerbs && !MVCF.Base.IgnoredFeatures.HediffVerbs)
+                    {
+                    Log.ErrorOnce(
+                        "[MVCF] Found a hediff with a ranged verb while that feature is not enabled. Enabling now. This is not recommend. Contant the author of " +
+                        mod + " and ask them to add a MVCF.ModDef.",
+                        mod?.GetHashCode() ?? -1);
+                    Log.ErrorOnce(
+                        "[SPADE] Found an instance of MVCF being mentally deficient. " +
+                        "If you have your own ways of triggering the ranged verb on your hediff, of if you're reading this message from just tossing mods together, just ignore it. " +
+                        "If your hediff needs MVCF to work, and you're seeing this message, you should really make the ModDef.",
+                        mod?.GetHashCode() + 1 ?? -1);
+                    return false;
+                    }
+                if (notInDatabase(mod))
+                    {
+                    Log.ErrorOnce(
+                        "[SPADE] Found an instance of MVCF being mentally deficient. " +
+                        "Ranged hediffs enabled by another mod, but " + mod +
+                        " has not opted in to use them. Since vanilla ignores ranged hediffs by default, this is considered breaking behavior. " +
+                        "Contact the author of " + mod + " and warn them about their possible incompatibility with Vanilla Expanded Framework and specifically MVCF.",
+                        mod?.GetHashCode() + 1 ?? -1);
+                    return false;
+                    }
+                }
+
+            return true;
+            }
+
+        private static bool notInDatabase(string mod)
+            {
+            bool value;
+            if (!modCompatDictionary.TryGetValue(mod, out value))
+                {
+                value = !DefDatabase<MVCF.ModDef>.AllDefs.Any( def => def.modContentPack?.Name == mod);
+                modCompatDictionary[mod] = value;
+                }
+            return value;
+            }
+        }
+
 
     [HarmonyPatch(typeof(JobDriver_BeatFire), "MakeNewToils")]
     static class SPADE_JobDriver_BeatFire_MakeNewToils_Patch
