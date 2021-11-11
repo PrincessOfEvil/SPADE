@@ -245,8 +245,9 @@
 		<description>A set of hover pads. Slightly faster than default threads, and doesn't slow down on terrain, but cannot carry anything heavier than dry tissue paper.</description>
 		<descriptionHyperlinks><RecipeDef>InstallSpadeHover</RecipeDef></descriptionHyperlinks>
 		<costList>
-			<Steel>60</Steel>
+			<Plasteel>30</Plasteel>
 			<ComponentIndustrial>3</ComponentIndustrial>
+			<ComponentSpacer>1</ComponentSpacer>
 		</costList>
 		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
 		<statBases>
@@ -311,8 +312,8 @@
 		<description>A spade cleaning skirt. Extremely delicate and slow, but capable of cleaning.</description>
 		<descriptionHyperlinks><RecipeDef>InstallSpadeCleaner</RecipeDef></descriptionHyperlinks>
 		<costList>
-			<Steel>60</Steel>
-			<ComponentIndustrial>3</ComponentIndustrial>
+			<Steel>40</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
 		</costList>
 		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
 		<statBases>
@@ -456,8 +457,8 @@
 		<description>A crane manipulator for a SPADE. Capable of moving heavy items, and isn't too terrible in melee, but incapable of doing much else.</description>
 		<descriptionHyperlinks><RecipeDef>InstallSpadeCrane</RecipeDef></descriptionHyperlinks>
 		<costList>
-			<Steel>40</Steel>
-			<ComponentIndustrial>4</ComponentIndustrial>
+			<Steel>80</Steel>
+			<ComponentIndustrial>2</ComponentIndustrial>
 		</costList>
 		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
 		<statBases>
@@ -618,8 +619,8 @@
 		<description>A crop harvester for a SPADE. Too rough to work on delicate crops, but rapidly harvests them.</description>
 		<descriptionHyperlinks><RecipeDef>InstallSpadeHarvester</RecipeDef></descriptionHyperlinks>
 		<costList>
-			<Steel>40</Steel>
-			<ComponentIndustrial>4</ComponentIndustrial>
+			<Steel>60</Steel>
+			<ComponentIndustrial>3</ComponentIndustrial>
 		</costList>
 		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
 		<statBases>
@@ -693,8 +694,9 @@
 		<description>A drill manipulator for a SPADE. Relatively fast and efficient.</description>
 		<descriptionHyperlinks><RecipeDef>InstallSpadeDrill</RecipeDef></descriptionHyperlinks>
 		<costList>
+			<Plasteel>10</Plasteel>
 			<Steel>40</Steel>
-			<ComponentIndustrial>4</ComponentIndustrial>
+			<ComponentIndustrial>3</ComponentIndustrial>
 		</costList>
 		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
 		<statBases>
@@ -770,7 +772,8 @@
 		<descriptionHyperlinks><RecipeDef>InstallSpadeManipulator</RecipeDef></descriptionHyperlinks>
 		<costList>
 			<Steel>40</Steel>
-			<ComponentIndustrial>4</ComponentIndustrial>
+			<ComponentIndustrial>3</ComponentIndustrial>
+			<ComponentSpacer>1</ComponentSpacer>
 		</costList>
 		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
 		<statBases>
@@ -885,7 +888,7 @@
 		<descriptionHyperlinks><RecipeDef>InstallSpadeExtinguisher</RecipeDef></descriptionHyperlinks>
 		<costList>
 			<Steel>20</Steel>
-			<ComponentIndustrial>2</ComponentIndustrial>
+			<ComponentIndustrial>3</ComponentIndustrial>
 		</costList>
 		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
 		<statBases>
@@ -962,8 +965,8 @@
 		<description>An Omnipedia uplink. Gathers easy-to-use scripts related to many tasks.</description>
 		<descriptionHyperlinks><RecipeDef>InstallSpadeWikiuplink</RecipeDef></descriptionHyperlinks>
 		<costList>
-			<Steel>20</Steel>
-			<ComponentIndustrial>2</ComponentIndustrial>
+			<Plasteel>20</Plasteel>
+			<ComponentSpacer>2</ComponentSpacer>
 		</costList>
 		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
 		<statBases>
@@ -1035,8 +1038,8 @@
 		<description>A SPADE targeting software upgrade. Upgrades targeting software with predictive aiming and ballistic calculations.</description>
 		<descriptionHyperlinks><RecipeDef>InstallSpadeTargeting</RecipeDef></descriptionHyperlinks>
 		<costList>
-			<Steel>20</Steel>
-			<ComponentIndustrial>2</ComponentIndustrial>
+			<Plasteel>20</Plasteel>
+			<ComponentSpacer>2</ComponentSpacer>
 		</costList>
 		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
 		<statBases>

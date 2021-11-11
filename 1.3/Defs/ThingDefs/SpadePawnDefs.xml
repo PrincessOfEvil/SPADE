@@ -509,6 +509,8 @@
 				<apparelList>
 					<li>spade_Apparel_Tarp</li>
 					<li>spade_Apparel_ArmorPlating</li>
+					<li>spade_Apparel_SpallLiner</li>
+					<li>spade_Apparel_AlloyArmor</li>
 				</apparelList>
 				<traitList>
 					<li>spade_EmotionlessRobot</li>
@@ -792,8 +794,9 @@
 		<defName>spade_SPADE_Assembler_Spawner</defName>
 		<label>SPADE, assembly configuration</label>
 		<description>Scout/Patrol Automated Drone, Enhanced. Assembly line configuration. Designed to be used in small-scale factories.</description>
-		<comps>
+		<comps Inherit="False">
 			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
 				<hatcherPawn>spade_SPADE_Assembler</hatcherPawn>
 			</li>
 		</comps>
@@ -803,8 +806,9 @@
 		<defName>spade_SPADE_Harvester_Spawner</defName>
 		<label>SPADE, harvester configuration</label>
 		<description>Scout/Patrol Automated Drone, Enhanced. Combine harvester configuration. Capable of fully tending after a variety of simple crops.</description>
-		<comps>
+		<comps Inherit="False">
 			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
 				<hatcherPawn>spade_SPADE_Harvester</hatcherPawn>
 			</li>
 		</comps>
@@ -814,8 +818,9 @@
 		<defName>spade_SPADE_Miner_Spawner</defName>
 		<label>SPADE, mining configuration</label>
 		<description>Scout/Patrol Automated Drone, Enhanced. Automated mining configuration. Incapable of transporting extracted resources.</description>
-		<comps>
+		<comps Inherit="False">
 			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
 				<hatcherPawn>spade_SPADE_Miner</hatcherPawn>
 			</li>
 		</comps>
@@ -825,8 +830,9 @@
 		<defName>spade_SPADE_Support_Spawner</defName>
 		<label>SPADE, support configuration</label>
 		<description>Scout/Patrol Automated Drone, Enhanced. Auxiliary support configuration. The installed manipulator is capable of any required basic labor, but isn't specialized enough to excel at any tasks.</description>
-		<comps>
+		<comps Inherit="False">
 			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
 				<hatcherPawn>spade_SPADE_Support</hatcherPawn>
 			</li>
 		</comps>
@@ -836,8 +842,9 @@
 		<defName>spade_SPADE_Hauler_Spawner</defName>
 		<label>SPADE, hauling configuration</label>
 		<description>Scout/Patrol Automated Drone, Enhanced. Hauling/cleaning configuration.</description>
-		<comps>
+		<comps Inherit="False">
 			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
 				<hatcherPawn>spade_SPADE_Hauler</hatcherPawn>
 			</li>
 		</comps>
