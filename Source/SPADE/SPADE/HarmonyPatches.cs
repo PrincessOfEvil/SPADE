@@ -33,6 +33,14 @@ namespace SPADE
             var healthAI_bestMed_anon_postfix = typeof(SPADE_HealthAIUtility_FindBestMedicine_Anon_Patch).GetMethod("Postfix", AccessTools.all);
 
             harmony.Patch(healthAI_bestMed_anon_original, postfix: new HarmonyMethod(healthAI_bestMed_anon_postfix));
+
+
+            var vmu = AccessTools.TypeByName("MVCF.Utilities.VerbManagerUtility");
+            if (vmu != null)
+                {
+                var method = AccessTools.Method(vmu, "AddVerbs", new Type[] { AccessTools.TypeByName("MVCF.VerbManager"), typeof(Hediff) });
+                harmony.Patch(method, prefix: new HarmonyMethod(typeof(SPADEHacksIntoModsInTheNameOfChaos_MVCF_Utilities_VerbManagerUtility_AddVerbs_WithHediff_Patch).GetMethod("Prefix", AccessTools.all)));
+                }
             }
 
         /*
@@ -74,9 +82,7 @@ namespace SPADE
     /* 
      * This patch removes a bit of a vanilla backwards compatibility break in VEF's MVCF Ranged Hediffs.
      * Namely, them making all hediffs capable of being ranged.
-     * This only runs 
      */
-    [HarmonyPatch(typeof(MVCF.Utilities.VerbManagerUtility), "AddVerbs", new Type[] { typeof(MVCF.VerbManager), typeof(Hediff)})]
     static class SPADEHacksIntoModsInTheNameOfChaos_MVCF_Utilities_VerbManagerUtility_AddVerbs_WithHediff_Patch
         {
         private static Dictionary<string, bool> modCompatDictionary = new Dictionary<string, bool>();

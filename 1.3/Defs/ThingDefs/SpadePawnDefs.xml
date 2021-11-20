@@ -493,6 +493,14 @@
 			</thoughtSettings>
 
 			<relationSettings>
+				<renamer>
+					 <li>
+						<relation>Parent</relation>
+						<label>Creator</label>
+						<femaleLabel>Creator</femaleLabel>
+					 </li>
+				</renamer>
+
 				<relationChanceModifierParent>0</relationChanceModifierParent>
 				<relationChanceModifierSibling>0</relationChanceModifierSibling>
 				<relationChanceModifierChild>0</relationChanceModifierChild>
