@@ -13,7 +13,7 @@ namespace SPADE
         public HediffCompProperties_Joy Props => (HediffCompProperties_Joy)props;
         public override void CompPostTick(ref float severityAdjustment)
             {
-            Pawn.needs.joy.GainJoy(parent.Severity * Props.joyPerTick, Props.joyKind);
+            Pawn.needs?.joy?.GainJoy(parent.Severity * Props.joyPerTick, Props.joyKind);
             }
         }
 

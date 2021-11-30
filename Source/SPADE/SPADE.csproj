@@ -89,6 +89,7 @@
     <Compile Include="SPADE\HediffComps\HediffComp_ChangePartHealth.cs" />
     <Compile Include="SPADE\IngredientValueGetter_Nutrition.cs" />
     <Compile Include="SPADE\Recipe_InstallClashingArtificalPart.cs" />
+    <Compile Include="SPADE\ThinkNode_JobGiver_Idle_NotOnABuilding.cs" />
     <Compile Include="SPADE\Util.cs" />
     <Compile Include="SPADE\Verb_ShootStatic.cs" />
     <None Include=".editorconfig" />
