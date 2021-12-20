@@ -7,8 +7,13 @@ using Verse;
 
 namespace SPADE
     {
+    [StaticConstructorOnStartup]
     public static class Util
         {
+        static Util() 
+            {
+            }
+
         public static bool HasModExtension<T>(this Pawn pawn) where T : DefModExtension
             {
             return pawn.def.HasModExtension<T>() || pawn.kindDef.HasModExtension<T>();
@@ -26,6 +31,5 @@ namespace SPADE
                 }
             return ext;
             }
-
         }
     }

@@ -16,7 +16,7 @@ namespace SPADE
             {
             Traverse.Create(typeof(BackCompatibility)).Field<List<BackCompatibilityConverter>>("conversionChain").Value.Add(new BackCompatibilityConverter_SPADE());
             Log.Message("SPADE back compat:");
-            Log.Message(Traverse.Create(typeof(BackCompatibility)).Field<List<BackCompatibilityConverter>>("conversionChain").Value.ToStringSafeEnumerable()); ;
+            Log.Message(Traverse.Create(typeof(BackCompatibility)).Field<List<BackCompatibilityConverter>>("conversionChain").Value.ToStringSafeEnumerable());
             }
         }
     public class BackCompatibilityConverter_SPADE : BackCompatibilityConverter

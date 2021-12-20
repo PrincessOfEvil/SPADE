@@ -11,4 +11,8 @@ namespace SPADE
         {
         public DefExtension_DoesNotNeedCaravanRest() { }
         }
+    public class DefExtension_MaybeMechanoid : DefModExtension
+        {
+        public DefExtension_MaybeMechanoid() { }
+        }
     }

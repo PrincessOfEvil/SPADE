@@ -28,7 +28,7 @@ namespace SPADE
             //Targeting lambdas by name, yeah, yeah.
             var healthAI_bestMed_anon_original = AccessTools.FirstMethod(
                 AccessTools.FirstInner(typeof(HealthAIUtility), inner => inner.GetField("patient") != null),
-                method => method.Name.Contains("b__1")); ;
+                method => method.Name.Contains("b__1"));
 
             var healthAI_bestMed_anon_postfix = typeof(SPADE_HealthAIUtility_FindBestMedicine_Anon_Patch).GetMethod("Postfix", AccessTools.all);
 
@@ -140,6 +140,16 @@ namespace SPADE
             }
         }
 
+    [HarmonyPatch(typeof(PawnCapacityDef), "GetLabelFor", new Type[] { typeof(Pawn) })]
+    static class SPADE_PawnCapacityDef_GetLabelFor_Patch
+        {
+        static string Postfix(string ret, Pawn pawn, PawnCapacityDef __instance)
+            {
+            if (pawn.HasModExtension<DefExtension_MaybeMechanoid>() && !__instance.labelMechanoids.NullOrEmpty())
+                return __instance.labelMechanoids;
+            return ret;
+            }
+        }
 
     [HarmonyPatch(typeof(JobDriver_BeatFire), "MakeNewToils")]
     static class SPADE_JobDriver_BeatFire_MakeNewToils_Patch
