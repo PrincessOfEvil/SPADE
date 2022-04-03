@@ -217,14 +217,14 @@
 			<damageAmountBase>1</damageAmountBase>
 			<stoppingPower>2</stoppingPower>
 			<speed>100</speed>
-		<extraDamages>
-			<li>
-				<def>Flame</def>
-				<amount>5</amount>
-				<chance>0.3</chance>
-				<armorPenetration>0</armorPenetration>
-		</li>
-		</extraDamages>
+			<extraDamages>
+				<li>
+					<def>Flame</def>
+					<amount>5</amount>
+					<chance>0.3</chance>
+					<armorPenetration>0</armorPenetration>
+				</li>
+			</extraDamages>
 		</projectile>
 	</ThingDef>
 
