@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="PatchTestingGround.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SPADE\Bullet_Laser.cs" />
     <Compile Include="SPADE\Bullet_Tranq.cs" />
     <Compile Include="SPADE\BackCompatibilityConverter_SPADE.cs" />
     <Compile Include="SPADE\CompTargetEffect_FixWorstHealthCondition.cs" />

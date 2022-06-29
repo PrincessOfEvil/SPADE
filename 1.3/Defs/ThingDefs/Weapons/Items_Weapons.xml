@@ -155,16 +155,19 @@
 	</ThingDef>
 	<ThingDef ParentName="BaseBullet">
 		<defName>spade_Bullet_ChargeRifleBattle</defName>
+		<thingClass>SPADE.Bullet_Laser</thingClass>
 		<label>charge shot</label>
 		<graphicData>
-			<texPath>Things/Projectile/Charge_Small</texPath>
+			<texPath>UI/Overlays/ThickLine</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
+			<color>(255, 64, 64)</color>
+			<drawSize>(0.2, 0.5)</drawSize>
 		</graphicData>
 		<projectile>
 			<damageDef>Bullet</damageDef>
 			<damageAmountBase>23</damageAmountBase>
 			<armorPenetrationBase>0.35</armorPenetrationBase>
-			<speed>70</speed>
+			<speed>7</speed>
 		</projectile>
 	</ThingDef>
 
