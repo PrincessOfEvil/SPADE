@@ -155,7 +155,7 @@
 		<comps>
 			<li Class="SPADE.HediffCompProperties_ChangePartHealth">
 				<compClass>SPADE.HediffComp_ChangePartHealth</compClass>
-				<health>-30</health>
+				<health>-120</health>
 			</li>
 		</comps>
 		<spawnThingOnRemoved>SpadeWheels</spawnThingOnRemoved>
@@ -227,7 +227,7 @@
 		<comps>
 			<li Class="SPADE.HediffCompProperties_ChangePartHealth">
 				<compClass>SPADE.HediffComp_ChangePartHealth</compClass>
-				<health>-40</health>
+				<health>-145</health>
 			</li>
 			<li>
 				<compClass>SPADE.HediffComp_IgnoresTerrain</compClass>
@@ -242,7 +242,7 @@
 	<ThingDef ParentName="BodyPartSpadeBase">
 		<defName>SpadeHover</defName>
 		<label>spade hover pad</label>
-		<description>A set of hover pads. Slightly faster than default threads, and doesn't slow down on terrain, but cannot carry anything heavier than dry tissue paper.</description>
+		<description>A set of hover pads. Slightly faster than default threads, and doesn't slow down on any terrain, but cannot carry anything heavier than dry tissue paper, and are extremely delicate.</description>
 		<descriptionHyperlinks><RecipeDef>InstallSpadeHover</RecipeDef></descriptionHyperlinks>
 		<costList>
 			<Plasteel>30</Plasteel>
@@ -298,7 +298,7 @@
 			</li>
 			<li Class="SPADE.HediffCompProperties_ChangePartHealth">
 				<compClass>SPADE.HediffComp_ChangePartHealth</compClass>
-				<health>-40</health>
+				<health>-170</health>
 			</li>
 		</comps>
 		<spawnThingOnRemoved>SpadeCleaner</spawnThingOnRemoved>

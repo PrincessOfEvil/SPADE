@@ -24,7 +24,7 @@ namespace SPADE
 		public override void Draw()
 			{
 			if (mat == null)
-				mat =  def.graphic.MatSingle;
+				mat = new Material(def.graphic.MatSingle);
 			mat.color = mat.color.ToTransparent(GenMath.InverseParabola(def.graphicData.drawSize.y * ticksToImpact / def.projectile.speed));
 			GenDraw.DrawLineBetween(origin, destination, mat, def.graphicData.drawSize.x);
 			base.Comps_PostDraw();

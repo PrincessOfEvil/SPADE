@@ -1,0 +1,48 @@
+	Torso	40
+		Ribcage	30
+		Sternum	20
+		Pelvis	25
+		Spine	25
+		Stomach	20
+		Heart	15
+		Lung	15x2
+		Kidney	15x2
+		Liver	20
+		Neck	25	159
+			Head	25	134
+				Skull	25	35
+					Brain	10
+				Eye		10x2	20
+				Ear		12x2	24
+				Nose	10		
+				Jaw		20		
+					Tongue -
+	2x:	320
+		Shoulder	30	160
+			Clavicle	25
+			Arm			30	105
+				Humerus		25
+				Radius		20
+				Hand		20	60
+					Finger		8x5	40
+		Waist -
+	2x:	290
+		Leg	30	145
+			Femur	25	
+			Tibia	25	
+			Foot	25	65
+				Toe		8x5	40
+
+	SPADE_Casing	60
+		SPADE_Manipulator	30	
+		SPADE_Engine		40	BloodPumpingSource
+		SPADE_Transmission	30	BloodFiltrationLiver
+		SPADE_Biogenerator	20	MetabolismSource
+		SPADE_Battery		15	BreathingSource
+		SPADE_Controller	10	ConsciousnessSource
+		SPADE_Augmentation	-x4	
+		SPADE_LightSensor	10	SightSource
+		SPADE_Antenna		12	HearingSource,TalkingSource
+		SPADE_Suspension	-	
+		SPADE_Actuator		60	
+	

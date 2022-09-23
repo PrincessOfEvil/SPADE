@@ -13,11 +13,11 @@
 			</groups>
 			<parts>
 				<li>
-			  		<def>SPADE_Manipulator</def>
-			  		<coverage>0.1848</coverage>
-			  		<groups>
-			  			<li>SPADE_Manipulators</li>
- 					</groups>
+					<def>SPADE_Manipulator</def>
+					<coverage>0.1848</coverage>
+					<groups>
+						<li>SPADE_Manipulators</li>
+					</groups>
 				</li>
 				<li>
 					<def>SPADE_Engine</def>
@@ -52,13 +52,23 @@
 					</groups>
 				</li>
 				<li>
-					<def>SPADE_Controller</def>
-					<coverage>0.00864</coverage>
+					<def>SPADE_ControllerCasing</def>
+					<coverage>0.0216</coverage>
 					<depth>Inside</depth>
 					<groups>
 						<li>SPADE_Casings</li>
 					</groups>
+					<parts>
+						<li>
+							<def>SPADE_Controller</def>
+							<coverage>0.4</coverage>
+							<groups>
+								<li>SPADE_Casings</li>
+							</groups>
+						</li>
+					</parts>
 				</li>
+
 				<li>
 					<def>SPADE_Augmentation</def>
 					<customLabel>left front augment slot</customLabel>
@@ -95,12 +105,23 @@
 						<li>SPADE_Augmentations</li>
 					</groups>
 				</li>
+
 				<li>
-					<def>SPADE_LightSensor</def>
-					<coverage>0.000756</coverage>
+					<def>SPADE_ControllerCasing</def>
+					<coverage>0.00252</coverage>
+					<depth>Inside</depth>
 					<groups>
 						<li>SPADE_Casings</li>
 					</groups>
+					<parts>
+						<li>
+							<def>SPADE_LightSensor</def>
+							<coverage>0.3</coverage>
+							<groups>
+								<li>SPADE_Casings</li>
+							</groups>
+						</li>
+					</parts>
 				</li>
 				<li>
 					<def>SPADE_Antenna</def>
@@ -145,7 +166,7 @@
 	<BodyPartDef>
 		<defName>SPADE_Engine</defName>
 		<label>engine</label>
-		<hitPoints>40</hitPoints>
+		<hitPoints>75</hitPoints>
 		<skinCovered>false</skinCovered>
 
 		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
@@ -160,7 +181,7 @@
 	<BodyPartDef>
 		<defName>SPADE_Transmission</defName>
 		<label>transmission</label>
-		<hitPoints>30</hitPoints>
+		<hitPoints>70</hitPoints>
 		<skinCovered>false</skinCovered>
 
 		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
@@ -175,7 +196,7 @@
 	<BodyPartDef>
 		<defName>SPADE_Battery</defName>
 		<label>battery</label>
-		<hitPoints>15</hitPoints>
+		<hitPoints>30</hitPoints>
 		<skinCovered>false</skinCovered>
 
 		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
@@ -190,7 +211,7 @@
 	<BodyPartDef>
 		<defName>SPADE_Biogenerator</defName>
 		<label>biogenerator</label>
-		<hitPoints>20</hitPoints>
+		<hitPoints>50</hitPoints>
 		<skinCovered>false</skinCovered>
 
 		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
@@ -202,9 +223,23 @@
 	</BodyPartDef>
 
 	<BodyPartDef>
+		<defName>SPADE_ControllerCasing</defName>
+		<label>controller casing</label>
+		<hitPoints>50</hitPoints>
+		<skinCovered>false</skinCovered>
+
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<solid>true</solid>
+		<bleedRate>0</bleedRate>
+		<destroyableByDamage>false</destroyableByDamage>
+
+		<canSuggestAmputation>false</canSuggestAmputation>
+	</BodyPartDef>
+
+	<BodyPartDef>
 		<defName>SPADE_Controller</defName>
 		<label>controller</label>
-		<hitPoints>10</hitPoints>
+		<hitPoints>20</hitPoints>
 		<skinCovered>false</skinCovered>
 
 		<permanentInjuryChanceFactor>9999999</permanentInjuryChanceFactor>
@@ -212,8 +247,22 @@
 		<bleedRate>0</bleedRate>
 
 		<tags>
-	   		<li>ConsciousnessSource</li>
+		 	<li>ConsciousnessSource</li>
 		</tags>
+		<canSuggestAmputation>false</canSuggestAmputation>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>SPADE_SensorCage</defName>
+		<label>sensor cage</label>
+		<hitPoints>35</hitPoints>
+		<skinCovered>false</skinCovered>
+
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<solid>true</solid>
+		<bleedRate>0</bleedRate>
+		<destroyableByDamage>false</destroyableByDamage>
+
 		<canSuggestAmputation>false</canSuggestAmputation>
 	</BodyPartDef>
 
@@ -237,7 +286,7 @@
 	<BodyPartDef>
 		<defName>SPADE_Antenna</defName>
 		<label>antenna</label>
-		<hitPoints>12</hitPoints>
+		<hitPoints>42</hitPoints>
 		<skinCovered>false</skinCovered>
 		<socketed>true</socketed>
 
@@ -247,7 +296,7 @@
 		<bleedRate>0</bleedRate>
 
 		<tags>
-	  		<li>HearingSource</li>
+			<li>HearingSource</li>
 			<li>TalkingSource</li>
 			<li>Tongue</li>
 		</tags>
@@ -262,7 +311,7 @@
 	<BodyPartDef>
 		<defName>SPADE_Actuator</defName>
 		<label>actuator</label>
-		<hitPoints>60</hitPoints>
+		<hitPoints>320</hitPoints>
 		<skinCovered>true</skinCovered>
 		<solid>true</solid>
 
@@ -279,7 +328,7 @@
 	<BodyPartDef>
 		<defName>SPADE_Manipulator</defName>
 		<label>manipulator</label>
-		<hitPoints>30</hitPoints>
+		<hitPoints>240</hitPoints>
 		<skinCovered>true</skinCovered>
 		<solid>true</solid>
 
@@ -311,13 +360,13 @@
 		<label>utility slot</label>
 		<listOrder>50</listOrder>
 	</BodyPartGroupDef>
-  
+	
 	<BodyPartGroupDef>
 		<defName>SPADE_Actuators</defName>
 		<label>actuators</label>
 		<listOrder>10</listOrder>
 	</BodyPartGroupDef>
-  
+	
 	<BodyPartGroupDef>
 		<defName>SPADE_Manipulators</defName>
 		<label>manipulators</label>
