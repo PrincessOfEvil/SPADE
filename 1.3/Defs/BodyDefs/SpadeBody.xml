@@ -14,7 +14,7 @@
 			<parts>
 				<li>
 					<def>SPADE_Manipulator</def>
-					<coverage>0.1848</coverage>
+					<coverage>0.24</coverage>
 					<groups>
 						<li>SPADE_Manipulators</li>
 					</groups>
@@ -107,8 +107,8 @@
 				</li>
 
 				<li>
-					<def>SPADE_ControllerCasing</def>
-					<coverage>0.00252</coverage>
+					<def>SPADE_SensorCage</def>
+					<coverage>0.028</coverage>
 					<depth>Inside</depth>
 					<groups>
 						<li>SPADE_Casings</li>
@@ -125,7 +125,7 @@
 				</li>
 				<li>
 					<def>SPADE_Antenna</def>
-					<coverage>0.000756</coverage>
+					<coverage>0.0084</coverage>
 					<groups>
 						<li>SPADE_Casings</li>
 					</groups>

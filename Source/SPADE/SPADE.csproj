@@ -86,6 +86,7 @@
     <Compile Include="SPADE\CompTargetable_SinglePawn_HasExt.cs" />
     <Compile Include="SPADE\DefExts\DefExtension_CarryOffsets.cs" />
     <Compile Include="SPADE\DefExts\DefExtension_MiscFlags.cs" />
+    <Compile Include="SPADE\HarmonyPatches_MaybeMechanoid.cs" />
     <Compile Include="SPADE\HediffComps\HediffComp_Skill.cs" />
     <Compile Include="SPADE\HediffGiver_IngoresResSickness.cs" />
     <Compile Include="SPADE\DefExts\DefExtension_NonStandardMedicine.cs" />

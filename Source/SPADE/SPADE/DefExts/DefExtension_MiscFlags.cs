@@ -15,4 +15,6 @@ namespace SPADE
         {
         public DefExtension_MaybeMechanoid() { }
         }
+
+    public class RaceProperties_MaybeMechanoid : RaceProperties { }
     }

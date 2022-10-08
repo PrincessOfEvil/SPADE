@@ -40,7 +40,7 @@
 			<spade_CaravanCarryingCapacityFactor>2.5</spade_CaravanCarryingCapacityFactor>
 		</statBases>
 
-		<race>
+		<race Class="SPADE.RaceProperties_MaybeMechanoid">
 			<thinkTreeMain>SpadeThinkTree</thinkTreeMain>
 			<thinkTreeConstant>SpadeConstant</thinkTreeConstant>
 			<nameGenerator>SPADEAtlasStandard</nameGenerator>

@@ -4,6 +4,7 @@ using RimWorld.Planet;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -140,16 +141,6 @@ namespace SPADE
             }
         }
 
-    [HarmonyPatch(typeof(PawnCapacityDef), "GetLabelFor", new Type[] { typeof(Pawn) })]
-    static class SPADE_PawnCapacityDef_GetLabelFor_Patch
-        {
-        static string Postfix(string ret, Pawn pawn, PawnCapacityDef __instance)
-            {
-            if (pawn.HasModExtension<DefExtension_MaybeMechanoid>() && !__instance.labelMechanoids.NullOrEmpty())
-                return __instance.labelMechanoids;
-            return ret;
-            }
-        }
 
     [HarmonyPatch(typeof(JobDriver_BeatFire), "MakeNewToils")]
     static class SPADE_JobDriver_BeatFire_MakeNewToils_Patch
@@ -180,6 +171,7 @@ namespace SPADE
     static class SPADE_FoodTypeFlagsExtension_ToHumanString_Patch
         {
         // 2^23
+        // Keeping it a calculated constant for copypasting reasons.
         private const int JetFuel = 8388608;
         static string Postfix(string ret, FoodTypeFlags ft)
             {
