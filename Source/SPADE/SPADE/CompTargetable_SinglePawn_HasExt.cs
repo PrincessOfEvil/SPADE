@@ -14,17 +14,16 @@ namespace SPADE
 			{
 			return new TargetingParameters
 				{
-				canTargetPawns = false,
-				canTargetBuildings = false,
-				canTargetItems = true,
+				canTargetPawns                       = false,
+				canTargetBuildings                   = false,
+				canTargetItems                       = true,
 				mapObjectTargetsMustBeAutoAttackable = false,
-				validator = ((TargetInfo x) => x.Thing is Corpse && BaseTargetValidator(x.Thing) && localValidator(x.Thing))
+				validator                            = ( x => x.Thing is Corpse && BaseTargetValidator(x.Thing) && localValidator(x.Thing))
 				};
 			}
 		protected bool localValidator(Thing thing)
 			{
-			Corpse corpse = thing as Corpse;
-			if (corpse != null)
+			if (thing is Corpse corpse)
 				{
 				return corpse.InnerPawn.HasModExtension<DefExtension_SPADE_Resurrectable>();
 				}
@@ -33,13 +32,10 @@ namespace SPADE
 		public override bool CanBeUsedBy(Pawn p, out string failReason)
 			{
 			failReason = null;
-			if (p.skills.GetSkill(DefDatabase<SkillDef>.GetNamed("Crafting")).Level < 8)
-				{
-				failReason = "LackingSufficientCraftingSkill".Translate();
+			if (p.skills.GetSkill(DefDatabase<SkillDef>.GetNamed("Crafting")).Level >= 8) return true;
+			failReason = "LackingSufficientCraftingSkill".Translate();
 
-				return false;
-				}
-			return true;
+			return false;
 			}
 		}
 	public class DefExtension_SPADE_Resurrectable : DefModExtension
@@ -53,15 +49,14 @@ namespace SPADE
 			{
 			return new TargetingParameters
 				{
-				canTargetPawns = true,
+				canTargetPawns     = true,
 				canTargetBuildings = false,
-				validator = ((TargetInfo x) => BaseTargetValidator(x.Thing) && localValidator(x.Thing))
+				validator          = ( x => BaseTargetValidator(x.Thing) && localValidator(x.Thing))
 				};
 			}
 		protected bool localValidator(Thing thing)
 			{
-			Pawn pawn = thing as Pawn;
-			if (pawn != null)
+			if (thing is Pawn pawn)
 				{
 				return pawn.HasModExtension<DefExtension_Repairable>();
 				}
@@ -70,13 +65,10 @@ namespace SPADE
 		public override bool CanBeUsedBy(Pawn p, out string failReason)
 			{
 			failReason = null;
-			if (p.skills.GetSkill(DefDatabase<SkillDef>.GetNamed("Crafting")).Level < 4)
-				{
-				failReason = "LackingSufficientCraftingSkill".Translate();
+			if (p.skills.GetSkill(DefDatabase<SkillDef>.GetNamed("Crafting")).Level >= 4) return true;
+			failReason = "LackingSufficientCraftingSkill".Translate();
 
-				return false;
-				}
-			return true;
+			return false;
 			}
 		}
 	public class DefExtension_Repairable : DefModExtension

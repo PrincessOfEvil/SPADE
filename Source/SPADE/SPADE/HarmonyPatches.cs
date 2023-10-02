@@ -12,6 +12,12 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+// ReSharper disable ArrangeTypeModifiers
+// ReSharper disable ArrangeTypeMemberModifiers
+// ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedType.Global
+// ReSharper disable SuggestBaseTypeForParameter
+// ReSharper disable UnusedParameter.Local
 
 namespace SPADE
     {
@@ -26,7 +32,8 @@ namespace SPADE
             Log.Message("SPADE patching...");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
-            //Targeting lambdas by name, yeah, yeah.
+            // Targeting lambdas by name, yeah, yeah.
+            // Two versions and i still have to do this, by the way.
             var healthAI_bestMed_anon_original = AccessTools.FirstMethod(
                 AccessTools.FirstInner(typeof(HealthAIUtility), inner => inner.GetField("patient") != null),
                 method => method.Name.Contains("b__1"));
@@ -35,13 +42,13 @@ namespace SPADE
 
             harmony.Patch(healthAI_bestMed_anon_original, postfix: new HarmonyMethod(healthAI_bestMed_anon_postfix));
 
-
+            /*
             var vmu = AccessTools.TypeByName("MVCF.Utilities.VerbManagerUtility");
             if (vmu != null)
                 {
                 var method = AccessTools.Method(vmu, "AddVerbs", new Type[] { AccessTools.TypeByName("MVCF.VerbManager"), typeof(Hediff) });
                 harmony.Patch(method, prefix: new HarmonyMethod(typeof(SPADEHacksIntoModsInTheNameOfChaos_MVCF_Utilities_VerbManagerUtility_AddVerbs_WithHediff_Patch).GetMethod("Prefix", AccessTools.all)));
-                }
+                }*/
             }
 
         /*
@@ -83,7 +90,8 @@ namespace SPADE
     /* 
      * This patch removes a bit of a vanilla backwards compatibility break in VEF's MVCF Ranged Hediffs.
      * Namely, them making all hediffs capable of being ranged.
-     */
+     * I am leaving this here as a monument to VEF not being a true framework.
+     * 
     static class SPADEHacksIntoModsInTheNameOfChaos_MVCF_Utilities_VerbManagerUtility_AddVerbs_WithHediff_Patch
         {
         private static Dictionary<string, bool> modCompatDictionary = new Dictionary<string, bool>();
@@ -93,7 +101,7 @@ namespace SPADE
             /*
              * ...it would get ignored anyway and i'm sparing a couple cycles.
              * Checking for self for any 'lets just block them out and ignore it lul' shenanigans.
-             */
+             * /
             if (MVCF.Base.IsIgnoredMod(mod) && mod != "SPADE") return false;
 
             var comp = hediff.TryGetComp<HediffComp_VerbGiver>();
@@ -140,15 +148,15 @@ namespace SPADE
             return value;
             }
         }
-
+    */
 
     [HarmonyPatch(typeof(JobDriver_BeatFire), "MakeNewToils")]
     static class SPADE_JobDriver_BeatFire_MakeNewToils_Patch
         {
         static IEnumerable<Toil> Postfix(IEnumerable<Toil> ret, JobDriver_BeatFire __instance)
             {
-            var input = __instance.pawn.health.hediffSet.GetAllComps().FirstOrFallback(hediff => hediff is HediffComp_VerbGiver diff && !diff.VerbProperties.NullOrEmpty() && diff.VerbProperties.Any(props => props.category == VerbCategory.BeatFire)) as HediffComp_VerbGiver;
-            if (input != null)
+            if (__instance.pawn.health.hediffSet.GetAllComps().FirstOrFallback(hediff => hediff is HediffComp_VerbGiver diff && !diff.VerbProperties.NullOrEmpty()
+                                                                                                                            && diff.VerbProperties.Any(props => props.category == VerbCategory.BeatFire)) is HediffComp_VerbGiver input)
                 return iterator(input, __instance);
 
             else return ret;
@@ -175,29 +183,12 @@ namespace SPADE
         private const int JetFuel = 8388608;
         static string Postfix(string ret, FoodTypeFlags ft)
             {
-            if (!Harmony.HasAnyPatches("twoscythe.shipgirls") && ((int)ft & JetFuel) != 0)
+            if (Harmony.HasAnyPatches("twoscythe.shipgirls") || ((int) ft & JetFuel) == 0) return ret;
+            if (ret.Length > 0)
                 {
-                if (ret.Length > 0)
-                    {
-                    ret += ", ";
-                    }
-                ret += "FoodTypeFlags_JetFuel".Translate();
+                ret += ", ";
                 }
-
-            return ret;
-            }
-        }
-
-    [HarmonyPatch(typeof(Caravan), "get_NightResting")]
-    static class SPADE_Caravan_get_NightResting_Patch
-        {
-        static bool Postfix(bool ret, Caravan __instance)
-            {
-            if (ret) 
-                {
-                if (!__instance.PawnsListForReading.Where((Pawn p) => !p.HasModExtension<DefExtension_DoesNotNeedCaravanRest>()).Any())
-                    return false;
-                }
+            ret += "FoodTypeFlags_JetFuel".Translate();
 
             return ret;
             }
@@ -228,8 +219,7 @@ namespace SPADE
             }
         private static void ensureInit()
             {
-            if (def == null)
-                def = DefDatabase<StatDef>.GetNamed("spade_CaravanCarryingCapacityFactor");
+            def ??= DefDatabase<StatDef>.GetNamed("spade_CaravanCarryingCapacityFactor");
             }
         }
 
@@ -263,44 +253,37 @@ namespace SPADE
     [HarmonyPatch(typeof(PawnRenderer), "DrawEquipmentAiming")]
     static class SPADE_PawnRenderer_DrawEquipmentAiming_Patch 
         {
-        static void Prefix(Thing eq, ref Vector3 drawLoc, ref float aimAngle, Pawn ___pawn, PawnRenderer __instance)
+        static void Prefix(Thing eq, ref Vector3 drawLoc, ref float aimAngle, Pawn ___pawn)
             {
             var defExt = ___pawn.GetModExtension<DefExtension_CarriesWeaponStraight>();
-            if (defExt != null)
-                {
-                Stance_Busy stance_Busy = ___pawn.stances.curStance as Stance_Busy;
-                if (!(stance_Busy != null && !stance_Busy.neverAimWeapon && stance_Busy.focusTarg.IsValid))
-                    {
-                    aimAngle = ___pawn.Rotation.AsAngle;
+            if (defExt == null) return;
+            if (___pawn.stances.curStance is Stance_Busy {neverAimWeapon: false, focusTarg.IsValid: true }) return;
+            aimAngle = ___pawn.Rotation.AsAngle;
 
-                    if (defExt.offsets != null)
-                        {
-                        drawLoc += defExt.offsets.GetFor(___pawn.Rotation);
-                        }
-                    }
+            if (defExt.offsets != null)
+                {
+                drawLoc += defExt.offsets.GetFor(___pawn.Rotation);
                 }
             }
         }
 
-    [HarmonyPatch(typeof(EquipmentUtility), "CanEquip", new Type[] { typeof(Thing), typeof(Pawn), typeof(string), typeof(bool) }, new ArgumentType[] { ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Out, ArgumentType.Normal})]
+    [HarmonyPatch(typeof(EquipmentUtility), "CanEquip", new [] { typeof(Thing), typeof(Pawn), typeof(string), typeof(bool) }, new [] { ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Out, ArgumentType.Normal})]
     static class SPADE_EquipmentUtility_CanEquip_Patch
         {
         static bool Postfix(bool ret, Thing thing, Pawn pawn, ref string cantReason, bool checkBonded)
             {
-            if (cantReason is null)
+            if (cantReason is not null) return ret;
+            if (thing.def.IsMeleeWeapon && pawn.health.hediffSet.GetAllComps().Any(comp => comp is HediffComp_CannotUseMelee))
+                {   
+                cantReason = "CannotEquipMeleeWeapons".Translate();
+
+                return false;
+                }
+            if (thing.def.IsRangedWeapon && pawn.health.hediffSet.GetAllComps().Any(comp => comp is HediffComp_CannotUseRanged))
                 {
-                if (thing.def.IsMeleeWeapon && pawn.health.hediffSet.GetAllComps().Any(comp => { return comp is HediffComp_CannotUseMelee; }))
-                    {   
-                    cantReason = "CannotEquipMeleeWeapons".Translate();
+                cantReason = "CannotEquipRangedWeapons".Translate();
 
-                    return false;
-                    }
-                if (thing.def.IsRangedWeapon && pawn.health.hediffSet.GetAllComps().Any(comp => { return comp is HediffComp_CannotUseRanged; }))
-                    {
-                    cantReason = "CannotEquipRangedWeapons".Translate();
-
-                    return false;
-                    }
+                return false;
                 }
             return ret;
             }
@@ -332,20 +315,18 @@ namespace SPADE
                 }
             */
 
-            if (ret)
+            if (!ret) return false;
+            if (DebugViewSettings.logTutor)
                 {
-                if (DebugViewSettings.logTutor)
-                    {
-                    Log.Message("entered the anon patch");
-                    }
-
-                var defext = ___patient.GetModExtension<DefExtension_NonStandardMedicine>();
-                if (defext != null && !m.def.thingCategories.Contains(defext.medicine))
-                    return false;
-                if (defext == null && m.TryGetComp<Comp_NonStandardMedicine>() != null)
-                    return false;
+                Log.Message("entered the anon patch");
                 }
-            return ret;
+
+            var defext = ___patient.GetModExtension<DefExtension_NonStandardMedicine>();
+            if (defext != null && !m.def.thingCategories.Contains(defext.medicine))
+                return false;
+            if (defext == null && m.TryGetComp<Comp_NonStandardMedicine>() != null)
+                return false;
+            return true;
             }
         }
 
@@ -354,7 +335,7 @@ namespace SPADE
         {
         static float Postfix(float ret, Pawn pawn, BodyPartDef __instance)
             {
-            return Mathf.CeilToInt(ret + pawn.health.hediffSet.GetAllComps().Where(hediff => { return hediff is HediffComp_ChangePartHealth && hediff.parent.Part.def == __instance; }).Cast<HediffComp_ChangePartHealth>().Sum(hediff => { return hediff.Props.health; }) * pawn.HealthScale);
+            return Mathf.CeilToInt(ret + pawn.health.hediffSet.GetAllComps().Where(hediff => hediff is HediffComp_ChangePartHealth && hediff.parent.Part.def == __instance).Cast<HediffComp_ChangePartHealth>().Sum(hediff => hediff.Props.health) * pawn.HealthScale);
             }
         }
     [HarmonyPatch(typeof(Pawn_StoryTracker), "get_DisabledWorkTagsBackstoryAndTraits")]
@@ -362,7 +343,7 @@ namespace SPADE
         {
         static WorkTags Postfix(WorkTags ret, Pawn ___pawn)
             {
-            return ret & (WorkTags)___pawn.health.hediffSet.GetAllComps().Where(hediff => { return hediff is HediffComp_EnableWorkTypes; }).Cast<HediffComp_EnableWorkTypes>().Sum(hediff => { return (int)hediff.Props.workTags; });
+            return ret & (WorkTags)___pawn.health.hediffSet.GetAllComps().Where(hediff => hediff is HediffComp_EnableWorkTypes).Cast<HediffComp_EnableWorkTypes>().Sum(hediff => (int)hediff.Props.workTags);
             }
         }
     [HarmonyPatch(typeof(Pawn), "GetDisabledWorkTypes")]
@@ -370,11 +351,11 @@ namespace SPADE
         {
         static List<WorkTypeDef> Postfix(List<WorkTypeDef> ret, Pawn __instance)
             {
-            IEnumerable<HediffComp_EnableWorkTypes> list = __instance.health.hediffSet.GetAllComps().Where(hediff => { return hediff is HediffComp_EnableWorkTypes; }).Cast<HediffComp_EnableWorkTypes>();
-            int allowedTags = list.Sum(hediff => { return (int)hediff.Props.workTags; });
+            var list        = __instance.health.hediffSet.GetAllComps().Where(hediff => hediff is HediffComp_EnableWorkTypes).Cast<HediffComp_EnableWorkTypes>().ToList();
+            int allowedTags = list.Aggregate(0, (acc, hediff) => (int)hediff.Props.workTags | acc);
             return ret.Except(
-                    list.SelectMany(hediff => { return hediff.Props.workTypes; }))
-                .Where(work => { return (allowedTags & (int)work.workTags) == 0; })
+                    list.SelectMany(hediff => hediff.Props.workTypes))
+                .Where(work => (allowedTags & (int)work.workTags) == 0)
                 .ToList();
             }
         }
@@ -383,17 +364,14 @@ namespace SPADE
         {
         static int Postfix(int ret, Pawn pawn, IntVec3 c)
             {
-            if (pawn.health.hediffSet.GetAllComps().Where(hediff => { return hediff is HediffComp_IgnoresTerrain; }).Any())
-                {
-                int i = (c.x != pawn.Position.x && c.z != pawn.Position.z) ? pawn.TicksPerMoveDiagonal : pawn.TicksPerMoveCardinal;
+            if (!pawn.health.hediffSet.GetAllComps().Any(hediff => hediff is HediffComp_IgnoresTerrain)) return ret;
+            int i = (c.x != pawn.Position.x && c.z != pawn.Position.z) ? pawn.TicksPerMoveDiagonal : pawn.TicksPerMoveCardinal;
 
-                if (pawn.CurJob != null && pawn.jobs.curJob.locomotionUrgency == LocomotionUrgency.Sprint)
-                    i = Mathf.RoundToInt((float)i * 0.75f); ;
+            if (pawn.CurJob != null && pawn.jobs.curJob.locomotionUrgency == LocomotionUrgency.Sprint)
+                i = Mathf.RoundToInt(i * 0.75f);
 
-                return i;
-                }
+            return i;
 
-            return ret;
             }
         }
     }

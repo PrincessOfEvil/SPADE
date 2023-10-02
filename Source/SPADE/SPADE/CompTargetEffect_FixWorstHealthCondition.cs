@@ -51,7 +51,6 @@ namespace SPADE
 			toil.FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
 			yield return toil;
 			yield return Toils_General.Do(Execute);
-			yield break;
 			}
 
 		public void Execute()

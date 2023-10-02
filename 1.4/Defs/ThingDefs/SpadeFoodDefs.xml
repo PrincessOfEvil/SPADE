@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThingDef ParentName="MealBase">
+		<defName>spade_Biofuel</defName>
+		<label>biofuel</label>
+		<description>Specifically prepared chemfuel-fat mix, designed to fool robotic sensors into thinking it's edible.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/Chemfuel</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.85</drawSize>
+			<color>(118,169,189)</color>
+		</graphicData>
+		<statBases>
+			<MarketValue>10</MarketValue>
+			<Nutrition>0.2</Nutrition>
+		</statBases>
+		<stackLimit>150</stackLimit>
+		<thingCategories>
+			<li>Manufactured</li>
+		</thingCategories>
+		<ingestible>
+			<foodType>8388608</foodType>
+			<preferability>MealAwful</preferability>
+			<ateEvent>AteNutrientPaste</ateEvent>
+			<ingestEffect>EatVegetarian</ingestEffect>
+			<ingestSound>Ingest_Beer</ingestSound>
+		</ingestible>
+		<tradeability>Buyable</tradeability>
+	</ThingDef>
+	
+	
+	<RecipeDef>
+		<defName>spade_Make_Biofuel</defName>
+		<label>make biofuel</label>
+		<description>Make biofuel by combining animal fat and chemfuel.</description>
+		<jobString>Making biofuel.</jobString>
+
+		<workAmount>200</workAmount>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<effectWorking>Cremate</effectWorking>
+		<soundWorking>Recipe_Cremate</soundWorking>
+		<recipeUsers>
+			<li>BiofuelRefinery</li>
+			<li>Campfire</li>
+			<li>FueledStove</li>
+			<li>ElectricStove</li>
+		</recipeUsers>
+
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<ingredientValueGetterClass>SPADE.IngredientValueGetter_NutritionMixed</ingredientValueGetterClass>
+
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>MeatRaw</li>
+					</categories>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</filter>
+				<count>20</count>
+			</li>
+		</ingredients>
+		<products>
+			<spade_Biofuel>20</spade_Biofuel>
+		</products>
+
+		<fixedIngredientFilter>
+			<categories>
+				<li>MeatRaw</li>
+			</categories>
+			<thingDefs>
+				<li>Chemfuel</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<defaultIngredientFilter>
+			<categories>
+				<li>MeatRaw</li>
+			</categories>
+			<disallowedThingDefs>
+				<li>Meat_Human</li>
+				<li>Meat_Megaspider</li>
+			</disallowedThingDefs>
+			<thingDefs>
+				<li>Chemfuel</li>
+			</thingDefs>
+		</defaultIngredientFilter>
+		<workSkill>Cooking</workSkill>
+	</RecipeDef>
+</Defs>

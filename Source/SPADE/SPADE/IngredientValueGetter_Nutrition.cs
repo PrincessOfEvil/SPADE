@@ -7,11 +7,7 @@ namespace SPADE
 		{
 		public override float ValuePerUnitOf(ThingDef t)
 			{
-			if (!t.IsNutritionGivingIngestible)
-				{
-				return 1f;
-				}
-			return t.GetStatValueAbstract(StatDefOf.Nutrition);
+			return !t.IsNutritionGivingIngestible ? 1f : t.GetStatValueAbstract(StatDefOf.Nutrition);
 			}
 		}
 	}

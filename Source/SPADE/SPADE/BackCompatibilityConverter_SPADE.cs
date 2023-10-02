@@ -32,46 +32,39 @@ namespace SPADE
 
             ret = parseBetterTurretsOverrides(defType, defName);
 
-            if (ret == null)
-                {
-                if (defType == typeof(BodyDef) && defName == "spade_spade")
-                    return "spade_SPADE_Body";
+            if (ret != null) return ret;
+            if (defType == typeof(BodyDef) && defName == "spade_spade")
+                return "spade_SPADE_Body";
 
-                if (defType == typeof(PawnKindDef))
-                    switch (defName)
-                        {
-                        case "spade_SpadeSimplePlayer": return "spade_SPADE_Ranged";
-                        }
+            if (defType == typeof(PawnKindDef))
+                switch (defName)
+                    {
+                    case "spade_SpadeSimplePlayer": return "spade_SPADE_Ranged";
+                    }
 
-                if (defType == typeof(ThingDef))
-                    switch (defName)
-                        {
-                        case "spade_BaseEgg": return "spade_SPADE_Ranged_Spawner";
-                        }
+            if (defType == typeof(ThingDef))
+                switch (defName)
+                    {
+                    case "spade_BaseEgg": return "spade_SPADE_Ranged_Spawner";
+                    }
 
-                if (defType == typeof(ResearchProjectDef))
-                    switch (defName)
-                        {
-                        case "spade_Basic": return "spade_SPADE_Research_Basic";
-                        }
+            if (defType == typeof(ResearchProjectDef))
+                switch (defName)
+                    {
+                    case "spade_Basic": return "spade_SPADE_Research_Basic";
+                    }
 
-                if (defName == "spade_spade")
-                    return "spade_SPADE_Basic";
-                }
-
-            return ret;
+            return defName == "spade_spade" ? "spade_SPADE_Basic" : ret;
             }
 
         public override Type GetBackCompatibleType(Type baseType, string providedClassName, XmlNode node)
             {
-            switch (providedClassName)
+            return providedClassName switch
                 {
-                case "BetterTurrets.Verb_ShootStatic":
-                    return typeof(Verb_ShootStatic);
-                case "BetterTurrets.Bullet_Tranq":
-                    return typeof(Bullet_Tranq);
-                }
-            return null;
+                "BetterTurrets.Verb_ShootStatic" => typeof(Verb_ShootStatic),
+                "BetterTurrets.Bullet_Tranq"     => typeof(Bullet_Tranq),
+                _                                => null
+                };
             }
 
         public override void PostExposeData(object obj)
@@ -80,33 +73,19 @@ namespace SPADE
 
         private string parseBetterTurretsOverrides(Type defType, string defName)
             {
-            if (defType == typeof(ThingDef))
+            if (defType != typeof(ThingDef)) return null;
+            return defName switch
                 {
-                switch (defName)
-                    {
-                    case "BetterTurrets_Gun_BattleRifle":
-                        return "spade_BattleRifle";
-                    case "BetterTurrets_Bullet_BattleRifle":
-                        return "spade_Bullet_BattleRifle";
-
-                    case "BetterTurrets_Gun_BattleRifle_Charge":
-                        return "spade_BattleRifle_Charge";
-                    case "BetterTurrets_Bullet_ChargeRifleBattle":
-                        return "spade_Bullet_ChargeRifleBattle";
-
-
-                    case "BetterTurrets_Apparel_ArcSidearm":
-                        return "spade_ArcSidearm";
-                    case "BetterTurrets_Bullet_Arc":
-                        return "spade_Bullet_Arc";
-
-                    case "BetterTurrets_Apparel_TranqRifle":
-                        return "spade_TranqRifle";
-                    case "BetterTurrets_Bullet_Tranq":
-                        return "spade_Bullet_Tranq";
-                    }
-                }
-            return null;
+                "BetterTurrets_Gun_BattleRifle"          => "spade_BattleRifle",
+                "BetterTurrets_Bullet_BattleRifle"       => "spade_Bullet_BattleRifle",
+                "BetterTurrets_Gun_BattleRifle_Charge"   => "spade_BattleRifle_Charge",
+                "BetterTurrets_Bullet_ChargeRifleBattle" => "spade_Bullet_ChargeRifleBattle",
+                "BetterTurrets_Apparel_ArcSidearm"       => "spade_ArcSidearm",
+                "BetterTurrets_Bullet_Arc"               => "spade_Bullet_Arc",
+                "BetterTurrets_Apparel_TranqRifle"       => "spade_TranqRifle",
+                "BetterTurrets_Bullet_Tranq"             => "spade_Bullet_Tranq",
+                _                                        => null
+                };
             }
         }
     }

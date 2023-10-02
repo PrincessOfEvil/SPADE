@@ -46,7 +46,7 @@ namespace SPADE
 					(map.thingGrid.CellContains(vec, ThingCategory.Plant) ? "a" : " ");
 				map.debugDrawer.FlashCell(vec, text: text, colorPct: String.IsNullOrWhiteSpace(text) ? 0.5f : 0f);
 				}
-			return !(map.thingGrid.CellContains(vec, ThingCategory.Building) || map.thingGrid.CellContains(vec, ThingCategory.Item) || !(map.thingGrid.ThingAt(vec, ThingCategory.Pawn)?.Equals(pawn) ?? true ) || map.thingGrid.CellContains(vec, ThingCategory.Plant)); ;
+			return !(map.thingGrid.CellContains(vec, ThingCategory.Building) || map.thingGrid.CellContains(vec, ThingCategory.Item) || !(map.thingGrid.ThingAt(vec, ThingCategory.Pawn)?.Equals(pawn) ?? true ) || map.thingGrid.CellContains(vec, ThingCategory.Plant));
 			}
 		}
     }

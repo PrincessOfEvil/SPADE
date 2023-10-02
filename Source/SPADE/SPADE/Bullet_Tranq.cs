@@ -13,7 +13,7 @@ namespace SPADE
 	public class Bullet_Tranq : Bullet
 		{
 		//Yay, copypasting vanilla.
-		protected override void Impact(Thing hitThing)
+		protected override void Impact(Thing hitThing, bool blockedByShield = false)
 			{
 			Map map = base.Map;
 			IntVec3 position = base.Position;
@@ -29,7 +29,7 @@ namespace SPADE
 				var anesthetize = false;
 				if (pawn != null && pawn.stances != null && pawn.BodySize <= def.projectile.StoppingPower + 0.001f)
 					{
-					pawn.stances.StaggerFor(95);
+					pawn.stances.stagger.StaggerFor(95);
 					anesthetize = true;
 					}
 				if (def.projectile.extraDamages == null)

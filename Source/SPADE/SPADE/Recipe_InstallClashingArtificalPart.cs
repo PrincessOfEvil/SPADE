@@ -10,12 +10,12 @@ namespace SPADE
     {
 	public class Recipe_InstallClashingArtificalPart : Recipe_InstallArtificialBodyPart
 		{
-		public override IEnumerable<BodyPartRecord> GetPartsToApplyOn(Pawn pawn, RecipeDef recipe)
+		public override IEnumerable<BodyPartRecord> GetPartsToApplyOn(Pawn pawn, RecipeDef recipeDef)
 			{
-			return MedicalRecipesUtility.GetFixedPartsToApplyOn(recipe, pawn, delegate (BodyPartRecord record)
+			return MedicalRecipesUtility.GetFixedPartsToApplyOn(recipeDef, pawn, delegate (BodyPartRecord record)
 				{
-					IEnumerable<Hediff> source = pawn.health.hediffSet.hediffs.Where((Hediff x) => x.Part == record);
-					if (source.Count() == 1 && source.First().def == recipe.addsHediff)
+					IEnumerable<Hediff> source = pawn.health.hediffSet.hediffs.Where( x => x.Part == record).ToList();
+					if (source.Count() == 1 && source.First().def == recipeDef.addsHediff)
 						{
 						return false;
 						}
@@ -23,11 +23,11 @@ namespace SPADE
 						{
 						return false;
 						}
-					if  (pawn.health.hediffSet.hediffs.Any((Hediff x) => !recipe.CompatibleWithHediff(x.def)))
+					if  (pawn.health.hediffSet.hediffs.Any( x => !recipeDef.CompatibleWithHediff(x.def)))
 						{
 						return false;
 						}
-				return (!pawn.health.hediffSet.PartOrAnyAncestorHasDirectlyAddedParts(record) || pawn.health.hediffSet.HasDirectlyAddedPartFor(record)) ? true : false;
+				return !pawn.health.hediffSet.PartOrAnyAncestorHasDirectlyAddedParts(record) || pawn.health.hediffSet.HasDirectlyAddedPartFor(record);
 				});
 			}
 		}

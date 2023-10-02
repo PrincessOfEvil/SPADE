@@ -7,10 +7,6 @@ using Verse;
 
 namespace SPADE
     {
-    public class DefExtension_DoesNotNeedCaravanRest : DefModExtension
-        {
-        public DefExtension_DoesNotNeedCaravanRest() { }
-        }
     public class DefExtension_MaybeMechanoid : DefModExtension
         {
         public DefExtension_MaybeMechanoid() { }

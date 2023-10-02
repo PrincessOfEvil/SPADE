@@ -15,8 +15,6 @@ namespace SPADE
         {
 		protected bool impacted = false;
 
-		protected Action<Bullet> ImpactSomething = AccessTools.MethodDelegate<Action<Bullet>>(AccessTools.Method(typeof(Bullet), "ImpactSomething"));
-
 		private Material mat;
 
 		public override Vector3 ExactPosition => destination.Yto0() + Vector3.up * def.Altitude;
@@ -27,7 +25,7 @@ namespace SPADE
 				mat = new Material(def.graphic.MatSingle);
 			mat.color = mat.color.ToTransparent(GenMath.InverseParabola(def.graphicData.drawSize.y * ticksToImpact / def.projectile.speed));
 			GenDraw.DrawLineBetween(origin, destination, mat, def.graphicData.drawSize.x);
-			base.Comps_PostDraw();
+			Comps_PostDraw();
 			}
 
 		public override void Tick()
@@ -37,10 +35,10 @@ namespace SPADE
 				impacted = true;
 				Position = DestinationCell;
 				ticksToImpact = Mathf.CeilToInt(def.projectile.speed);
-				ImpactSomething(this);
+				ImpactSomething();
 				}
 			this.ticksToImpact--;
-			if (!this.ExactPosition.InBounds(base.Map))
+			if (!this.ExactPosition.InBounds(Map))
 				{
 				ticksToImpact++;
 				Position = ExactPosition.ToIntVec3();

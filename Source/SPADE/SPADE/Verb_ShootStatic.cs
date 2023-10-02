@@ -13,13 +13,10 @@ namespace SPADE
 		public override void WarmupComplete()
 			{
 			base.WarmupComplete();
-			Pawn pawn = currentTarget.Thing as Pawn;
-			if (pawn != null && !pawn.Downed && CasterIsPawn && CasterPawn.skills != null)
-				{
-				float num = pawn.HostileTo(caster) ? 170f : 20f;
-				float num2 = verbProps.AdjustedFullCycleTime(this, CasterPawn);
-				CasterPawn.skills.Learn(SkillDefOf.Shooting, num * num2);
-				}
+			if (currentTarget.Thing is not Pawn {Downed: false } pawn || !CasterIsPawn || CasterPawn.skills == null) return;
+			float num  = pawn.HostileTo(caster) ? 170f : 20f;
+			float num2 = verbProps.AdjustedFullCycleTime(this, CasterPawn);
+			CasterPawn.skills.Learn(SkillDefOf.Shooting, num * num2);
 			}
 
 		protected override bool TryCastShot()

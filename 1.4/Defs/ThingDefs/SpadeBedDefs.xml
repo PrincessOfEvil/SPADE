@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThingDef ParentName="BuildingBase">
+		<defName>spade_SentrySpot</defName>
+		<label>sentry spot</label>
+		<description>Designates a spot on the ground where SPADE drones should stand watch.</description>
+
+		<thingClass>Building_Bed</thingClass>
+		<designationCategory>Furniture</designationCategory>
+
+		<graphicData>
+			<texPath>Buildings/SentrySpot</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<size>(1,1)</size>
+		<uiIconScale>0.80</uiIconScale>
+
+		<statBases>
+			<WorkToBuild>0</WorkToBuild>
+			<SurgerySuccessChanceFactor>0.7</SurgerySuccessChanceFactor>
+		</statBases>
+		<useHitPoints>False</useHitPoints>
+
+		<building>
+			<bed_showSleeperBody>True</bed_showSleeperBody>
+			<sowTag>SupportPlantsOnly</sowTag>
+			<canPlaceOverImpassablePlant>false</canPlaceOverImpassablePlant>
+			<ai_chillDestination>false</ai_chillDestination>
+			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+		</building>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<passability>Standable</passability>
+		<scatterableOnMapGen>false</scatterableOnMapGen>
+		<drawGUIOverlay>True</drawGUIOverlay>
+		<clearBuildingArea>false</clearBuildingArea>
+		<rotatable>false</rotatable>
+
+		<comps>
+			<li Class="CompProperties_AssignableToPawn">
+				<drawAssignmentOverlay>false</drawAssignmentOverlay>
+				<compClass>CompAssignableToPawn_Bed</compClass>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>spade_InspectionPit</defName>
+		<label>inspection pit</label>
+		<description>Literally a pit in the ground that nevertheless makes accessing the underside of the drone much easier.</description>
+
+		<thingClass>Building_Bed</thingClass>
+		<designationCategory>Furniture</designationCategory>
+
+		<graphicData>
+			<texPath>Buildings/InspectionPit</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>Transparent</shaderType>
+		</graphicData>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<size>(1,1)</size>
+		<uiIconScale>0.80</uiIconScale>
+
+		<statBases>
+			<WorkToBuild>800</WorkToBuild>
+			<MedicalTendQualityOffset>0.10</MedicalTendQualityOffset>
+			<SurgerySuccessChanceFactor>1.1</SurgerySuccessChanceFactor>
+		</statBases>
+		<useHitPoints>False</useHitPoints>
+
+		<building>
+			<bed_showSleeperBody>True</bed_showSleeperBody>
+			<bed_defaultMedical>true</bed_defaultMedical>
+			<sowTag>SupportPlantsOnly</sowTag>
+			<canPlaceOverImpassablePlant>false</canPlaceOverImpassablePlant>
+			<ai_chillDestination>false</ai_chillDestination>
+			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+		</building>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<passability>Standable</passability>
+		<scatterableOnMapGen>false</scatterableOnMapGen>
+		<drawGUIOverlay>True</drawGUIOverlay>
+		<constructEffect>ConstructDirt</constructEffect>
+		<terrainAffordanceNeeded>Diggable</terrainAffordanceNeeded>
+
+		<comps>
+			<li Class="CompProperties_AssignableToPawn">
+				<drawAssignmentOverlay>false</drawAssignmentOverlay>
+				<compClass>CompAssignableToPawn_Bed</compClass>
+			</li>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>VitalsMonitor</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+	</ThingDef>
+
+</Defs>

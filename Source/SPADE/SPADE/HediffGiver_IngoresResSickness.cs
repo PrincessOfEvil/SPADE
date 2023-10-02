@@ -11,11 +11,11 @@ namespace SPADE
     public class HediffGiver_IngoresHediffs : HediffGiver
         {
         List<HediffDef> ignoredHediffs = new List<HediffDef>();
-        public override bool OnHediffAdded(Pawn pawn, Hediff hediff)
+        public override bool OnHediffAdded(Pawn pawn, Hediff hed)
             {
-            if (ignoredHediffs.Contains(hediff.def))
+            if (ignoredHediffs.Contains(hed.def))
                 {
-                pawn.health.RemoveHediff(hediff);
+                pawn.health.RemoveHediff(hed);
                 }
             return false;
             }

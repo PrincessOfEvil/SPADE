@@ -24,30 +24,31 @@ namespace SPADE
             }
         }*/
 
-    [HarmonyPatch(typeof(PawnTextureAtlas), "TryGetFrameSet")]
-    static class SPADE_PawnTextureAtlas_TryGetFrameSet_Patch
+    /*
+[HarmonyPatch(typeof(PawnTextureAtlas), "TryGetFrameSet")]
+static class SPADE_PawnTextureAtlas_TryGetFrameSet_Patch
+    {
+    static bool Prefix(ref bool __result, Pawn pawn, ref bool createdNew, PawnTextureAtlas __instance, List<PawnTextureAtlasFrameSet> ___freeFrameSets)
         {
-        static bool Prefix(ref bool __result, Pawn pawn, ref bool createdNew, PawnTextureAtlas __instance, List<PawnTextureAtlasFrameSet> ___freeFrameSets)
+        if (__instance.FreeCount > 0 && ___freeFrameSets.First().meshes.First().vertices.First().x / -1f != ((pawn.def as ThingDef_AlienRace)?.alienRace.generalSettings.alienPartGenerator.borderScale ?? 1f)) 
             {
-            if (__instance.FreeCount > 0 && ___freeFrameSets.First().meshes.First().vertices.First().x / -1f != ((pawn.def as ThingDef_AlienRace)?.alienRace.generalSettings.alienPartGenerator.borderScale ?? 1f)) 
-                {
-                createdNew = false;
-                __result = false;
-                return false;
-                }
-            return true;
+            createdNew = false;
+            __result = false;
+            return false;
             }
+        return true;
+        }
 
-        /*
-        static bool Postfix(bool ret, Pawn pawn, bool createdNew, List<PawnTextureAtlasFrameSet> ___freeFrameSets)
-            {
-            if (createdNew)
-                Log.Message("patched method called, returned " + ret);
-            if (___freeFrameSets.First().meshes.First().vertices.First().x / -1f != ((pawn.def as ThingDef_AlienRace)?.alienRace.generalSettings.alienPartGenerator.borderScale ?? 1f) && ret)
-                Log.Message("Pawn atlas reuse detected!");
-            return ret;
-            }
-        */
+    /*
+    static bool Postfix(bool ret, Pawn pawn, bool createdNew, List<PawnTextureAtlasFrameSet> ___freeFrameSets)
+        {
+        if (createdNew)
+            Log.Message("patched method called, returned " + ret);
+        if (___freeFrameSets.First().meshes.First().vertices.First().x / -1f != ((pawn.def as ThingDef_AlienRace)?.alienRace.generalSettings.alienPartGenerator.borderScale ?? 1f) && ret)
+            Log.Message("Pawn atlas reuse detected!");
+        return ret;
+        }
+    */
 
         /*
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
@@ -86,6 +87,6 @@ namespace SPADE
 
             return list.Pop();
             }
-        */
         }
+        */
     }
