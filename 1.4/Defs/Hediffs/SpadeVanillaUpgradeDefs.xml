@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+<!-- eyes -->
+	<RecipeDef ParentName="SurgerySpade">
+		<defName>InstallSpadeBionicEye</defName>
+		<label>install bionic eye</label>
+		<description>Installs a bionic eye.</description>
+		<jobString>Installing bionic eye.</jobString>
+		<descriptionHyperlinks>
+			<ThingDef>BionicEye</ThingDef>
+			<HediffDef>BionicEye</HediffDef>
+		</descriptionHyperlinks>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>BionicEye</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>BionicEye</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>SPADE_LightSensor</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>BionicEye</addsHediff>
+	</RecipeDef>
+	<RecipeDef ParentName="SurgerySpade">
+		<defName>InstallSpadeArchotechEye</defName>
+		<label>install archotech eye</label>
+		<description>Installs an archotech eye.</description>
+		<jobString>Installing archotech eye.</jobString>
+		<descriptionHyperlinks>
+			<ThingDef>ArchotechEye</ThingDef>
+			<HediffDef>ArchotechEye</HediffDef>
+		</descriptionHyperlinks>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ArchotechEye</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>ArchotechEye</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>SPADE_LightSensor</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>ArchotechEye</addsHediff>
+	</RecipeDef>
+</Defs>

@@ -211,8 +211,8 @@
 			<li Class="CompProperties_Targetable">
 				<compClass>SPADE.CompTargetable_SingleCorpse_SPADE_Resurrectable</compClass>
 			</li>
-			<li>
-				<compClass>CompTargetEffect_Resurrect</compClass>
+			<li Class="CompProperties_TargetEffectResurrect">
+				<moteDef>Mote_ResurrectFlash</moteDef>
 			</li>
 		</comps>
 		<recipeMaker>

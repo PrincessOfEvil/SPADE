@@ -84,6 +84,7 @@
     <Compile Include="SPADE\BackCompatibilityConverter_SPADE.cs" />
     <Compile Include="SPADE\CompTargetEffect_FixWorstHealthCondition.cs" />
     <Compile Include="SPADE\CompTargetable_SinglePawn_HasExt.cs" />
+    <Compile Include="SPADE\DefExts\CompHatcherButSpade.cs" />
     <Compile Include="SPADE\DefExts\DefExtension_CarryOffsets.cs" />
     <Compile Include="SPADE\DefExts\DefExtension_MiscFlags.cs" />
     <Compile Include="SPADE\HarmonyPatches_MaybeMechanoid.cs" />

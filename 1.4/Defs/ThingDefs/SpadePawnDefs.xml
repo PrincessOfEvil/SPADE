@@ -15,7 +15,7 @@
 			<ComfyTemperatureMin>-40</ComfyTemperatureMin>
 			<ComfyTemperatureMax>40</ComfyTemperatureMax>
 			<PainShockThreshold>5</PainShockThreshold>
-			<ToxicSensitivity>0.1</ToxicSensitivity>
+			<ToxicResistance>1</ToxicResistance>
 			<MentalBreakThreshold>0.08</MentalBreakThreshold>
 			<GlobalLearningFactor>0</GlobalLearningFactor>
 			<WorkSpeedGlobal>0.5</WorkSpeedGlobal>
@@ -164,9 +164,9 @@
 				</notXenophobistTowards>
 
 				<alienPartGenerator>
-					<alienbodytypes>
+					<bodyTypes>
 						<li>spade_body</li>
-					</alienbodytypes>
+					</bodyTypes>
 					<bodyAddons>
 						<li>
 							<path>Pawns/Naked_spade_actuator</path>
@@ -268,16 +268,12 @@
 							</first>
 						</li>
 					</colorChannels>
-					<useGenderedHeads>false</useGenderedHeads>
-					<useGenderedBodies>false</useGenderedBodies>
 					<customDrawSize>(1.25, 1.25)</customDrawSize>
 				</alienPartGenerator>
 			</generalSettings>
 
 			<graphicPaths>
-				<li>
-					<body>Pawns/</body>
-				</li>
+				<body>Pawns/</body>
 			</graphicPaths>
 
 			<styleSettings>
@@ -355,6 +351,7 @@
 				</traitList>
 				<onlyUseRaceRestrictedApparel>true</onlyUseRaceRestrictedApparel>
 				<onlyGetRaceRestrictedTraits>true</onlyGetRaceRestrictedTraits>
+				<onlyHaveRaceRestrictedGenes>true</onlyHaveRaceRestrictedGenes>
 			</raceRestriction>
 
 			<compatibility>
@@ -437,11 +434,11 @@
 	</AlienRace.ThingDef_AlienRace>
 
 
-	<AlienRace.BackstoryDef>
+	<AlienRace.AlienBackstoryDef>
 		<defName>spade_PlayerBackstory_Spawn</defName>
 		<title>Robotic colonist</title>
 		<titleShort>SPADE</titleShort>
-		<baseDescription>{PAWN_nameDef} is a simple robot assembled from scrap. What happens next is up to them.</baseDescription>
+		<baseDesc>{PAWN_nameDef} is a simple robot assembled from scrap. What happens next is up to them.</baseDesc>
 		<bodyTypeGlobal>spade_body</bodyTypeGlobal>
 		<slot>Childhood</slot>
 		<spawnCategories>
@@ -452,58 +449,58 @@
 		</forcedHediffs>
 		<skillGains>
 			<li>
-				<defName>Shooting</defName>
-				<amount>-20</amount>
+				<key>Shooting</key>
+				<value>-20</value>
 			</li>
 			<li>
-				<defName>Melee</defName>
-				<amount>-20</amount>
-			</li>
-	
-			<li>
-				<defName>Construction</defName>
-				<amount>-20</amount>
-			</li>
-			<li>
-				<defName>Crafting</defName>
-				<amount>-20</amount>
-			</li>
-			<li>
-				<defName>Mining</defName>
-				<amount>-20</amount>
+				<key>Melee</key>
+				<value>-20</value>
 			</li>
 	
 			<li>
-				<defName>Plants</defName>
-				<amount>-20</amount>
+				<key>Construction</key>
+				<value>-20</value>
 			</li>
 			<li>
-				<defName>Animals</defName>
-				<amount>-20</amount>
+				<key>Crafting</key>
+				<value>-20</value>
 			</li>
 			<li>
-				<defName>Cooking</defName>
-				<amount>-20</amount>
+				<key>Mining</key>
+				<value>-20</value>
 			</li>
 	
 			<li>
-				<defName>Artistic</defName>
-				<amount>-20</amount>
+				<key>Plants</key>
+				<value>-20</value>
 			</li>
 			<li>
-				<defName>Medicine</defName>
-				<amount>-20</amount>
+				<key>Animals</key>
+				<value>-20</value>
 			</li>
 			<li>
-				<defName>Social</defName>
-				<amount>-20</amount>
+				<key>Cooking</key>
+				<value>-20</value>
+			</li>
+	
+			<li>
+				<key>Artistic</key>
+				<value>-20</value>
 			</li>
 			<li>
-				<defName>Intellectual</defName>
-				<amount>-20</amount>
+				<key>Medicine</key>
+				<value>-20</value>
+			</li>
+			<li>
+				<key>Social</key>
+				<value>-20</value>
+			</li>
+			<li>
+				<key>Intellectual</key>
+				<value>-20</value>
 			</li>
 		</skillGains>
-	</AlienRace.BackstoryDef>
+	</AlienRace.AlienBackstoryDef>
 
 
 	<TraitDef>

@@ -28,9 +28,7 @@ namespace SPADE
 
         public override string BackCompatibleDefName(Type defType, string defName, bool forDefInjections = false, XmlNode node = null)
             {
-            string ret = null;
-
-            ret = parseBetterTurretsOverrides(defType, defName);
+            string ret = parseBetterTurretsOverrides(defType, defName);
 
             if (ret != null) return ret;
             if (defType == typeof(BodyDef) && defName == "spade_spade")

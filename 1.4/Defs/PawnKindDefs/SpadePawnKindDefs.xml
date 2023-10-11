@@ -184,6 +184,7 @@
 		</graphicData>
 		<comps>
 			<li Class="CompProperties_Hatcher">
+				<compClass>SPADE.CompHatcherButSpade</compClass>
 				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
 				<hatcherPawn>spade_SPADE_Ranged</hatcherPawn>
 			</li>
@@ -218,6 +219,7 @@
 		<description>Scout/Patrol Automated Drone, Enhanced. Assembly line configuration. Designed to be used in small-scale factories.</description>
 		<comps Inherit="False">
 			<li Class="CompProperties_Hatcher">
+				<compClass>SPADE.CompHatcherButSpade</compClass>
 				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
 				<hatcherPawn>spade_SPADE_Assembler</hatcherPawn>
 			</li>
@@ -230,6 +232,7 @@
 		<description>Scout/Patrol Automated Drone, Enhanced. Combine harvester configuration. Capable of fully tending after a variety of simple crops.</description>
 		<comps Inherit="False">
 			<li Class="CompProperties_Hatcher">
+				<compClass>SPADE.CompHatcherButSpade</compClass>
 				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
 				<hatcherPawn>spade_SPADE_Harvester</hatcherPawn>
 			</li>
@@ -242,6 +245,7 @@
 		<description>Scout/Patrol Automated Drone, Enhanced. Automated mining configuration. Incapable of transporting extracted resources.</description>
 		<comps Inherit="False">
 			<li Class="CompProperties_Hatcher">
+				<compClass>SPADE.CompHatcherButSpade</compClass>
 				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
 				<hatcherPawn>spade_SPADE_Miner</hatcherPawn>
 			</li>
@@ -254,6 +258,7 @@
 		<description>Scout/Patrol Automated Drone, Enhanced. Auxiliary support configuration. The installed manipulator is capable of any required basic labor, but isn't specialized enough to excel at any tasks.</description>
 		<comps Inherit="False">
 			<li Class="CompProperties_Hatcher">
+				<compClass>SPADE.CompHatcherButSpade</compClass>
 				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
 				<hatcherPawn>spade_SPADE_Support</hatcherPawn>
 			</li>
@@ -266,6 +271,7 @@
 		<description>Scout/Patrol Automated Drone, Enhanced. Hauling/cleaning configuration.</description>
 		<comps Inherit="False">
 			<li Class="CompProperties_Hatcher">
+				<compClass>SPADE.CompHatcherButSpade</compClass>
 				<hatcherDaystoHatch>0.0001</hatcherDaystoHatch>
 				<hatcherPawn>spade_SPADE_Hauler</hatcherPawn>
 			</li>

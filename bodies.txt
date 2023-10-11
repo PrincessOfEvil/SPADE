@@ -45,4 +45,3 @@
 		SPADE_Antenna		12	HearingSource,TalkingSource
 		SPADE_Suspension	-	
 		SPADE_Actuator		60	
-	

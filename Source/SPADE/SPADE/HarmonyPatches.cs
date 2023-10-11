@@ -12,11 +12,8 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 using Verse.AI;
-// ReSharper disable ArrangeTypeModifiers
-// ReSharper disable ArrangeTypeMemberModifiers
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedType.Global
-// ReSharper disable SuggestBaseTypeForParameter
 // ReSharper disable UnusedParameter.Local
 
 namespace SPADE
@@ -24,7 +21,7 @@ namespace SPADE
 #pragma warning disable IDE0051 // Remove unused private members
 
     [StaticConstructorOnStartup]
-    static class HarmonyPatches
+    internal static class HarmonyPatches
         {
         static HarmonyPatches()
             {
@@ -76,14 +73,69 @@ namespace SPADE
 
     [HarmonyPatch(typeof(CompHatcher))]
     [HarmonyPatch("Hatch")]
-    class Hatch
+    internal class Hatch
         {
-        public static void Prefix(CompHatcher __instance)
+        public static bool Prefix(CompHatcher __instance)
             {
             if (__instance.hatcheeParent == null) //If no parent is found for the hatchee, set the hatchee's faction to that of the player.
                 {
                 __instance.hatcheeFaction = Faction.OfPlayer;
                 }
+            // my own code from that point
+            if (__instance is not CompHatcherButSpade) return true;
+
+            try
+                {
+                PawnGenerationRequest request = new PawnGenerationRequest(__instance.Props.hatcherPawn, __instance.hatcheeFaction, PawnGenerationContext.NonPlayer,
+                                                                          -1, forceGenerateNewPawn: false, allowDead: false, allowDowned: false, canGeneratePawnRelations: true,
+                                                                          mustBeCapableOfViolence: false, 1f, forceAddFreeWarmLayerIfNeeded: false, allowGay: true,
+                                                                          allowPregnant: false, allowFood: true, allowAddictions: true, inhabitant: false, certainlyBeenInCryptosleep: false,
+                                                                          forceRedressWorldPawnIfFormerColonist: false, worldPawnFactionDoesntMatter: false,
+                                                                          0f, 0f, null, 1f,
+                                                                          null, null, null, null, null,
+                                                                          /* Age changed from vanilla code! */ fixedBiologicalAge:0f, fixedChronologicalAge:0f, null, null, null,
+                                                                          null, null, forceNoIdeo: false, forceNoBackstory: false, forbidAnyTitle: false, forceDead: false,
+                                                                          null, null, null, null, null, 0f,
+                                                                          DevelopmentalStage.Baby);
+                for (int i = 0; i < __instance.parent.stackCount; i++)
+                    {
+                    Pawn pawn = PawnGenerator.GeneratePawn(request);
+                    if (PawnUtility.TrySpawnHatchedOrBornPawn(pawn, __instance.parent))
+                        {
+                        if (pawn != null)
+                            {
+                            if (__instance.hatcheeParent != null)
+                                {
+                                if (pawn.playerSettings != null && __instance.hatcheeParent.playerSettings != null && __instance.hatcheeParent.Faction == __instance.hatcheeFaction)
+                                    {
+                                    pawn.playerSettings.AreaRestriction = __instance.hatcheeParent.playerSettings.AreaRestriction;
+                                    }
+                                if (pawn.RaceProps.IsFlesh)
+                                    {
+                                    pawn.relations.AddDirectRelation(PawnRelationDefOf.Parent, __instance.hatcheeParent);
+                                    }
+                                }
+                            if (__instance.otherParent != null && (__instance.hatcheeParent == null || __instance.hatcheeParent.gender != __instance.otherParent.gender) && pawn.RaceProps.IsFlesh)
+                                {
+                                pawn.relations.AddDirectRelation(PawnRelationDefOf.Parent, __instance.otherParent);
+                                }
+                            }
+                        if (__instance.parent.Spawned)
+                            {
+                            FilthMaker.TryMakeFilth(__instance.parent.Position, __instance.parent.Map, ThingDefOf.Filth_AmnioticFluid);
+                            }
+                        }
+                    else
+                        {
+                        Find.WorldPawns.PassToWorld(pawn, PawnDiscardDecideMode.Discard);
+                        }
+                    }
+                }
+            finally
+                {
+                __instance.parent.Destroy();
+                }
+            return false;
             }
         }
 
@@ -151,9 +203,9 @@ namespace SPADE
     */
 
     [HarmonyPatch(typeof(JobDriver_BeatFire), "MakeNewToils")]
-    static class SPADE_JobDriver_BeatFire_MakeNewToils_Patch
+    internal static class SPADE_JobDriver_BeatFire_MakeNewToils_Patch
         {
-        static IEnumerable<Toil> Postfix(IEnumerable<Toil> ret, JobDriver_BeatFire __instance)
+        private static IEnumerable<Toil> Postfix(IEnumerable<Toil> ret, JobDriver_BeatFire __instance)
             {
             if (__instance.pawn.health.hediffSet.GetAllComps().FirstOrFallback(hediff => hediff is HediffComp_VerbGiver diff && !diff.VerbProperties.NullOrEmpty()
                                                                                                                             && diff.VerbProperties.Any(props => props.category == VerbCategory.BeatFire)) is HediffComp_VerbGiver input)
@@ -162,7 +214,7 @@ namespace SPADE
             else return ret;
             }
 
-        static IEnumerable<Toil> iterator(HediffComp_VerbGiver input, JobDriver_BeatFire __instance)
+        private static IEnumerable<Toil> iterator(HediffComp_VerbGiver input, JobDriver_BeatFire __instance)
             {
             __instance.job.verbToUse = input.VerbTracker.PrimaryVerb;
 
@@ -174,14 +226,15 @@ namespace SPADE
             yield return Toils_Jump.Jump(jumpIfCannotHit);
             }
         }
-
+    
     [HarmonyPatch(typeof(FoodTypeFlagsExtension), "ToHumanString")]
-    static class SPADE_FoodTypeFlagsExtension_ToHumanString_Patch
+    internal static class SPADE_FoodTypeFlagsExtension_ToHumanString_Patch
         {
         // 2^23
         // Keeping it a calculated constant for copypasting reasons.
         private const int JetFuel = 8388608;
-        static string Postfix(string ret, FoodTypeFlags ft)
+
+        private static string Postfix(string ret, FoodTypeFlags ft)
             {
             if (Harmony.HasAnyPatches("twoscythe.shipgirls") || ((int) ft & JetFuel) == 0) return ret;
             if (ret.Length > 0)
@@ -195,10 +248,11 @@ namespace SPADE
         }
 
     [HarmonyPatch(typeof(MassUtility), "Capacity")]
-    static class SPADE_MassUtility_Capacity_Patch
+    internal static class SPADE_MassUtility_Capacity_Patch
         {
-        static StatDef def;
-        static float Postfix(float ret, Pawn p, StringBuilder explanation)
+        private static StatDef def;
+
+        private static float Postfix(float ret, Pawn p, StringBuilder explanation)
             {
             ensureInit();
 
@@ -224,9 +278,9 @@ namespace SPADE
         }
 
     [HarmonyPatch(typeof(JobDriver), "ModifyCarriedThingDrawPos")]
-    static class SPADE_JobDriver_ModifyCarriedThingDrawPos_Patch
+    internal static class SPADE_JobDriver_ModifyCarriedThingDrawPos_Patch
         {
-        static bool Postfix(bool ret, ref Vector3 drawPos, JobDriver __instance)
+        private static bool Postfix(bool ret, ref Vector3 drawPos, JobDriver __instance)
             {
             var defExt = __instance.GetActor().GetModExtension<DefExtension_CarriesThingsOffset>();
             if (defExt != null)
@@ -240,9 +294,9 @@ namespace SPADE
         }
 
     [HarmonyPatch(typeof(PawnRenderer), "CarryWeaponOpenly")]
-    static class SPADE_PawnRenderer_CarryWeaponOpenly_Patch
+    internal static class SPADE_PawnRenderer_CarryWeaponOpenly_Patch
         {
-        static bool Postfix(bool ret, Pawn ___pawn)
+        private static bool Postfix(bool ret, Pawn ___pawn)
             {
             if (___pawn.HasModExtension<DefExtension_CarriesWeaponOpenly>())
                 return true;
@@ -251,9 +305,9 @@ namespace SPADE
         }
 
     [HarmonyPatch(typeof(PawnRenderer), "DrawEquipmentAiming")]
-    static class SPADE_PawnRenderer_DrawEquipmentAiming_Patch 
+    internal static class SPADE_PawnRenderer_DrawEquipmentAiming_Patch 
         {
-        static void Prefix(Thing eq, ref Vector3 drawLoc, ref float aimAngle, Pawn ___pawn)
+        private static void Prefix(Thing eq, ref Vector3 drawLoc, ref float aimAngle, Pawn ___pawn)
             {
             var defExt = ___pawn.GetModExtension<DefExtension_CarriesWeaponStraight>();
             if (defExt == null) return;
@@ -268,9 +322,9 @@ namespace SPADE
         }
 
     [HarmonyPatch(typeof(EquipmentUtility), "CanEquip", new [] { typeof(Thing), typeof(Pawn), typeof(string), typeof(bool) }, new [] { ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Out, ArgumentType.Normal})]
-    static class SPADE_EquipmentUtility_CanEquip_Patch
+    internal static class SPADE_EquipmentUtility_CanEquip_Patch
         {
-        static bool Postfix(bool ret, Thing thing, Pawn pawn, ref string cantReason, bool checkBonded)
+        private static bool Postfix(bool ret, Thing thing, Pawn pawn, ref string cantReason, bool checkBonded)
             {
             if (cantReason is not null) return ret;
             if (thing.def.IsMeleeWeapon && pawn.health.hediffSet.GetAllComps().Any(comp => comp is HediffComp_CannotUseMelee))
@@ -288,9 +342,10 @@ namespace SPADE
             return ret;
             }
         }
-    static class SPADE_HealthAIUtility_FindBestMedicine_Anon_Patch
+
+    internal static class SPADE_HealthAIUtility_FindBestMedicine_Anon_Patch
         {
-        static bool Postfix(bool ret, Thing m, Pawn ___patient)
+        private static bool Postfix(bool ret, Thing m, Pawn ___patient)
             {
             /*
             if (patient.HasModExtension<DefExtension_NonStandardMedicine>())
@@ -331,25 +386,25 @@ namespace SPADE
         }
 
     [HarmonyPatch(typeof(BodyPartDef), "GetMaxHealth")]
-    static class SPADE_BodyPartDef_GetMaxHealth_Patch
+    internal static class SPADE_BodyPartDef_GetMaxHealth_Patch
         {
-        static float Postfix(float ret, Pawn pawn, BodyPartDef __instance)
+        private static float Postfix(float ret, Pawn pawn, BodyPartDef __instance)
             {
             return Mathf.CeilToInt(ret + pawn.health.hediffSet.GetAllComps().Where(hediff => hediff is HediffComp_ChangePartHealth && hediff.parent.Part.def == __instance).Cast<HediffComp_ChangePartHealth>().Sum(hediff => hediff.Props.health) * pawn.HealthScale);
             }
         }
     [HarmonyPatch(typeof(Pawn_StoryTracker), "get_DisabledWorkTagsBackstoryAndTraits")]
-    static class SPADE_Pawn_StoryTracker_get_DisabledWorkTagsBackstoryAndTraits_Patch
+    internal static class SPADE_Pawn_StoryTracker_get_DisabledWorkTagsBackstoryAndTraits_Patch
         {
-        static WorkTags Postfix(WorkTags ret, Pawn ___pawn)
+        private static WorkTags Postfix(WorkTags ret, Pawn ___pawn)
             {
             return ret & (WorkTags)___pawn.health.hediffSet.GetAllComps().Where(hediff => hediff is HediffComp_EnableWorkTypes).Cast<HediffComp_EnableWorkTypes>().Sum(hediff => (int)hediff.Props.workTags);
             }
         }
     [HarmonyPatch(typeof(Pawn), "GetDisabledWorkTypes")]
-    static class SPADE_Pawn_GetDisabledWorkTypes_Patch
+    internal static class SPADE_Pawn_GetDisabledWorkTypes_Patch
         {
-        static List<WorkTypeDef> Postfix(List<WorkTypeDef> ret, Pawn __instance)
+        private static List<WorkTypeDef> Postfix(List<WorkTypeDef> ret, Pawn __instance)
             {
             var list        = __instance.health.hediffSet.GetAllComps().Where(hediff => hediff is HediffComp_EnableWorkTypes).Cast<HediffComp_EnableWorkTypes>().ToList();
             int allowedTags = list.Aggregate(0, (acc, hediff) => (int)hediff.Props.workTags | acc);
@@ -360,9 +415,9 @@ namespace SPADE
             }
         }
     [HarmonyPatch(typeof(Pawn_PathFollower), "CostToMoveIntoCell", typeof(Pawn), typeof(IntVec3))]
-    static class SPADE_Pawn_PathFollower_CostToMoveIntoCell_Patch
+    internal static class SPADE_Pawn_PathFollower_CostToMoveIntoCell_Patch
         {
-        static int Postfix(int ret, Pawn pawn, IntVec3 c)
+        private static int Postfix(int ret, Pawn pawn, IntVec3 c)
             {
             if (!pawn.health.hediffSet.GetAllComps().Any(hediff => hediff is HediffComp_IgnoresTerrain)) return ret;
             int i = (c.x != pawn.Position.x && c.z != pawn.Position.z) ? pawn.TicksPerMoveDiagonal : pawn.TicksPerMoveCardinal;
