@@ -87,7 +87,7 @@ namespace SPADE
             try
                 {
                 PawnGenerationRequest request = new PawnGenerationRequest(__instance.Props.hatcherPawn, __instance.hatcheeFaction, PawnGenerationContext.NonPlayer,
-                                                                          -1, forceGenerateNewPawn: false, allowDead: false, allowDowned: false, canGeneratePawnRelations: true,
+                                                                          -1, forceGenerateNewPawn: true, allowDead: false, allowDowned: false, canGeneratePawnRelations: false,
                                                                           mustBeCapableOfViolence: false, 1f, forceAddFreeWarmLayerIfNeeded: false, allowGay: true,
                                                                           allowPregnant: false, allowFood: true, allowAddictions: true, inhabitant: false, certainlyBeenInCryptosleep: false,
                                                                           forceRedressWorldPawnIfFormerColonist: false, worldPawnFactionDoesntMatter: false,

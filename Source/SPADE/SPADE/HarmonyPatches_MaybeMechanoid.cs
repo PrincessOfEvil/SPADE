@@ -39,7 +39,20 @@ namespace SPADE
             }
         }
     
-    [HarmonyPatch(typeof(PawnCapacityDef), "GetLabelFor", new Type[] { typeof(Pawn) })]
+    [HarmonyPatch(typeof(RitualRoleAssignments), nameof(RitualRoleAssignments.PawnNotAssignableReason),
+                  new []{typeof(Pawn), typeof(RitualRole),typeof(Precept_Ritual), typeof(RitualRoleAssignments), typeof(TargetInfo), typeof(bool)},
+                  new [] { ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Out})]
+    internal static class SPADE_StatPart_Age_PawnNotAssignableReason_Patch
+        {
+        private static string Postfix(string ret, Pawn p)
+            {
+            if (p.HasModExtension<DefExtension_MaybeMechanoid>()) return "MessageRitualPawnSPADE".Translate(p);
+
+            return ret;
+            }
+        }
+    
+    [HarmonyPatch(typeof(PawnCapacityDef), nameof(PawnCapacityDef.GetLabelFor), new [] { typeof(Pawn) })]
     internal static class SPADE_PawnCapacityDef_GetLabelFor_Patch
         {
         private static string Postfix(string ret, Pawn pawn, PawnCapacityDef __instance)

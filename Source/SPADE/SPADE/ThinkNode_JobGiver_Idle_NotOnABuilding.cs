@@ -11,7 +11,8 @@ namespace SPADE
     {
     public class ThinkNode_JobGiver_Idle_NotOnABuilding : JobGiver_Idle
 		{
-		public new int ticks = GenTicks.TickLongInterval;
+		public new readonly int      ticks                    = GenTicks.TickLongInterval;
+		protected           IntRange ticksBetweenWandersRange = new IntRange(20, 100);
 
 		protected override Job TryGiveJob(Pawn pawn)
 			{
@@ -28,7 +29,7 @@ namespace SPADE
 					return JobMaker.MakeJob(JobDefOf.Goto, intVec);
 					}
 				}
-			Job job = JobMaker.MakeJob(JobDefOf.Wait);
+			Job job                = JobMaker.MakeJob(JobDefOf.Wait);
 			job.expiryInterval = this.ticks;
 			job.overrideFacing = pawn.mindState?.duty?.overrideFacing ?? Rot4.Invalid;
 			return job;
