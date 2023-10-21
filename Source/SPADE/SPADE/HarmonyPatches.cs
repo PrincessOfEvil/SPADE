@@ -227,6 +227,16 @@ namespace SPADE
             }
         }
     
+    [HarmonyPatch(typeof(VerbProperties), nameof(VerbProperties.GetForceMissFactorFor))]
+    internal static class SPADE_VerbProperties_GetForceMissFactorFor_Patch
+        {
+        private static bool Prefix(Thing equipment, ref float __result)
+            {
+            if (equipment is not null) return true;
+            __result = 1f;
+            return false;
+            }
+        }
     [HarmonyPatch(typeof(FoodTypeFlagsExtension), "ToHumanString")]
     internal static class SPADE_FoodTypeFlagsExtension_ToHumanString_Patch
         {
